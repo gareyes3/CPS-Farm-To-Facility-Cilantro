@@ -102,7 +102,6 @@ Scenario2_oo_l = 20  # oocyst per liter scenario 2
 
 # for field contamination
 
-
 #safety parameters
 water_test_freq = 3 #water testign every 3 days. 
 
@@ -134,7 +133,7 @@ grabs_weight = (375/60)/454
 
 
 
-#beggining of day water testing
+#begining of day water testing
 
 if Water_testing_YN == True:
     Detect =Water_Sampling (total_oocyst_bw =Initial_Levels_Bulk , 
@@ -157,7 +156,6 @@ if Water_testing_YN == True:
         
 #Finished product testing
 
-
 Oo_list=Cilantro_df.loc[:,"Oo"]
 for j in range(N_Grabs):
     List_Random=Oo_list.sample(n=1)
@@ -179,8 +177,7 @@ for j in range(N_Grabs):
 
 
 
-
-
+Initial_Levels_Bulk = int(Total_L_Season*Scenario1_oo_l_l)
         
     
 #FDA recovery rate "validation"
@@ -190,7 +187,7 @@ det_rate_list = []
 for j in rec_rate :
     sampling_results = []
     for i in range(1000):
-        Detect =Water_Sampling (total_oocyst_bw =Initial_Levels , 
+        Detect =Water_Sampling (total_oocyst_bw =Initial_Levels_Bulk , 
                         bw_volume =Total_L_Season, 
                         sample_size_volume =Sample_Size_BW, 
                         filter_recovery =j, 
@@ -207,6 +204,9 @@ for j in rec_rate :
     det_rate_list.append(det_rate)
     
 sns.lineplot(x=rec_rate ,y=det_rate_list)
+plt.xlabel("Filter Recovery Rate")
+plt.ylabel("Detection Rate")
+plt.title("Detection vs Filter Recovery Rate 6 oocyst/ 10L sample")
 
 df_rec_ra=pd.DataFrame({"rr": rec_rate,
                         "dt":det_rate_list})
@@ -249,6 +249,8 @@ for i in Initial_Levels:
     
 
     
+
+
 sns.lineplot(x=Initial_Levels ,y=Probs_detect)
 
 
