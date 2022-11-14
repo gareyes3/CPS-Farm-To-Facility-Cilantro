@@ -58,6 +58,8 @@ def Water_Sampling (total_oocyst_bw, bw_volume, sample_size_volume, filter_recov
         return 1
     else:
         return 0
+    
+    
 #%%
 
 #Initial Mass Paramters
@@ -98,11 +100,87 @@ grabs_weight = (Composite_Mass/N_Grabs)/454 #in lbs.
 
 #%% Water Testing Model
 
+def Calc_Prob_Detection (total_oocyst_bw, bw_volume,sample_size_volume,filter_recovery, PCR_confirmation, tot_iters):
+    Detection_YN= []
+    for i in range(tot_iters):
+        Result = Water_Sampling (total_oocyst_bw, 
+                                 bw_volume, 
+                                 sample_size_volume, 
+                                 filter_recovery, 
+                                 PCR_confirmation)
+        Detection_YN.append(Result)
+    return np.mean(Detection_YN)
+
 #Comparisons = 
     #1.Contamination Levels
     #2.Method (Recovery Rate from Filter)
     
 #Create a list
+# [0.6, 2.5, 20] Range based on the literature
+Cont_Levels = list(np.arange(0,20, 0.1)) #oocyst per liter. 
+
+def Calc_Pdetect_From_Cont_Levels(Cont_Levels, Total_L_Season, Sample_Size_BW_L, filter_recovery,Pr_PCR_Con, total_Probdet_iters, unc_iters):
+    Output2 = pd.DataFrame(columns=["Contamination_Level", "PDetect", "Rec_Rate"])
+    for j in range(unc_iters):
+        print(j)
+        Prob_Dets= []
+        for i in Cont_Levels:  
+            Initial_Levels_Bulk = int(Total_L_Season*i)
+            Prob_det = Calc_Prob_Detection(total_oocyst_bw= Initial_Levels_Bulk,
+                                            bw_volume = Total_L_Season,
+                                            sample_size_volume = Sample_Size_BW_L,
+                                            filter_recovery =Pr_Rec_Filter_1623,
+                                            PCR_confirmation =Pr_PCR_Con,
+                                            tot_iters= total_Probdet_iters)
+            
+            Prob_Dets.append(Prob_det)  
+        
+        Output= pd.DataFrame({
+            "Contamination_Level": Cont_Levels,
+            "PDetect": Prob_Dets,
+            "Rec_Rate": filter_recovery
+            })
+    
+    Output2 =pd.concat([Output2,Output])
+    
+    return (Output2)   
+
+    
+Output_1623 = Calc_Pdetect_From_Cont_Levels(Cont_Levels=Cont_Levels , 
+                              Total_L_Season= Total_L_Season , 
+                              Sample_Size_BW_L = Sample_Size_BW_L , 
+                              filter_recovery= Pr_Rec_Filter_1623,
+                              Pr_PCR_Con =  Pr_PCR_Con,
+                              total_Probdet_iters= 100,
+                              unc_iters= 100)
+
+Output_Duf = Calc_Pdetect_From_Cont_Levels(Cont_Levels=Cont_Levels , 
+                              Total_L_Season= Total_L_Season , 
+                              Sample_Size_BW_L = Sample_Size_BW_L , 
+                              filter_recovery= Pr_Rec_Filter_Duf,
+                              Pr_PCR_Con =  Pr_PCR_Con,
+                              total_Probdet_iters= 100,
+                              unc_iters= 100)
+
+Output_FDA = Calc_Pdetect_From_Cont_Levels(Cont_Levels=Cont_Levels , 
+                              Total_L_Season= Total_L_Season , 
+                              Sample_Size_BW_L = Sample_Size_BW_L , 
+                              filter_recovery= Pr_Rec_Filter_FDA,
+                              Pr_PCR_Con =  Pr_PCR_Con,
+                              total_Probdet_iters= 100,
+                              unc_iters= 100)
+
+methods_combined = pd.concat([Output_1623,Output_Duf,Output_FDA])
+methods_combined["Rec_Rate"] = methods_combined["Rec_Rate"].astype(str)
+
+sns.lineplot(data = methods_combined , x = "Contamination_Level", y = "PDetect",hue ="Rec_Rate")
+
+        
+    
+
+
+
+
 
 
 
