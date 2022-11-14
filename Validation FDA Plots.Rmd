@@ -1,0 +1,60 @@
+---
+title: "Untitled"
+output: html_document
+date: "2022-11-14"
+---
+
+#Validation Plot
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+Validation_FDA<-read_csv("Data_Cilantro_Outputs/RR_FDA_Validation.csv")
+```
+
+```{r}
+Validation_FDA %>% 
+  ggplot(aes(x = rr, y = dt))+
+  geom_point()+
+  geom_line()+
+  geom_hline(aes(yintercept = 0.66), color = "red")+
+  geom_vline(aes(xintercept = 0.39),color = "red")+
+  theme_bw()+
+  labs(x = "Filter Recovery Rate", y = "Detection Rate", title= "FDA Recovery Rate Validation 6 Oocyst/10L")
+
+ggsave("Recovery Rate.jpeg", width = 15, height = 10, units = "cm", dpi = 600)
+
+```
+## Validation of other two methods in the paper
+
+```{r}
+Validation_FDA_Conts<-read_csv("Data_Cilantro_Outputs/RR_FDA_Validation_Conts.csv")
+Validation_FDA_Conts <-Validation_FDA_Conts %>% 
+  group_by(Contamination_Level) %>% 
+  summarise(mean= mean(PDetect))
+  
+
+```
+
+
+```{r}
+
+Validation_FDA_Conts %>% 
+  ggplot(aes(x = Contamination_Level, y = mean))+
+  geom_point()+
+  geom_line()+
+  geom_vline(aes(xintercept = 0.6), color = "orange", size = 1)+
+  geom_vline(aes(xintercept = 2.5), color = "blue",size = 1)+
+  geom_vline(aes(xintercept = 20), color = "darkgreen",size = 1)+
+  geom_hline(aes(yintercept = 0.66),color = "red",size = 1)+
+  geom_hline(aes(yintercept = 1),color = "red",size = 1)+
+  theme_bw()+
+  labs(x = "Contamination Level Oocyst/L", y = "Detection Rate", title= "Detection rate validation")
+
+ggsave("Recovery Rate Validated.jpeg", width = 15, height = 10, units = "cm", dpi = 600)
+
+
+```
+

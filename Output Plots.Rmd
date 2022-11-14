@@ -1,0 +1,89 @@
+---
+title: "Model Analysis"
+output: html_document
+date: "2022-11-14"
+---
+
+## Uncertainty around contamination per sampling method. 
+
+
+```{r}
+library(tidyverse)
+```
+```{r}
+Unc_Conts<-read_csv("Data_Cilantro_Outputs/Contamination_Unc.csv")
+```
+```{r}
+Unc_Conts<-Unc_Conts %>% 
+  select(-...1) %>% 
+  mutate(Rec_Rate= as.factor(Rec_Rate)) %>% 
+  group_by(Rec_Rate, Contamination_Level) %>% 
+  summarise(median = median(PDetect), q05 = quantile(PDetect, 0.05), q95 = quantile(PDetect, 0.95)) 
+
+Unc_Conts$Rec_Rate<-Unc_Conts$Rec_Rate %>% 
+  str_replace("0.39", "FDA Method: 39% Rec Rate") %>% 
+  str_replace("0.16", "Method 1623: 16% Rec Rate") %>% 
+  str_replace("0.17", "Method DUF: 17% Rec Rate") 
+  
+
+Unc_Conts %>% 
+  ggplot(aes(x = Contamination_Level, y = median, color = Rec_Rate,ymin=q05, ymax=q95, fill = Rec_Rate))+
+  geom_point(alpha = 0.5)+
+  geom_line()+
+  geom_ribbon(alpha= 0.3)+
+  labs(x = "Contamination Levels Bulk Water: Oocyst/L", y = "Probability of Detection", fill = "Method", color= "Method")
+
+ggsave("Contamination vs Method.jpeg", width = 15, height = 10, units = "cm", dpi = 600)
+
+
+```
+Seems like at ~1.5 oocyst per liter is the threshold lets zoom in
+
+```{r}
+Unc_Conts %>% 
+  filter(Contamination_Level<4) %>% 
+  ggplot(aes(x = Contamination_Level, y = median, color = Rec_Rate,ymin=q05, ymax=q95, fill = Rec_Rate))+
+  geom_point(alpha = 0.5)+
+  geom_line()+
+  geom_ribbon(alpha= 0.3)+
+  labs(x = "Contamination Levels Bulk Water: Oocyst/L", y = "Probability of Detection (5th-95th Percentiles)", fill = "Method", color= "Method", title= "Probability of Detection 10 Liter Bulk water sample")
+
+ggsave("Contamination vs Method Zoom.jpeg", width = 15, height = 10, units = "cm", dpi = 600)
+
+```
+## Sampling Plan Optimization based on Standard. 
+
+```{r}
+Unc_Conts<-read_csv("Data_Cilantro_Outputs/Volume_Unc.csv")
+```
+
+
+```{r}
+Unc_Conts<-Unc_Conts %>% 
+  select(-...1) %>% 
+  mutate(Rec_Rate= as.factor(Rec_Rate)) %>% 
+  group_by(Rec_Rate, Contamination_Level, Volume) %>% 
+  summarise(median = mean(PDetect), q05 = quantile(PDetect, 0.05), q95 = quantile(PDetect, 0.95)) 
+
+
+Unc_Conts$Rec_Rate<-Unc_Conts$Rec_Rate %>% 
+  str_replace("0.39", "FDA Method: 39% Rec Rate") %>% 
+  str_replace("0.16", "Method 1623: 16% Rec Rate") %>% 
+  str_replace("0.17", "Method DUF: 17% Rec Rate") 
+
+Unc_Conts$Volume<-factor(Unc_Conts$Volume, levels = c("1 Liter(s)","5 Liter(s)","10 Liter(s)","50 Liter(s)"))
+
+Unc_Conts %>% 
+  ggplot(aes(x = Contamination_Level, y = median, color = Volume,ymin=q05, ymax=q95, fill = Volume))+
+  geom_point(alpha = 0.5)+
+  geom_line()+
+  geom_ribbon(alpha= 0.3)+
+  geom_hline(aes(yintercept = 0.90),color= "red")+
+  labs(x = "Contamination Levels Bulk Water: Oocyst/L", y = "Probability of Detection", fill = "Volume (L)", color= "Volume (L)")+
+  facet_wrap(~Rec_Rate)
+
+ggsave("Volume vs Cont vs Method.jpeg", width = 25, height = 15, units = "cm", dpi = 600)
+
+
+```
+
