@@ -6,7 +6,11 @@ Created on Thu Nov 10 18:47:01 2022
 """
 
 #%%
-sys.path.append('C:\\Users\\reyes\\Documents\\GitHub\\CPS-Farm-to-Facility-Cilantro')
+import sys
+sys.path
+sys.path.append('C:\\Users\Gustavo Reyes\Documents\GitHubFiles\CPS-Farm-To-Facility-Cilantro')
+sys.path.append('C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-To-Facility-Cilantro')
+sys.path.append('C:\\Users\\reyes\\Documents\\GitHub\\CPS-Farm-To-Facility-Cilantro')
 #%%
 import numpy as np
 import pandas as pd

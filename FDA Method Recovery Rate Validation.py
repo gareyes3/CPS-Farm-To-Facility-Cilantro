@@ -13,26 +13,27 @@ import math
 from numpy.random import Generator, PCG64
 rng = Generator(PCG64())
 import seaborn as sns
+import pickle
 
-#%%Functions    
-def Water_Sampling (total_oocyst_bw, bw_volume, sample_size_volume, filter_recovery, PCR_confirmation):
+#%%Functions   
+ 
+def Water_Sampling (total_oocyst_bw, bw_volume, sample_size_volume, filter_recovery, loaded_model):
     Pr_Ocyst_BW= sample_size_volume /(bw_volume)#probability of finding an ocyst in sample water
     #total Ocyst that actually made it to our sample
     T_Ocyst_SBW = rng.binomial(n = total_oocyst_bw, p =Pr_Ocyst_BW) #SBW = sample bulk water
-    #print(T_Ocyst_SBW)
     #Total Occyst recovered
     T_Ocyst_Rec_SBW = rng.binomial(n=T_Ocyst_SBW, p =filter_recovery)
-    # Sample Results. 
-    Total_Confirmed =[]
-    for k in range(1,T_Ocyst_Rec_SBW+1):
-        if random.uniform(0,1) <PCR_confirmation:
-            Total_Confirmed.append(k)
-    if len(Total_Confirmed)>1:
+    # PCR Confirmation 
+    Pr_Detect = loaded_model.predict_proba(np.array([T_Ocyst_Rec_SBW]).reshape(-1,1))[0][1] #from logistic
+    if np.random.uniform(0,1) < Pr_Detect:
         return 1
     else:
         return 0
     
 #%%
+filename = 'C:\\Users\Gustavo Reyes\Documents\GitHubFiles\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test.sav'
+loaded_model = pickle.load(open(filename, 'rb'))
+
 #Water Characteristics
 Water_Irrigation_In = 12 #Inches of water per harvest season
 Total_L_Season = 40.46*40.46*(0.0254*Water_Irrigation_In)*1000 # one acre 40.46m2 * 0.348 m of water * 10000 to convert tot m3
@@ -55,13 +56,14 @@ rec_rate = list(np.arange(0, 1, 0.001))
 
 det_rate_list = []
 for j in rec_rate :
+    print(j)
     sampling_results = []
-    for i in range(10000):
+    for i in range(1000):
         Detect =Water_Sampling (total_oocyst_bw =Initial_Levels_Bulk , 
                         bw_volume =Total_L_Season, 
                         sample_size_volume =Sample_Size_BW_L, 
                         filter_recovery =j, 
-                        PCR_confirmation =Pr_PCR_Con)
+                        loaded_model =loaded_model)
         
         sampling_results.append(Detect)
     
@@ -70,7 +72,7 @@ for j in rec_rate :
         if k == 1:
          zeros.append(1)  
     
-    det_rate =len(zeros)/10000
+    det_rate =len(zeros)/1000
     det_rate_list.append(det_rate)
     
 sns.lineplot(x=rec_rate ,y=det_rate_list)
