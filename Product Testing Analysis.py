@@ -99,8 +99,11 @@ def F_Rejection_Rule_C (df):
 #Loading the saved logistic regression model
 
 #filename = 'C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test.sav'
-filename = 'C:\\Users\Gustavo Reyes\Documents\GitHubFiles\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test.sav'
-loaded_model = pickle.load(open(filename, 'rb'))
+filename_nPCR = 'C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test_nPCR_FDA.sav'
+nPCR_Model = pickle.load(open(filename_nPCR, 'rb'))
+
+filename_qPCR = 'C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test_qPCR_FDA.sav'
+qPCR_Model = pickle.load(open(filename_qPCR, 'rb'))
 
 
 #%%
@@ -144,6 +147,9 @@ def Samling_Var(Cilantro_df, Hazard_lvl, percent_cont, Sample_Weight,N_25g_Sampl
         P_Reject.append(np.mean(L_Acc_Reject)) 
     return P_Reject
 
+
+#Field and Model Characyeristics: 
+    
 #Creating the Field
 Field_Yield = 22_000 #lb
 Plant_Weight = 1 #lb
@@ -220,42 +226,42 @@ Cilantro_df=pd.DataFrame({"Plant_ID": Total_Plants_List,
 
 #Grabs, each grab = 25g. 
 
-Cont_Levels = list(np.linspace(1,10_000_000, 20)) 
+Cont_Levels = list(np.linspace(1,10_000_000, 100)) 
 Cont_Levels_log10= list(np.arange(1,7.5, 0.5)) 
 Cont_Levels_log10_Num =[10**x for x in Cont_Levels_log10 ]
 
 #Running Analysys for 25g grabs
 
-Outs_60g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num, 
+Outs_60g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num , 
            Cilantro_df = Cilantro_df, 
            percent_cont =100, 
            Sample_Weight =25,
            N_25g_Samples=60,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
-           loaded_model = loaded_model,
+           loaded_model = qPCR_Model,
            Field_Iters =20, 
            Sampling_Iters =20)
 
-Outs_30g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num, 
+Outs_30g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num , 
            Cilantro_df = Cilantro_df, 
            percent_cont =100, 
            Sample_Weight =25,
            N_25g_Samples=30,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
-           loaded_model = loaded_model,
+           loaded_model = qPCR_Model,
            Field_Iters =20, 
            Sampling_Iters =20)
 
-Outs_20g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num, 
+Outs_20g = Iter_Cont_Levels(Cont_Levels =Cont_Levels_log10_Num, 
            Cilantro_df = Cilantro_df, 
            percent_cont =100, 
            Sample_Weight =25,
            N_25g_Samples=20,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
-           loaded_model = loaded_model,
+           loaded_model = qPCR_Model,
            Field_Iters =20, 
            Sampling_Iters =20)
 
@@ -267,7 +273,18 @@ Outs_15g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num,
            N_25g_Samples=15,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
-           loaded_model = loaded_model,
+           loaded_model = qPCR_Model,
+           Field_Iters =20, 
+           Sampling_Iters =20)
+
+Outs_10g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num, 
+           Cilantro_df = Cilantro_df, 
+           percent_cont =100, 
+           Sample_Weight =25,
+           N_25g_Samples=10,
+           N_Grabs_Sample =1,
+           Plant_Weight = 1,
+           loaded_model = qPCR_Model,
            Field_Iters =20, 
            Sampling_Iters =20)
 
@@ -279,7 +296,8 @@ sns.lineplot(data =Outs_20g, x = "Conts", y = "PDetect")
 sns.lineplot(data =Outs_15g, x = "Conts", y = "PDetect")
 
 
-Grabs_Combined =pd.concat([Outs_60g,Outs_30g,Outs_20g,Outs_15g])
+Grabs_Combined =pd.concat([Outs_60g,Outs_30g,Outs_20g,Outs_15g,Outs_10g])
+Grabs_Combined.reset_index(drop= True, inplace= True)
 
 Grabs_Combined["Conts"] = np.log10(Grabs_Combined["Conts"])
 Grabs_Combined["N25gsamples"] = Grabs_Combined["N25gsamples"].astype(str)
@@ -337,7 +355,7 @@ Outs_1 = Iter_Grabs(Cont_Level= Cont_Levels[0] ,
            N_25g_Samples=N_Samples,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
-           loaded_model = loaded_model,
+           loaded_model = qPCR_Model,
            Field_Iters =50, 
            Sampling_Iters =50)
 
@@ -348,7 +366,7 @@ Outs_2 = Iter_Grabs(Cont_Level= Cont_Levels[1] ,
            N_25g_Samples=N_Samples,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
-           loaded_model = loaded_model,
+           loaded_model = qPCR_Model,
            Field_Iters =50, 
            Sampling_Iters =50)
 
@@ -359,7 +377,7 @@ Outs_3 = Iter_Grabs(Cont_Level= Cont_Levels[2] ,
            N_25g_Samples=N_Samples,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
-           loaded_model = loaded_model,
+           loaded_model = qPCR_Model,
            Field_Iters =50, 
            Sampling_Iters =50)
 
@@ -370,7 +388,7 @@ Outs_4 = Iter_Grabs(Cont_Level= Cont_Levels[3] ,
            N_25g_Samples=N_Samples,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
-           loaded_model = loaded_model,
+           loaded_model = qPCR_Model,
            Field_Iters =50, 
            Sampling_Iters =50)
 
@@ -381,7 +399,7 @@ Outs_5 = Iter_Grabs(Cont_Level= Cont_Levels[4] ,
            N_25g_Samples=N_Samples,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
-           loaded_model = loaded_model,
+           loaded_model = qPCR_Model,
            Field_Iters =50, 
            Sampling_Iters =50)
 
@@ -392,13 +410,15 @@ Outs_6 = Iter_Grabs(Cont_Level= Cont_Levels[5] ,
            N_25g_Samples=N_Samples,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
-           loaded_model = loaded_model,
+           loaded_model = qPCR_Model,
            Field_Iters =50, 
            Sampling_Iters =50)
 
 
 All_Grabs_Combined =pd.concat([Outs_1,Outs_2,Outs_3,Outs_4,Outs_5,Outs_6])
 All_Grabs_Combined["Conts"] = All_Grabs_Combined["Conts"].astype(str)
+All_Grabs_Combined.reset_index(drop= True, inplace= True)
+
 
 
 sns.lineplot(data =All_Grabs_Combined, x = "N25gsamples", y = "PDetect", hue ="Conts" )
