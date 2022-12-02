@@ -227,57 +227,68 @@ Cilantro_df=pd.DataFrame({"Plant_ID": Total_Plants_List,
 #Grabs, each grab = 25g. 
 
 Cont_Levels = list(np.linspace(1,10_000_000, 100)) 
-Cont_Levels_log10= list(np.arange(1,7.5, 0.5)) 
+Cont_Levels_log10= list(np.arange(1,7.5, 0.1)) 
 Cont_Levels_log10_Num =[10**x for x in Cont_Levels_log10 ]
 
 #Running Analysys for 25g grabs
 
-Outs_60g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num , 
+Outs_32g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num , 
            Cilantro_df = Cilantro_df, 
            percent_cont =100, 
            Sample_Weight =25,
-           N_25g_Samples=60,
+           N_25g_Samples=32,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
            loaded_model = qPCR_Model,
-           Field_Iters =20, 
-           Sampling_Iters =20)
+           Field_Iters =50, 
+           Sampling_Iters =50)
 
-Outs_30g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num , 
+Outs_16g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num , 
            Cilantro_df = Cilantro_df, 
            percent_cont =100, 
            Sample_Weight =25,
-           N_25g_Samples=30,
+           N_25g_Samples=16,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
            loaded_model = qPCR_Model,
-           Field_Iters =20, 
-           Sampling_Iters =20)
+           Field_Iters =50, 
+           Sampling_Iters =50)
 
-Outs_20g = Iter_Cont_Levels(Cont_Levels =Cont_Levels_log10_Num, 
+Outs_8g = Iter_Cont_Levels(Cont_Levels =Cont_Levels_log10_Num, 
            Cilantro_df = Cilantro_df, 
            percent_cont =100, 
            Sample_Weight =25,
-           N_25g_Samples=20,
+           N_25g_Samples=8,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
            loaded_model = qPCR_Model,
-           Field_Iters =20, 
-           Sampling_Iters =20)
+           Field_Iters =50, 
+           Sampling_Iters =50)
 
 
-Outs_15g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num, 
+Outs_4g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num, 
            Cilantro_df = Cilantro_df, 
            percent_cont =100, 
            Sample_Weight =25,
-           N_25g_Samples=15,
+           N_25g_Samples=4,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
            loaded_model = qPCR_Model,
-           Field_Iters =20, 
-           Sampling_Iters =20)
+           Field_Iters =50, 
+           Sampling_Iters =50)
 
-Outs_10g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num, 
+Outs_2g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num, 
+           Cilantro_df = Cilantro_df, 
+           percent_cont =100, 
+           Sample_Weight =25,
+           N_25g_Samples=2,
+           N_Grabs_Sample =1,
+           Plant_Weight = 1,
+           loaded_model = qPCR_Model,
+           Field_Iters =50, 
+           Sampling_Iters =50)
+
+Outs_1g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num, 
            Cilantro_df = Cilantro_df, 
            percent_cont =100, 
            Sample_Weight =25,
@@ -285,8 +296,8 @@ Outs_10g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
            loaded_model = qPCR_Model,
-           Field_Iters =20, 
-           Sampling_Iters =20)
+           Field_Iters =50, 
+           Sampling_Iters =50)
 
 
 
@@ -296,8 +307,11 @@ sns.lineplot(data =Outs_20g, x = "Conts", y = "PDetect")
 sns.lineplot(data =Outs_15g, x = "Conts", y = "PDetect")
 
 
-Grabs_Combined =pd.concat([Outs_60g,Outs_30g,Outs_20g,Outs_15g,Outs_10g])
+Grabs_Combined =pd.concat([Outs_1g,Outs_2g,Outs_4g,Outs_8g,Outs_16g,Outs_32g])
 Grabs_Combined.reset_index(drop= True, inplace= True)
+
+Grabs_Combined.to_csv("C:\\Users\\gareyes3\\Documents\\GitHub\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\Product_Testing_Analysis.csv")
+
 
 Grabs_Combined["Conts"] = np.log10(Grabs_Combined["Conts"])
 Grabs_Combined["N25gsamples"] = Grabs_Combined["N25gsamples"].astype(str)
@@ -418,6 +432,8 @@ Outs_6 = Iter_Grabs(Cont_Level= Cont_Levels[5] ,
 All_Grabs_Combined =pd.concat([Outs_1,Outs_2,Outs_3,Outs_4,Outs_5,Outs_6])
 All_Grabs_Combined["Conts"] = All_Grabs_Combined["Conts"].astype(str)
 All_Grabs_Combined.reset_index(drop= True, inplace= True)
+
+
 
 
 

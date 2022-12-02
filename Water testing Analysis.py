@@ -125,35 +125,51 @@ Sample_BW_1 =Analysis_NSamples (Cont_Levels =Cont_Levels,
                    sampling_iters =50, 
                    var_iters= 50)
 
-Sample_BW_5 =Analysis_NSamples (Cont_Levels =Cont_Levels, 
+Sample_BW_2 =Analysis_NSamples (Cont_Levels =Cont_Levels, 
                    bw_volume =Total_L_Season, 
                    sample_size_volume =10,
-                   total_samples =5, 
+                   total_samples =2, 
                    loaded_model =qPCR_Model_AW,
                    sampling_iters =50, 
                    var_iters= 50)
 
-Sample_BW_10 =Analysis_NSamples (Cont_Levels =Cont_Levels, 
+Sample_BW_4 =Analysis_NSamples (Cont_Levels =Cont_Levels, 
                    bw_volume =Total_L_Season, 
                    sample_size_volume =10,
-                   total_samples =10, 
+                   total_samples =4, 
                    loaded_model =qPCR_Model_AW,
                    sampling_iters =50, 
                    var_iters= 50)
 
-Sample_BW_15 =Analysis_NSamples (Cont_Levels =Cont_Levels, 
+Sample_BW_8 =Analysis_NSamples (Cont_Levels =Cont_Levels, 
                    bw_volume =Total_L_Season, 
                    sample_size_volume =10,
-                   total_samples =15, 
+                   total_samples =8, 
                    loaded_model =qPCR_Model_AW,
                    sampling_iters =50, 
                    var_iters= 50)
 
-All_Samples_Combined =pd.concat([Sample_BW_1,Sample_BW_5,Sample_BW_10,Sample_BW_15])
+Sample_BW_16 =Analysis_NSamples (Cont_Levels =Cont_Levels, 
+                   bw_volume =Total_L_Season, 
+                   sample_size_volume =10,
+                   total_samples =16, 
+                   loaded_model =qPCR_Model_AW,
+                   sampling_iters =50, 
+                   var_iters= 50)
+
+Sample_BW_32 =Analysis_NSamples (Cont_Levels =Cont_Levels, 
+                   bw_volume =Total_L_Season, 
+                   sample_size_volume =10,
+                   total_samples =32, 
+                   loaded_model =qPCR_Model_AW,
+                   sampling_iters =50, 
+                   var_iters= 50)
+
+All_Samples_Combined =pd.concat([Sample_BW_1,Sample_BW_2,Sample_BW_4,Sample_BW_8,Sample_BW_16,Sample_BW_32])
 All_Samples_Combined["N10Lsamples"] = All_Samples_Combined["N10Lsamples"].astype(str)
 All_Samples_Combined.reset_index(drop= True, inplace= True)
 
-
+All_Samples_Combined.to_csv("C:\\Users\\gareyes3\\Documents\\GitHub\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\Water_Testing_Analysis.csv")
 
 sns.lineplot(data =All_Samples_Combined, x = "Conts", y = "PDetect", hue ="N10Lsamples" )
 plt.xlim(0,5)

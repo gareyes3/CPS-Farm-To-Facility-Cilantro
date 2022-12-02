@@ -42,6 +42,8 @@ from sklearn import linear_model
 logr = linear_model.LogisticRegression()
 logr.fit(np.array(Df_PD["Cont"]).reshape(-1,1),np.array(Df_PD["Results"]))
 
+logr.score(np.array(Df_PD["Cont"]).reshape(-1,1),np.array(Df_PD["Results"]))
+
 # save the model to disk
 filename = 'C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test_nPCR_FDA.sav'
 pickle.dump(logr, open(filename, 'wb'))
@@ -76,8 +78,54 @@ Df_PD_qPCR=pd.DataFrame({
 
 
 from sklearn import linear_model
+#Logistic Regression
 logr_qPCR = linear_model.LogisticRegression()
 logr_qPCR.fit(np.array(Df_PD_qPCR["Cont"]).reshape(-1,1),np.array(Df_PD_qPCR["Results"]))
+logr_qPCR.score(np.array(Df_PD_qPCR["Cont"]).reshape(-1,1),np.array(Df_PD_qPCR["Results"]))
+logr_qPCR.r2_score()
+
+#
+from sklearn.naive_bayes import GaussianNB
+nbayes_qPCR = GaussianNB()
+nbayes_qPCR.fit(np.array(Df_PD_qPCR["Cont"]).reshape(-1,1),np.array(Df_PD_qPCR["Results"]))
+nbayes_qPCR.score(np.array(Df_PD_qPCR["Cont"]).reshape(-1,1),np.array(Df_PD_qPCR["Results"]))
+
+from sklearn.ensemble import RandomForestClassifier
+clf_qPCR = RandomForestClassifier()
+clf_qPCR.fit(np.array(Df_PD_qPCR["Cont"]).reshape(-1,1),np.array(Df_PD_qPCR["Results"]))
+clf_qPCR.score(np.array(Df_PD_qPCR["Cont"]).reshape(-1,1),np.array(Df_PD_qPCR["Results"]))
+clf_qPCR.predict_proba(np.array([7]).reshape(-1,1))[0][1]
+
+from sklearn import tree
+tree_qPCR = tree.DecisionTreeClassifier()
+tree_qPCR.fit(np.array(Df_PD_qPCR["Cont"]).reshape(-1,1),np.array(Df_PD_qPCR["Results"]))
+tree_qPCR.score(np.array(Df_PD_qPCR["Cont"]).reshape(-1,1),np.array(Df_PD_qPCR["Results"]))
+tree_qPCR.predict_proba(np.array([7]).reshape(-1,1))[0][1]
+
+from sklearn import svm
+svm_qPCR = svm.SVC(probability=True)
+svm_qPCR.fit(np.array(Df_PD_qPCR["Cont"]).reshape(-1,1),np.array(Df_PD_qPCR["Results"]))
+svm_qPCR.score(np.array(Df_PD_qPCR["Cont"]).reshape(-1,1),np.array(Df_PD_qPCR["Results"]))
+svm_qPCR.predict_proba(np.array([7]).reshape(-1,1))[0][1]
+
+logr_qPCR.predict_proba(np.array([10]).reshape(-1,1))[0][1]
+
+probs_detect = []
+for i in (range(200)):
+    prob_detect = logr_qPCR.predict_proba(np.array([i]).reshape(-1,1))[0][1]
+    probs_detect.append(prob_detect)
+
+sns.scatterplot(data =Df_PD_qPCR, x ="Cont", y=  "Results" ,x_jitter=75)
+sns.lineplot(y =probs_detect, x = range(200))
+plt.xlabel("Oocyst per 25g sample")
+plt.ylabel("Probability of Detection")
+plt.title("Product Testing qPCR Method")
+
+Df_PD_qPCR.to_csv("C:\\Users\\gareyes3\\Documents\\GitHub\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\qPCR_Fit_Product_Testing.csv")
+Df_probs_qPCR = pd.DataFrame({"Prob Detect":probs_detect,
+                             "Cont" : range(200)})
+
+Df_probs_qPCR.to_csv("C:\\Users\\gareyes3\\Documents\\GitHub\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\qPCR_Fit_Product_Testing_Probs.csv")
 
 # save the model to disk
 filename = 'C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test_qPCR_FDA.sav'
@@ -86,7 +134,7 @@ pickle.dump(logr_qPCR, open(filename, 'wb'))
 
 probs_detect = []
 for i in (range(200)):
-    prob_detect = logr_qPCR.predict_proba(np.array([i]).reshape(-1,1))[0][1]
+    prob_detect =clf_qPCR.predict_proba(np.array([i]).reshape(-1,1))[0][1]
     probs_detect.append(prob_detect)
 
 sns.scatterplot(data =Df_PD_qPCR, x ="Cont", y=  "Results" )
@@ -165,6 +213,9 @@ from sklearn import linear_model
 logr_AW = linear_model.LogisticRegression()
 logr_AW.fit(np.array(Df_PD_AW["Cont"]).reshape(-1,1),np.array(Df_PD_AW["Results"]))
 
+logr_AW.predict_proba(np.array([6]).reshape(-1,1))[0][1]
+
+
 probs_detect = []
 for i in (range(200)):
     prob_detect = logr_AW.predict_proba(np.array([i]).reshape(-1,1))[0][1]
@@ -176,6 +227,14 @@ sns.lineplot(y =probs_detect, x = range(200))
 plt.xlabel("OOcyst per 10L sample")
 plt.ylabel("Probability of Detection")
 plt.title("Agricultural Water Fit")
+
+Df_PD_AW.to_csv("C:\\Users\\gareyes3\\Documents\\GitHub\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\qPCR_Fit_Water_Testing.csv")
+Df_probs_logr_AW = pd.DataFrame({"Prob Detect":probs_detect,
+                             "Cont" : range(200)})
+
+Df_probs_logr_AW.to_csv("C:\\Users\\gareyes3\\Documents\\GitHub\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\qPCR_Fit_Water_Testing_Probs.csv")
+
+
 
 # save the model to disk
 filename = 'C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-To-Facility-Cilantro\logistic_AW_Testing_qPCR.sav'

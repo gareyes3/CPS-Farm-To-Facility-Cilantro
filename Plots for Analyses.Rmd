@@ -1,0 +1,126 @@
+---
+title: "Untitled"
+output: html_document
+date: "2022-11-28"
+---
+```{r}
+library(tidyverse)
+```
+
+```{r}
+Unc_Conts<-read_csv("Data_Cilantro_Outputs/Water_Testing_Analysis.csv")
+```
+
+```{r}
+Unc_Conts<-Unc_Conts %>% 
+  select(-...1) %>% 
+  mutate(N10Lsamples= as.factor(N10Lsamples)) %>% 
+  group_by(N10Lsamples, Conts) %>% 
+  summarise(median = median(PDetect), q05 = quantile(PDetect, 0.05), q95 = quantile(PDetect, 0.95)) 
+
+Unc_Conts %>% 
+  ggplot(aes(x = Conts, y = median, color =N10Lsamples,ymin=q05, ymax=q95, fill = N10Lsamples))+
+  geom_point(alpha = 0.5)+
+  geom_line()+
+  geom_ribbon(alpha= 0.3)+
+  labs(x = "Contamination Levels Bulk Water: Oocyst/L", y = "Probability of Detection", fill = "No. 10L Samples", color= "No. 10L Samples")
+
+ggsave("Contamination vs Method.jpeg", width = 15, height = 10, units = "cm", dpi = 600)
+
+```
+
+```{r}
+
+
+Unc_Conts %>% 
+  filter(Conts <3) %>% 
+  ggplot(aes(x = Conts, y = median, color =N10Lsamples,ymin=q05, ymax=q95, fill = N10Lsamples))+
+  geom_point(alpha = 0.5)+
+  geom_line()+
+  geom_ribbon(alpha= 0.3)+
+  labs(x = "Contamination Levels Bulk Water: Oocyst/L", y = "Probability of Detection", fill = "No. 10L Samples", color= "No. 10L Samples")+
+  theme_bw()+
+  theme(legend.position="top")
+
+
+ggsave("Contamination vs Method.jpeg", width = 15, height = 10, units = "cm", dpi = 600)
+```
+```{r}
+log10(10000000/(20000*454))
+```
+
+
+```{r}
+Unc_Conts<-read_csv("Data_Cilantro_Outputs/Product_Testing_Analysis.csv")
+Unc_Conts$Conts<- log10(Unc_Conts$Conts)
+```
+
+```{r}
+Unc_Conts<-Unc_Conts %>% 
+  select(-...1) %>% 
+  mutate(N25gsamples= as.factor(N25gsamples)) %>% 
+  group_by(N25gsamples, Conts) %>% 
+  summarise(median = median(PDetect), q05 = quantile(PDetect, 0.05), q95 = quantile(PDetect, 0.95)) 
+
+Unc_Conts %>% 
+  ggplot(aes(x = Conts, y = median, color =N25gsamples,ymin=q05, ymax=q95, fill = N25gsamples))+
+  geom_point(alpha = 0.5)+
+  geom_line()+
+  geom_ribbon(alpha= 0.3)+
+  theme_bw()+
+  labs(x = "Contamination Levels in Field: log10 (Total Oocyst in field)", y = "Probability of Detection", fill = "No. 25 g Samples", color= "No. 25 g Samples")
+
+ggsave("Contamination vs Field Contam.jpeg", width = 15, height = 10, units = "cm", dpi = 600)
+
+```
+```{r}
+Unc_Conts %>% 
+  filter(Conts<5.0e+06) %>% 
+  ggplot(aes(x = Conts, y = median, color =N25gsamples,ymin=q05, ymax=q95, fill = N25gsamples))+
+  geom_point(alpha = 0.5)+
+  geom_line()+
+  geom_ribbon(alpha= 0.3)+
+  labs(x = "Contamiantion levels total Oocysts in Field", y = "Probability of Detection", fill = "No. 25g Samples", color= "No. 25g Samples")
+```
+
+
+
+### Logistic Fits
+
+```{r}
+#product Testing
+PT_Qpcr_Results<-read_csv("Data_Cilantro_Outputs/qPCR_Fit_Product_Testing.csv")
+PT_Qpcr_Probs<-read_csv("Data_Cilantro_Outputs/qPCR_Fit_Product_Testing_Probs.csv")
+
+ggplot()+
+  geom_hline(aes(yintercept = .29),color = "orange")+
+  geom_hline(aes(yintercept = .82),color = "red")+  
+  geom_vline(aes(xintercept = 5),color = "orange")+
+  geom_vline(aes(xintercept = 10),color = "red")+
+  geom_line(aes(x = Cont, y = `Prob Detect`), data = PT_Qpcr_Probs)+
+  geom_point(aes(x = Cont, y = Results), data = PT_Qpcr_Results,position = position_jitter(height = 0.01, width = 1),shape= 21, fill = "skyblue")+
+  labs(x= "Oocyst/ 25 g Sample", y = "Predicted Probability of Detection", title = "Logistic Fit: Product Testing")+
+  theme_bw()
+
+  ggsave(filename="Product Testing Fit.png",width = 15, height = 10, units = "cm", dpi = 600)
+  
+  
+#Water Testing
+PT_Qpcr_Results<-read_csv("Data_Cilantro_Outputs/qPCR_Fit_Water_Testing.csv")
+PT_Qpcr_Probs<-read_csv("Data_Cilantro_Outputs/qPCR_Fit_Water_Testing_Probs.csv")
+
+ggplot()+
+  #geom_hline(aes(yintercept = .29),color = "orange")+
+  geom_hline(aes(yintercept = .66),color = "red")+  
+  #geom_vline(aes(xintercept = 5),color = "orange")+
+  geom_vline(aes(xintercept = 6),color = "red")+
+  geom_line(aes(x = Cont, y = `Prob Detect`), data = PT_Qpcr_Probs)+
+  geom_point(aes(x = Cont, y = Results), data = PT_Qpcr_Results,position = position_jitter(height = 0.01, width = 1),shape= 21, fill = "skyblue")+
+  labs(x= "Oocyst/ 10L Sample", y = "Predicted Probability of Detection", title = "Logistic Fit: Agricultural Water Testing")+
+  theme_bw()
+
+  ggsave(filename="Water Testing Fit.png",width = 15, height = 10, units = "cm", dpi = 600)
+  
+
+```
+
