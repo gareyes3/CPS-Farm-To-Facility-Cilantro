@@ -227,7 +227,7 @@ Cilantro_df=pd.DataFrame({"Plant_ID": Total_Plants_List,
 #Grabs, each grab = 25g. 
 
 Cont_Levels = list(np.linspace(1,10_000_000, 100)) 
-Cont_Levels_log10= list(np.arange(1,7.5, 0.1)) 
+Cont_Levels_log10= list(np.arange(3,7.5, 0.1)) 
 Cont_Levels_log10_Num =[10**x for x in Cont_Levels_log10 ]
 
 #Running Analysys for 25g grabs
