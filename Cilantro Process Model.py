@@ -181,12 +181,22 @@ for i in range (1,Days_per_season+1):
                                         loaded_model =qPCR_Model_AW )
         print(W_Test_Outcome)
     
-    if W_Test_Outcome == 0:
+    #Condition here, what happens if we detect cyclospora in water sample? 
+        #- if water test positive and it is in the test day we do not irrigate
+        #- if water test negative or if we are not on a sampling day we irrigate
+    if W_Test_Outcome == 0 or i not in Water_Sampling_Days:
         #Step 1: Irrigation Event
         Cilantro_df = field_cont_percetage2(df = Cilantro_df, 
                                             percent_cont = Per_Cont_Field, 
                                             Hazard_lvl =Initial_Levels_Bulk_Day_Low ,
                                             No_Cont_Clusters = 1)
+        
+    elif W_Test_Outcome == 1 and i in Water_Sampling_Days:
+        Cilantro_df = field_cont_percetage2(df = Cilantro_df, 
+                                            percent_cont = Per_Cont_Field, 
+                                            Hazard_lvl =0,
+                                            No_Cont_Clusters = 1)
+    
     
     
         
