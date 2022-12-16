@@ -111,6 +111,9 @@ def Water_Sampling (total_oocyst_bw, bw_volume, sample_size_volume,total_samples
 #%% Loading PCR Detection Models
 filename_qPCR = 'C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-To-Facility-Cilantro\logistic_AW_Testing_qPCR.sav'
 qPCR_Model_AW = pickle.load(open(filename_qPCR, 'rb'))
+
+filename_qPCR = 'C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test_qPCR_FDA.sav'
+qPCR_Model = pickle.load(open(filename_qPCR, 'rb'))
 #%%
 
 #Cilantro  Inputs
@@ -156,7 +159,22 @@ Water_Sampling_Days = np.arange(1,Days_per_season,Sampling_every_Days_Water)
 #Water Sampling
 W_Sample_Vol = 10 #L
 Total_Samples_Day = 1
+
+#3Product Sample
+Sample_Weight = 25
+N_25g_Samples = 1
+N_Grabs = 1
+
+Sampling_every_Days_Product = 3
+Product_Sampling_Days = np.arange(1,Days_per_season,Sampling_every_Days_Product)
+
 #%%
+
+Water_Sampling = 1
+Product_Sampling_PH = 0
+Product_Testing_H = 0
+
+
 # Process Model --------------------------------------------------------------
 
 #Creating field dataframe
@@ -170,32 +188,65 @@ Cilantro_df=pd.DataFrame({"Plant_ID": Total_Plants_List,
                        "Rej_Acc" :"Acc"
                   })
 
+W_Test_Outcome = 0
+
 for i in range (1,Days_per_season+1):
-    
+
+
     #Water Sampling: Happens in sampling days
-    if i in Water_Sampling_Days:
-        W_Test_Outcome =W_Detected_YN = Water_Sampling (total_oocyst_bw = Initial_Levels_Bulk, 
+    if i in Water_Sampling_Days and Water_Sampling == 1 :
+        W_Test_Outcome = Water_Sampling (total_oocyst_bw = Initial_Levels_Bulk, 
                                         bw_volume =Total_L_Season , 
                                         sample_size_volume =W_Sample_Vol,
                                         total_samples = Total_Samples_Day, 
                                         loaded_model =qPCR_Model_AW )
         print(W_Test_Outcome)
     
-    #Condition here, what happens if we detect cyclospora in water sample? 
-        #- if water test positive and it is in the test day we do not irrigate
-        #- if water test negative or if we are not on a sampling day we irrigate
-    if W_Test_Outcome == 0 or i not in Water_Sampling_Days:
+    #Irrigation based on water testing: if water testing is positive at any day.
+    # the product is irrigated with good water. 
+    if W_Test_Outcome == 0:
         #Step 1: Irrigation Event
         Cilantro_df = field_cont_percetage2(df = Cilantro_df, 
                                             percent_cont = Per_Cont_Field, 
                                             Hazard_lvl =Initial_Levels_Bulk_Day_Low ,
                                             No_Cont_Clusters = 1)
         
-    elif W_Test_Outcome == 1 and i in Water_Sampling_Days:
+    elif W_Test_Outcome == 1:
         Cilantro_df = field_cont_percetage2(df = Cilantro_df, 
                                             percent_cont = Per_Cont_Field, 
                                             Hazard_lvl =0,
                                             No_Cont_Clusters = 1)
+    
+    #Preharvest product testing. 
+    if i in Product_Sampling_Days and Product_Sampling_PH == 1 :
+        Cilantro_df =Cilantro_Sampling_25g(df=Cilantro_df,
+                              Sample_Weight = Sample_Weight,
+                              N_25g_Samples = N_25g_Samples,
+                              N_Grabs_Sample = N_Grabs ,
+                              Plant_Weight = Plant_Weight, 
+                              loaded_model =  qPCR_Model)
+        
+        Cilantro_df =F_Rejection_Rule_C (df= Cilantro_df )
+    
+    if i == (Days_per_season+1):
+        #Harvest Testing
+        if Product_Testing_H  == 1:
+            Cilantro_df =Cilantro_Sampling_25g(df=Cilantro_df,
+                                  Sample_Weight = Sample_Weight,
+                                  N_25g_Samples = N_25g_Samples,
+                                  N_Grabs_Sample = N_Grabs ,
+                                  Plant_Weight = Plant_Weight, 
+                                  loaded_model =  qPCR_Model)
+            
+            Cilantro_df =F_Rejection_Rule_C (df= Cilantro_df )
+    
+Exp = Cilantro_df["Oo"].sum()
+    
+        
+    
+        
+    
+    
     
     
     
