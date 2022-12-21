@@ -139,7 +139,7 @@ filename_qPCR = 'C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-To-Facility-Cilant
 qPCR_Model = pickle.load(open(filename_qPCR, 'rb'))
 #%%
 
-#Cilantro  Inputs
+#Cilantro Static Inputs
 
 #Creating the Field
 Field_Yield = 22_000 #lb
@@ -147,6 +147,7 @@ Plant_Weight = 1 #lb
 Total_Plants = int(Field_Yield/Plant_Weight)
 Total_Plants_List = range(1,Total_Plants+1)
 
+#not in use because until harvest
 Case_Weight = 20 #lb per case
 Bunches_Weight = Case_Weight/Plant_Weight
 
@@ -157,39 +158,18 @@ Days_per_season = 45 #days
 L_water_day = Total_L_Season/Days_per_season
 
 #Contamination
+#percentage of field contaminated
 Per_Cont_Field = 100
 
-
-#Water contamintion to calculate min and max. 
-OO_per_L = 0.6
-OO_per_H = 20
-OO_per_Input = 1
-
-Initial_Levels_Bulk_Low = int(Total_L_Season*OO_per_L)
-Initial_Levels_Bulk_Day_Low = L_water_day*OO_per_L
-#299376, Oo per season
-#6652.8, Oo per day
-Initial_Levels_Bulk_High = int(Total_L_Season*OO_per_H)
-Initial_Levels_Bulk_Day_High = L_water_day*OO_per_H
-
-#Initial levels based on Input
-Initial_Levels_Bulk = int(Total_L_Season*OO_per_Input)
-
-#Water Sampling
-Sampling_every_Days_Water = 3
-Water_Sampling_Days = np.arange(1,Days_per_season,Sampling_every_Days_Water)
-
-#Water Sampling
+#Water testing characteristics
 W_Sample_Vol = 10 #L
-Total_Samples_Day = 1
+Total_Samples_Water = 1
 
-#3Product Sample
-Sample_Weight = 25
+#Product Sample
+Sample_Weight = 25 #g
 N_25g_Samples = 1
 N_Grabs = 1
 
-Sampling_every_Days_Product = 3
-Product_Sampling_Days = np.arange(1,Days_per_season,Sampling_every_Days_Product)
 
 #%% output collection functions
 def Output_DF_Creation(Column_Names, Niterations):
@@ -210,7 +190,7 @@ def Output_Collection_any_output(outputDF, Step_Column,iteration, outcome):
     outputDF.at[iteration,Step_Column] =outcome
     return outputDF
 
-#%%
+#%% Function to run the scenarions in the process mdoel
 
 def Process_Model(Days_per_season,
                   Niterations,
@@ -219,49 +199,58 @@ def Process_Model(Days_per_season,
                   #Contamination Information
                   OO_per_L,
                   #Water Testing Options
-                  Sampling_every_Days_Water,
-                  Sampling_every_Days_Product,
+                  Sampling_every_Days_Water, #change to 1 always
+                  Sampling_every_Days_Product, #change to 1 always
                   #for scenario 2
-                  Testing_Day_Water,
-                  Testing_Day_Product,
+                  Testing_Day_Water, #if scenario 2, then select the days you want testing to happen 1,23,45
+                  Testing_Day_Product,#if scenario 2, then select the days you want testing to happen 1,23,45
                   #Testing Options
-                  Water_Sampling = 0,
-                  Product_Sampling_PH = 0,
-                  Product_Testing_H = 0
+                  Water_Sampling = 0,#1 is on 0 is off
+                  Product_Sampling_PH = 0, #1 is on 0 is off
+                  Product_Testing_H = 0 ##1 is on 0 is off
                   ):
     
     #Initial levels based on Input
     #Initial_Levels_Bulk = int(Total_L_Season*OO_per_L)
     #Irrigation_Levels_Days = Initial_Levels_Bulk/Days_per_season 
     
-    #Dataframe output creation
+    #Dataframe output creation, THIS ARE THE [0], [2], [8] later in the output section
+    
+    #tells you  what if water rejected on a given day
     Water_Outcome_DF = Output_DF_Creation(Column_Names =np.arange(1,Days_per_season+1), Niterations= Niterations)
+    #tells you the probability of detection per days
     Water_PrRej_DF = Output_DF_Creation(Column_Names =np.arange(1,Days_per_season+1), Niterations= Niterations)
+    #tells you if produce sampling detected every day
     Produce_Outcome_DF = Output_DF_Creation(Column_Names =np.arange(1,Days_per_season+1), Niterations= Niterations)
+    #tell you probability of detection of product sampling
     Produce_PrRej_DF = Output_DF_Creation(Column_Names =np.arange(1,Days_per_season+1), Niterations= Niterations)
+    #tells you contamination at each sampling point per day
     Contam_Produce_DF = Output_DF_Creation(Column_Names =np.arange(1,Days_per_season+1), Niterations= Niterations)
+    #not in use harest samplfin
     Harvest_Sampling_Outcome_DF = Output_DF_Creation(Column_Names =[Days_per_season], Niterations= Niterations)
     Harvest_Sampling_PrRej_DF = Output_DF_Creation(Column_Names =[Days_per_season], Niterations= Niterations)
     Contam_HS_DF = Output_DF_Creation(Column_Names =[Days_per_season], Niterations= Niterations)
+    #Tells you the cells at the end of each day
     Final_CFUS_DF = Output_DF_Creation(Column_Names =np.arange(1,Days_per_season+1), Niterations= Niterations)
     
     
     for k in (range(Niterations)): 
         print(k)
         
+        #Contmaination scenario selection
         if Cont_Scenario ==2:
             Random_Irr_Day_Scen2 = random.randint(1,Days_per_season)
                 
         #Water Sampling
         #Sampling_every_Days_Water = 1
-        if Testing_Scenario ==1:
+        if Testing_Scenario ==1 :
             Water_Sampling_Days = np.arange(1,Days_per_season+1,Sampling_every_Days_Water)
         elif Testing_Scenario ==2:
             Water_Sampling_Days = [Testing_Day_Water]
         
         #Product Sampling Days
         #Sampling_every_Days_Product = 1
-        if Testing_Scenario ==1:
+        if Testing_Scenario ==1 :
             Product_Sampling_Days = np.arange(1,Days_per_season+1,Sampling_every_Days_Product)
         elif Testing_Scenario ==2:
             Product_Sampling_Days = [Testing_Day_Product]
@@ -303,7 +292,7 @@ def Process_Model(Days_per_season,
                 W_Test_Outcome = Func_Water_Sampling (total_oocyst_bw = Initial_Levels_Bulk, 
                                                 bw_volume =Total_L_Season , 
                                                 sample_size_volume =W_Sample_Vol,
-                                                total_samples = Total_Samples_Day, 
+                                                total_samples = Total_Samples_Water, 
                                                 loaded_model =qPCR_Model_AW )
                 
                 Water_Outcome_DF = Output_Collection_any_output(outputDF = Water_Outcome_DF, Step_Column = i,iteration=k, outcome = W_Test_Outcome[0])
@@ -356,12 +345,12 @@ def Process_Model(Days_per_season,
 
 
     
-        
-
-        
+ #%% SCENARIOS     THESE ARE EXAMPLES (SOME REAL SCENARIO), TUNE THEM TO MATCH THE SCENARIOS WE SPOKE ABOUT  IN DOC
+#FOR THE FINAL ANALYSIS nITERATIONS ==10,000  
+       
 #Baseline Scenario 1, No Sampling one a day. Contamination every Day
 #Low Contamination
-Baseline_1_L = Process_Model(
+Out_B1_L = Process_Model(
                   Days_per_season = 45,
                   Niterations= 10,
                   Cont_Scenario = 1,
@@ -380,11 +369,30 @@ Baseline_1_L = Process_Model(
                   )
 
 #High Contamination
-Baseline_1_H = Process_Model(
+Out_B1_H = Process_Model(
                   Days_per_season = 45,
                   Niterations= 10,
-                  Cont_Scenario = 1,
-                  Testing_Scenario=2,
+                  Cont_Scenario = 1,#Change in baseline scenario
+                  Testing_Scenario=2,#leave as 2 default
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 0,
+                  Sampling_every_Days_Product = 0,
+                  #Testing Options
+                  Testing_Day_Water = 0,
+                  Testing_Day_Product = 0,
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 0,
+                  Product_Testing_H = 0
+                  )
+
+#Baseline Scenario 2: Irrigation one day randomly
+Out_B2_L = Process_Model(
+                  Days_per_season = 45,
+                  Niterations= 10,
+                  Cont_Scenario = 2, #Change in baseline scenario
+                  Testing_Scenario=2, #leave as 2 default
                   #Contamination Information
                   OO_per_L =0.6,
                   #Water Testing Options
@@ -398,13 +406,13 @@ Baseline_1_H = Process_Model(
                   Product_Testing_H = 0
                   )
 
-Baseline_1_L = Process_Model(
+Out_B2_H = Process_Model(
                   Days_per_season = 45,
                   Niterations= 10,
-                  Cont_Scenario = 1,
-                  Testing_Scenario=2,
+                  Cont_Scenario = 2, #Change in baseline scenario
+                  Testing_Scenario=2, #leave as 2 default
                   #Contamination Information
-                  OO_per_L =0.6,
+                  OO_per_L =20,
                   #Water Testing Options
                   Sampling_every_Days_Water = 0,
                   Sampling_every_Days_Product = 0,
@@ -418,18 +426,18 @@ Baseline_1_L = Process_Model(
 
 
 
-
-#Baseline Scenario 1, No Sampling one a day
-Baseline_2_L = Process_Model(
+#BaselineScenario 1: Plus sampling plans =========================================
+#B1_Daily testing water (DTW) -Low
+Scen_B1_L_DTW = Process_Model(
                   Days_per_season = 45,
                   Niterations= 10,
-                  Cont_Scenario = 1,
-                  Testing_Scenario=1,
+                  Cont_Scenario = 1,#every day contamiantion
+                  Testing_Scenario=1,#every day sampling
                   #Contamination Information
                   OO_per_L =0.6,
                   #Water Testing Options
-                  Sampling_every_Days_Water = 1,
-                  Sampling_every_Days_Product = 1,
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as fault 
                   #Testing Options
                   Testing_Day_Water = 0,
                   Testing_Day_Product = 0,
@@ -437,22 +445,110 @@ Baseline_2_L = Process_Model(
                   Product_Sampling_PH = 0,
                   Product_Testing_H = 0
                   )
-#%%
-Iterations = 10
 
-df_ext = pd.DataFrame({"Iteration": range(Iterations),
-                   "MinDay": ""})
-for i in range(Iterations):
-    list_of_days=list(range(1,45+1))
-    index_rows =Baseline_2_L[0].iloc[[i]] ==1
-    index_rows=index_rows.values.flatten().tolist()
-    postivie_days=[i+1 for i, x in enumerate(index_rows) if x]
-    if len(postivie_days)>0:
-        min_day= min(postivie_days)
-    else:
-        min_day = np.nan
-    df_ext.loc[i,"MinDay"] =  min_day
+Scen_B1_H_DTW = Process_Model(
+                  Days_per_season = 45,
+                  Niterations= 10,
+                  Cont_Scenario = 1,#every day contamiantion
+                  Testing_Scenario=1,#every day sampling
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as fault 
+                  #Testing Options
+                  Testing_Day_Water = 0,
+                  Testing_Day_Product = 0,
+                  Water_Sampling = 1,
+                  Product_Sampling_PH = 0,
+                  Product_Testing_H = 0
+                  )
 
+
+#este ejemplo es de product testing todos los dias: 
+Scen_B1_L_DTWP = Process_Model(
+                  Days_per_season = 45,
+                  Niterations= 10,
+                  Cont_Scenario = 1,#every day contamiantion
+                  Testing_Scenario=1,#every day sampling
+                  #Contamination Information
+                  OO_per_L =0.06,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = 0,
+                  Testing_Day_Product = 0,
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1, #now product testing is on
+                  Product_Testing_H = 0
+                  )
+
+
+#este ejemplo es el de water testing en el dia 1
+Scen_B1_L_WT1 = Process_Model(
+                  Days_per_season = 45,
+                  Niterations= 10,
+                  Cont_Scenario = 1,#every day contamiantion
+                  Testing_Scenario=2,#Testing only in given day
+                  #Contamination Information
+                  OO_per_L =0.06,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #leave as 1 defaul
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = 1, #testing water on day 1
+                  Testing_Day_Product = 0,
+                  Water_Sampling = 1,#now water testing is on
+                  Product_Sampling_PH = 0, 
+                  Product_Testing_H = 0
+                  )
+
+#%% Generating function for outputs
+
+#Output 1: TAC at system endpoint. If rejected at any point Endpoint TACs = 0 
+
+#Extracting Rejection Days: 
+    
+#gets the earliest day of each iteration when the product was rejected.
+def Rejection_Days(Iterations, dfrejections):    
+    df_ext = pd.DataFrame({"Iteration": range(Iterations),
+                       "MinDay": ""})
+    for i in range(Iterations):
+        index_rows =dfrejections.iloc[[i]] ==1
+        index_rows=index_rows.values.flatten().tolist()
+        postivie_days=[i+1 for i, x in enumerate(index_rows) if x]
+        if len(postivie_days)>0:
+            min_day= min(postivie_days)
+        else:
+            min_day = "Never Rejected"
+        df_ext.loc[i,"MinDay"] =  min_day
+    return  df_ext
+        
+#gets the endpoint TAC of any days that were not able to reject contamination
+def get_exposure(df_rejections,df_FinalConts,Iterations, Days_per_season):
+    Days_Rejected=Rejection_Days(Iterations = Iterations, dfrejections =df_rejections )
+    #Checking for NA Values.
+    Not_Rejected = Days_Rejected["MinDay"] == "Never Rejected"
+    Index_Not_Rejected=[i for i, x in enumerate(Not_Rejected) if x==True]
+    exps =df_FinalConts[Days_per_season][Index_Not_Rejected].sum()
+    return exps
+
+
+#THIS GIVES YOU THE ENDPOINT TAC, ADJUST ACCORDINGLY PER SCENARIO
+
+#This should get the exposure of any of the scenarios: just replace the dataframe. at the end this can be automated. as well
+get_exposure(df_rejections =Scen_B1_L_DTW[0] ,df_FinalConts = Scen_B1_L_DTW[8],Iterations = 10,Days_per_season=45) #el 0 es para el water esting
+
+#this gets you the output TAC  of scenario with product testing
+get_exposure(df_rejections =Scen_B1_L_DTWP[2] ,df_FinalConts = Scen_B1_L_DTWP[8],Iterations = 10, Days_per_season=45) #el 2 es para el product esting
+
+#enpoint TAC for testing only on day 1 water
+get_exposure(df_rejections =Scen_B1_L_WT1[0] ,df_FinalConts = Scen_B1_L_WT1[8],Iterations = 10, Days_per_season=45) #el 2 es para el product esting
+
+
+
+#%% Nothing yet, trying code
 import seaborn as sns
 
 Baseline_1[1].melt()   
