@@ -1,0 +1,65 @@
+---
+title: "Baseline 1"
+author: "Ruben"
+date: "2023-01-11"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+
+library(ggplot2)
+
+BS1 <- read.csv(file = "Baseline1.csv", header = TRUE )
+
+BS1
+
+BS1$Scenarios <- as.factor(BS1$Scenarios)
+BS1$Scenarios2 <- as.factor(BS1$Scenarios2)
+
+BS1$Relative_Efficacy <-as.numeric(BS1$Relative_Efficacy)
+
+BS1
+
+Fig1 <- ggplot(BS1, aes(fill=Contamination, x=Scenarios2, y=Relative_Efficacy)) + 
+  geom_bar(position = "dodge", stat = "identity") + 
+  labs(title="Baseline Scenario 1:Daily Irrigation with Contaminated Water", y="Relative Efficacy Enpoint Oocyst", x="Sampling Scenario")
+
+Fig1 + 
+  scale_fill_discrete(name = "Contamination \nScenario")+#(values=c("#FF3366","#99CCFF")) +
+  theme_bw()+
+  #theme(axis.text.x = element_text(angle=45, vjust=1, hjust=1))+
+  coord_flip()
+
+ggsave("Baseline1.jpg", width =7, height = 7, units = "in", dpi = 600)
+
+
+BS2 <- read.csv(file = "Baseline2.csv", header = TRUE )
+
+BS2
+
+BS2$Scenarios <- as.factor(BS2$Scenarios)
+BS2$Scenarios2 <- as.factor(BS2$Scenarios2)
+
+BS2$Relative_Efficacy <-as.numeric(BS2$Relative_Efficacy)
+
+BS2
+
+Fig2 <- ggplot(BS2, aes(fill=Contamination, x=Scenarios2, y=Relative_Efficacy)) + 
+  geom_bar(position = "dodge", stat = "identity") + 
+  labs(title="Baseline Scenario 2: Irrigation with contaminated water once \n per season (random)", y="Relative Efficacy Enpoint Oocyst", x="Sampling Scenario")
+
+Fig2 + 
+  scale_fill_discrete(name = "Contamination \nScenario")+#(values=c("#FF3366","#99CCFF")) +
+  theme_bw()+
+  #theme(axis.text.x = element_text(angle=45, vjust=1, hjust=1))+
+  coord_flip()
+
+ggsave("Baseline2.jpg", width =7, height = 7, units = "in", dpi = 600)
+
+```
+
+
