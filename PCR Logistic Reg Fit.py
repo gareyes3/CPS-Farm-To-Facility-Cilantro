@@ -36,6 +36,9 @@ Df_PD=pd.DataFrame({
         "Results": np.concatenate([R1,R2,R3,R4]),
         })
 
+Df_PD.to_csv("C:\\Users\\Gustavo Reyes\\Documents\\GitHubFiles\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\Product_Testing_Data.csv")
+
+
 sns.scatterplot(data =Df_PD, x ="Cont", y=  "Results" )
 
 from sklearn import linear_model
@@ -207,6 +210,7 @@ Df_PD_AW=pd.DataFrame({
         "Results": np.concatenate([R1_AW,R2_AW,R3_AW,R4_AW,R5_AW,R6_AW]),
         })
 
+Df_PD_AW.to_csv("C:\\Users\\Gustavo Reyes\\Documents\\GitHubFiles\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\Water_Testing_Data.csv")
 
 
 from sklearn import linear_model
@@ -214,6 +218,7 @@ logr_AW = linear_model.LogisticRegression()
 logr_AW.fit(np.array(Df_PD_AW["Cont"]).reshape(-1,1),np.array(Df_PD_AW["Results"]))
 
 logr_AW.predict_proba(np.array([6]).reshape(-1,1))[0][1]
+
 
 
 probs_detect = []
