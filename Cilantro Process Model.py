@@ -535,6 +535,25 @@ def get_exposure(df_rejections,df_FinalConts,Iterations, Days_per_season):
     return exps
 
 
+def get_exposure_WP(df_rejections_W,df_rejections_P,df_FinalConts,Iterations, Days_per_season):
+    Days_Rejected_W=Rejection_Days(Iterations = Iterations, dfrejections =df_rejections_W )
+    Days_Rejected_P=Rejection_Days(Iterations = Iterations, dfrejections =df_rejections_P )
+    
+    #Checking for NA Values.
+    Not_Rejected_W = Days_Rejected_W["MinDay"] == "Never Rejected"
+    Not_Rejected_P = Days_Rejected_P["MinDay"] == "Never Rejected"
+
+    
+    Index_Not_Rejected_W=[i for i, x in enumerate(Not_Rejected_W) if x==True]
+    Index_Not_Rejected_P=[i for i, x in enumerate(Not_Rejected_P) if x==True]
+    
+    exps_W =df_FinalConts[Days_per_season][Index_Not_Rejected_W].sum()
+    exps_P =df_FinalConts[Days_per_season][Index_Not_Rejected_P].sum()
+    
+    exps = min(exps_W, exps_P)
+
+    return exps
+
 #THIS GIVES YOU THE ENDPOINT TAC, ADJUST ACCORDINGLY PER SCENARIO
 
 #This should get the exposure of any of the scenarios: just replace the dataframe. at the end this can be automated. as well
@@ -548,6 +567,10 @@ get_exposure(df_rejections =Scen_B1_L_WT1[0] ,df_FinalConts = Scen_B1_L_WT1[8],I
 
 
 
+
+
+#
+get_exposure_WP(df_rejections_W = Scen_B1_L_DTWP[0],df_rejections_P = Scen_B1_L_DTWP[2],df_FinalConts = Scen_B1_L_DTWP[8],Iterations =10, Days_per_season =45)
 #%% Nothing yet, trying code
 import seaborn as sns
 
