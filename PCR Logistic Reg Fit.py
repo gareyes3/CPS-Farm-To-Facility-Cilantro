@@ -18,6 +18,8 @@ rng = Generator(PCG64())
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pickle
+import statsmodels.api as smf
+import math
 #%%
 #Product Testing Model Logistic nPCR FDA
 R1=np.concatenate([np.ones(0), np.zeros(39)])
@@ -44,17 +46,23 @@ logr.fit(np.array(Df_PD["Cont"]).reshape(-1,1),np.array(Df_PD["Results"]))
 
 logr.score(np.array(Df_PD["Cont"]).reshape(-1,1),np.array(Df_PD["Results"]))
 
+logr.predict_proba(np.array([0]).reshape(-1,1))[0][1]
+logr.intercept_
+logr.coef_
+
+
 # save the model to disk
 filename = 'C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test_nPCR_FDA.sav'
 pickle.dump(logr, open(filename, 'wb'))
 
+np.arange(0, 200, 0.01)
 probs_detect = []
-for i in (range(200)):
+for i in (np.arange(0, 200, 0.01)):
     prob_detect = logr.predict_proba(np.array([i]).reshape(-1,1))[0][1]
     probs_detect.append(prob_detect)
 
 sns.scatterplot(data =Df_PD ,x ="Cont", y=  "Results" )
-sns.lineplot(y =probs_detect, x = range(200))
+sns.lineplot(y =probs_detect, x = np.arange(0, 200, 0.01))
 plt.xlabel("OOcyst per 25g sample")
 plt.ylabel("Probability of Detection")
 plt.title("Product Testing nPCR Method")
@@ -213,7 +221,12 @@ from sklearn import linear_model
 logr_AW = linear_model.LogisticRegression()
 logr_AW.fit(np.array(Df_PD_AW["Cont"]).reshape(-1,1),np.array(Df_PD_AW["Results"]))
 
-logr_AW.predict_proba(np.array([6]).reshape(-1,1))[0][1]
+logr_AW.intercept_
+logr_AW.coef_
+logr_AW.score(np.array(Df_PD_AW["Cont"]).reshape(-1,1),np.array(Df_PD_AW["Results"]))
+
+
+(math.exp(-4.4879239+0.85580838*0))/(1+(math.exp(-4.4879239+0.85580838*0)))
 
 
 probs_detect = []
