@@ -102,7 +102,7 @@ def F_Rejection_Rule_C (df):
 #Loading the saved logistic regression model
 
 #filename = 'C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test.sav'
-filename_nPCR = 'C:\\Users\Gustavo Reyes\Documents\GitHubFiles\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test_nPCR_FDA.sav'
+filename_nPCR = 'C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test_nPCR_FDA.sav'
 nPCR_Model = pickle.load(open(filename_nPCR, 'rb'))
 
 filename_qPCR = 'C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test_qPCR_FDA.sav'
@@ -227,12 +227,14 @@ Cilantro_df=pd.DataFrame({"Plant_ID": Total_Plants_List,
                        "Rej_Acc" :"Acc"
                   })
 
+#%%
 #Grabs, each grab = 25g. 
 
 Cont_Levels = list(np.linspace(1,10_000_000, 100)) 
 Cont_Levels_log10= list(np.arange(3,7.5, 0.1)) 
 Cont_Levels_log10_Num =[10**x for x in Cont_Levels_log10 ]
 
+#%%
 #Running Analysys for 25g grabs
 
 Outs_32g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num , 
@@ -304,22 +306,12 @@ Outs_1g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num,
 
 
 
-sns.lineplot(data =Outs_60g, x = "Conts", y = "PDetect")
-sns.lineplot(data =Outs_30g, x = "Conts", y = "PDetect")
-sns.lineplot(data =Outs_20g, x = "Conts", y = "PDetect")
-sns.lineplot(data =Outs_15g, x = "Conts", y = "PDetect")
-
 
 Grabs_Combined =pd.concat([Outs_1g,Outs_2g,Outs_4g,Outs_8g,Outs_16g,Outs_32g])
 Grabs_Combined.reset_index(drop= True, inplace= True)
 
-Grabs_Combined.to_csv("C:\\Users\\gareyes3\\Documents\\GitHub\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\Product_Testing_Analysis.csv")
+Grabs_Combined.to_csv("C:\\Users\\gareyes3\\Documents\\GitHub\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\Product_Testing_Analysis_R2.csv")
 
-
-Grabs_Combined["Conts"] = np.log10(Grabs_Combined["Conts"])
-Grabs_Combined["N25gsamples"] = Grabs_Combined["N25gsamples"].astype(str)
-
-sns.lineplot(data =Grabs_Combined, x = "Conts", y = "PDetect", hue ="N25gsamples" )
 
 #%%
 #Analysis: 

@@ -51,24 +51,29 @@ log10(10000000/(20000*454))
 
 
 ```{r}
-Unc_Conts<-read_csv("Data_Cilantro_Outputs/Product_Testing_Analysis.csv")
+Unc_Conts<-read_csv("Data_Cilantro_Outputs/Product_Testing_Analysis_R2.csv")
 Unc_Conts$Conts<- log10(Unc_Conts$Conts)
 ```
 
 ```{r}
-Unc_Conts<-Unc_Conts %>% 
+Unc_Conts<-Unc_Conts %>%
+  mutate(log_CFU_g_conts = log10(10^Conts/(454*22000))) %>% 
   select(-...1) %>% 
   mutate(N25gsamples= as.factor(N25gsamples)) %>% 
-  group_by(N25gsamples, Conts) %>% 
+  group_by(N25gsamples, log_CFU_g_conts) %>% 
   summarise(median = median(PDetect), q05 = quantile(PDetect, 0.05), q95 = quantile(PDetect, 0.95)) 
 
+
+
 Unc_Conts %>% 
-  ggplot(aes(x = Conts, y = median, color =N25gsamples,ymin=q05, ymax=q95, fill = N25gsamples))+
-  geom_point(alpha = 0.5)+
+  ggplot(aes(x = log_CFU_g_conts, y = median, color =N25gsamples, shape =N25gsamples, linetype =N25gsamples, ymin=q05, ymax=q95, fill = N25gsamples))+
+  geom_point(alpha = 0.5, size = 2.5)+
   geom_line()+
   geom_ribbon(alpha= 0.3)+
   theme_bw()+
-  labs(x = "Contamination Levels in Field: log10 (Total Oocyst in field)", y = "Probability of Detection", fill = "No. 25 g Samples", color= "No. 25 g Samples")
+  theme(legend.position="top")+
+  labs(x = "Contamination Levels in Field: log (Oocysts/g) ", y = "Probability of Detection: 25g sample(s)", fill = "No. 25 g Samples", color= "No. 25 g Samples", linetype = "No. 25 g Samples", shape = "No. 25 g Samples")
+
 
 ggsave("Contamination vs Field Contam.jpeg", width = 15, height = 10, units = "cm", dpi = 600)
 
