@@ -230,8 +230,10 @@ logr_AW.coef_
 logr_AW.score(np.array(Df_PD_AW["Cont"]).reshape(-1,1),np.array(Df_PD_AW["Results"]))
 
 
-(math.exp(-4.4879239+0.85580838*0))/(1+(math.exp(-4.4879239+0.85580838*0)))
+(math.exp(-4.4879239+0.85580838*1))/(1+(math.exp(-4.4879239+0.85580838*1)))
 
+0.02577*32
+1-(1-0.02577)**16
 
 
 probs_detect = []

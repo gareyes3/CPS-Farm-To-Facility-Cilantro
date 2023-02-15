@@ -80,7 +80,10 @@ def Cilantro_Sampling_25g(df,Sample_Weight,N_25g_Samples,N_Grabs_Sample ,Plant_W
             Total_Oocyst_Grab.append(Oo_Sample[0])
             Sample_Indeces.append(List_Random.index[0])
         Total_Oo_Composite = sum(Total_Oocyst_Grab)
-        Pr_Detect = loaded_model.predict_proba(np.array([Total_Oo_Composite]).reshape(-1,1))[0][1] #from logistic
+        if Total_Oo_Composite>=1:
+            Pr_Detect = loaded_model.predict_proba(np.array([Total_Oo_Composite]).reshape(-1,1))[0][1] #from logistic
+        else:
+            Pr_Detect = 0
         if np.random.uniform(0,1) < Pr_Detect:
             df2.loc[Sample_Indeces, 'PositiveSamples'] = df2.loc[Sample_Indeces, 'PositiveSamples'] + 1
     return df2
@@ -99,7 +102,7 @@ def F_Rejection_Rule_C (df):
 #Loading the saved logistic regression model
 
 #filename = 'C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test.sav'
-filename_nPCR = 'C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test_nPCR_FDA.sav'
+filename_nPCR = 'C:\\Users\Gustavo Reyes\Documents\GitHubFiles\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test_nPCR_FDA.sav'
 nPCR_Model = pickle.load(open(filename_nPCR, 'rb'))
 
 filename_qPCR = 'C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test_qPCR_FDA.sav'
@@ -239,7 +242,7 @@ Outs_32g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num ,
            N_25g_Samples=32,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
-           loaded_model = qPCR_Model,
+           loaded_model = nPCR_Model,
            Field_Iters =50, 
            Sampling_Iters =50)
 
@@ -250,7 +253,7 @@ Outs_16g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num ,
            N_25g_Samples=16,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
-           loaded_model = qPCR_Model,
+           loaded_model = nPCR_Model,
            Field_Iters =50, 
            Sampling_Iters =50)
 
@@ -261,7 +264,7 @@ Outs_8g = Iter_Cont_Levels(Cont_Levels =Cont_Levels_log10_Num,
            N_25g_Samples=8,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
-           loaded_model = qPCR_Model,
+           loaded_model = nPCR_Model,
            Field_Iters =50, 
            Sampling_Iters =50)
 
@@ -273,7 +276,7 @@ Outs_4g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num,
            N_25g_Samples=4,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
-           loaded_model = qPCR_Model,
+           loaded_model = nPCR_Model,
            Field_Iters =50, 
            Sampling_Iters =50)
 
@@ -284,7 +287,7 @@ Outs_2g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num,
            N_25g_Samples=2,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
-           loaded_model = qPCR_Model,
+           loaded_model = nPCR_Model,
            Field_Iters =50, 
            Sampling_Iters =50)
 
@@ -295,7 +298,7 @@ Outs_1g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num,
            N_25g_Samples=1,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
-           loaded_model = qPCR_Model,
+           loaded_model = nPCR_Model,
            Field_Iters =50, 
            Sampling_Iters =50)
 

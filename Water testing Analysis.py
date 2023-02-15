@@ -24,11 +24,14 @@ def Water_Sampling (total_oocyst_bw, bw_volume, sample_size_volume,total_samples
     
         #total Ocyst that actually made it to our sample
         T_Ocyst_SBW = np.random.binomial(n = total_oocyst_bw, p =Pr_Ocyst_BW) #SBW = sample bulk water
-    
+        #print(T_Ocyst_SBW)
         #Total Occyst recovered
         #T_Ocyst_Rec_SBW = rng.binomial(n=T_Ocyst_SBW, p =filter_recovery)
         # PCR Confirmation 
-        Pr_Detect = loaded_model.predict_proba(np.array([T_Ocyst_SBW]).reshape(-1,1))[0][1] #from logistic
+        if T_Ocyst_SBW>=1:
+            Pr_Detect = loaded_model.predict_proba(np.array([T_Ocyst_SBW]).reshape(-1,1))[0][1] #from logistic
+        else:
+            Pr_Detect = 0
         if np.random.uniform(0,1) < Pr_Detect:
             sample_resuls.append(1)
         else:
@@ -43,7 +46,7 @@ def Water_Sampling (total_oocyst_bw, bw_volume, sample_size_volume,total_samples
 #Loading the saved logistic regression model
 
 #filename = 'C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test.sav'
-filename_qPCR = 'C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-To-Facility-Cilantro\logistic_AW_Testing_qPCR.sav'
+filename_qPCR = 'C:\\Users\Gustavo Reyes\Documents\GitHubFiles\CPS-Farm-To-Facility-Cilantro\logistic_AW_Testing_qPCR.sav'
 qPCR_Model_AW = pickle.load(open(filename_qPCR, 'rb'))
 
 #%%
@@ -115,7 +118,7 @@ def Analysis_NSamples (Cont_Levels, bw_volume, sample_size_volume,total_samples,
         Df_Outs= pd.concat([Df_Outs,Df_Outs2])
     return Df_Outs
     
-Cont_Levels = list(np.arange(0.1,20,0.1)) #Oocyst per L
+Cont_Levels = list(np.arange(0,20,0.1)) #Oocyst per L
 
 Sample_BW_1 =Analysis_NSamples (Cont_Levels =Cont_Levels, 
                    bw_volume =Total_L_Season, 
@@ -169,7 +172,7 @@ All_Samples_Combined =pd.concat([Sample_BW_1,Sample_BW_2,Sample_BW_4,Sample_BW_8
 All_Samples_Combined["N10Lsamples"] = All_Samples_Combined["N10Lsamples"].astype(str)
 All_Samples_Combined.reset_index(drop= True, inplace= True)
 
-All_Samples_Combined.to_csv("C:\\Users\\gareyes3\\Documents\\GitHub\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\Water_Testing_Analysis.csv")
+All_Samples_Combined.to_csv("C:\\Users\\Gustavo Reyes\\Documents\\GitHubFiles\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\Water_Testing_Analysis_R2.csv")
 
 sns.lineplot(data =All_Samples_Combined, x = "Conts", y = "PDetect", hue ="N10Lsamples" )
 plt.xlim(0,5)
