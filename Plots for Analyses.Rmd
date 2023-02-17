@@ -5,6 +5,7 @@ date: "2022-11-28"
 ---
 ```{r}
 library(tidyverse)
+library(reshape2)
 ```
 
 ```{r}
@@ -17,34 +18,77 @@ Unc_Conts<-Unc_Conts %>%
   mutate(N10Lsamples= as.factor(N10Lsamples)) %>% 
   group_by(N10Lsamples, Conts) %>% 
   summarise(median = median(PDetect), q05 = quantile(PDetect, 0.05), q95 = quantile(PDetect, 0.95)) 
-
+```
 Unc_Conts %>% 
-  ggplot(aes(x = Conts, y = median, color =N10Lsamples,ymin=q05, ymax=q95, fill = N10Lsamples))+
+  ggplot(aes(x = Conts, y = median, shape =N10Lsamples, linetype =N10Lsamples, color =N10Lsamples,ymin=q05, ymax=q95, fill = N10Lsamples))+
   geom_point(alpha = 0.5)+
   geom_line()+
   geom_ribbon(alpha= 0.3)+
-  labs(x = "Contamination Levels Bulk Water: Oocyst/L", y = "Probability of Detection", fill = "No. 10L Samples", color= "No. 10L Samples")
+  labs(x = "Contamination Levels Bulk Water: Oocyst/L", y = "Probability of Detection: 10L Sample(s)", fill = "No. 10L Samples", color= "No. 10L Samples", shape = "No. 10L Samples", linetype ="No. 10L Samples" )
 
-ggsave("Contamination vs Method.jpeg", width = 15, height = 10, units = "cm", dpi = 600)
+ggsave("Contamination vs Method- R2.jpeg", width = 15, height = 10, units = "cm", dpi = 600)
 
-```
 
 ```{r}
-
-
 Unc_Conts %>% 
-  filter(Conts <3) %>% 
-  ggplot(aes(x = Conts, y = median, color =N10Lsamples,ymin=q05, ymax=q95, fill = N10Lsamples))+
-  geom_point(alpha = 0.5)+
+  filter(Conts <2) %>% 
+  ggplot(aes(x = Conts, y = median, shape =N10Lsamples, linetype =N10Lsamples, color =N10Lsamples,ymin=q05, ymax=q95, fill = N10Lsamples))+
+  geom_point(alpha = 0.5,size = 2.5)+
   geom_line()+
   geom_ribbon(alpha= 0.3)+
-  labs(x = "Contamination Levels Bulk Water: Oocyst/L", y = "Probability of Detection", fill = "No. 10L Samples", color= "No. 10L Samples")+
+  labs(x = "Contamination Levels Bulk Water: Oocyst/L", y = "Probability of Detection: 10L Sample(s)", fill = "No. 10L Samples", color= "No. 10L Samples", shape = "No. 10L Samples", linetype ="No. 10L Samples" )+
   theme_bw()+
   theme(legend.position="top")
 
 
-ggsave("Contamination vs Method.jpeg", width = 15, height = 10, units = "cm", dpi = 600)
+ggsave("Contamination vs Method-R2.jpeg", width = 15, height = 10, units = "cm", dpi = 600)
 ```
+
+```{r}
+Conts_WT = Unc_Conts[1:200,2]
+
+
+WT_1<-Unc_Conts %>% 
+  filter(N10Lsamples==1)
+
+WT_2<-Unc_Conts %>% 
+  filter(N10Lsamples==2)
+
+WT_4<-Unc_Conts %>% 
+  filter(N10Lsamples==4)
+
+WT_8<-Unc_Conts %>% 
+  filter(N10Lsamples==8)
+
+WT_16<-Unc_Conts %>% 
+  filter(N10Lsamples==16)
+
+WT_32<-Unc_Conts %>% 
+  filter(N10Lsamples==32)
+
+Conts_WT$`1`<-WT_1$median-WT_1$median
+Conts_WT$`2`<-WT_2$median-WT_1$median
+Conts_WT$`4`<-WT_4$median-WT_1$median
+Conts_WT$`8`<-WT_8$median-WT_1$median
+Conts_WT$`16`<-WT_16$median-WT_1$median
+Conts_WT$`32`<-WT_32$median-WT_1$median
+
+Conts_WT %>% 
+  melt(id = "Conts") %>% 
+  filter(Conts<2) %>% 
+  ggplot(aes(x = Conts, y = value, color = variable,shape =variable, fill = variable))+
+  geom_point(size= 2.5)+
+  geom_line()+
+  theme_bw()+
+  labs(x = "Contamination Levels Bulk Water: Oocyst/L", y = "Difference in median probability of detection\n n number of samples vs. 1 10L Sample", color = "No. 10L Samples", shape = "No. 10L Samples", fill = "No. 10L Samples")+
+  theme(legend.position="top")
+
+ggsave("Contamination vs Method Differences Water-R2.jpeg", width = 15, height = 10, units = "cm", dpi = 600)
+
+
+```
+
+
 ```{r}
 log10(10000000/(20000*454))
 ```
@@ -75,9 +119,54 @@ Unc_Conts %>%
   labs(x = "Contamination Levels in Field: log (Oocysts/g) ", y = "Probability of Detection: 25g sample(s)", fill = "No. 25 g Samples", color= "No. 25 g Samples", linetype = "No. 25 g Samples", shape = "No. 25 g Samples")
 
 
-ggsave("Contamination vs Field Contam.jpeg", width = 15, height = 10, units = "cm", dpi = 600)
+ggsave("Contamination vs Field Contam-R2.jpeg", width = 15, height = 10, units = "cm", dpi = 600)
 
 ```
+
+```{r}
+Conts_PD = Unc_Conts[1:45,2]
+as.data.frame(Conts_PD)
+
+PD_1<-Unc_Conts %>% 
+  filter(N25gsamples==1)
+
+PD_2<-Unc_Conts %>% 
+  filter(N25gsamples==2)
+
+PD_4<-Unc_Conts %>% 
+  filter(N25gsamples==4)
+
+PD_8<-Unc_Conts %>% 
+  filter(N25gsamples==8)
+
+PD_16<-Unc_Conts %>% 
+  filter(N25gsamples==16)
+
+PD_32<-Unc_Conts %>% 
+  filter(N25gsamples==32)
+
+Conts_PD$`1`<-PD_1$median-PD_1$median
+Conts_PD$`2`<-PD_2$median-PD_1$median
+Conts_PD$`4`<-PD_4$median-PD_1$median
+Conts_PD$`8`<-PD_8$median-PD_1$median
+Conts_PD$`16`<-PD_16$median-PD_1$median
+Conts_PD$`32`<-PD_32$median-PD_1$median
+
+Conts_PD %>% 
+  melt(id = "log_CFU_g_conts") %>% 
+  #filter(log_CFU_g_conts<2) %>% 
+  ggplot(aes(x = log_CFU_g_conts, y = value, color = variable,shape =variable, fill = variable))+
+  geom_point(size= 2.5)+
+  geom_line()+
+  theme_bw()+
+  theme(legend.position="top")+
+  labs(x = "Contamination Levels in Field: log (Oocysts/g)", y = "Difference in median probability of detection\n n number of samples vs. 1 25g Sample", color = "No. 25g Samples", shape = "No. 25g Samples", fill = "No. 25g Samples")
+
+ggsave("Contamination vs Method Differences Contam-R2.jpeg", width = 15, height = 10, units = "cm", dpi = 600)
+
+```
+
+
 ```{r}
 Unc_Conts %>% 
   filter(Conts<5.0e+06) %>% 

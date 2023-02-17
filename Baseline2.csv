@@ -1,25 +1,25 @@
 Scenarios,Relative_Efficacy,Contamination,Scenarios2
-Daily_Water_Test,0.7443,Low,Daily Water Test
-Daily_Produce_Test,0.7462,Low,Daily Product Test
-Water_Testing_1,0.0239,Low,Water Testing 1
-Water_Testing_2,0.049,Low,Water Testing 2
-Water_Testing_3,0.0736,Low,Water Testing 3
-Produce_Testing_1,0.0295,Low,Product Testing 1
-Produce_Testing_2,0.0601,Low,Product Testing 2
-Produce_Testing_3,0.0869,Low,Product Testing 3
-Daily_Water&Product_Test,0.994266667,Low,Daily Water & Product Test
-Water&Product_1,0.978275556,Low,Water & Product 1
-Water&Product_2,0.978891111,Low,Water & Product 2
-Water&Product_3,0.979288889,Low,Water & Product 3
+Daily_Water_Test,0.987338523,Low,Daily Water Test
+Daily_Produce_Test,0.0185,Low,Daily Product Test
+Water_Testing_1,0.0115,Low,Water Testing 1
+Water_Testing_2,0.0244,Low,Water Testing 2
+Water_Testing_3,0.039,Low,Water Testing 3
+Produce_Testing_1,0,Low,Product Testing 1
+Produce_Testing_2,0.0006,Low,Product Testing 2
+Produce_Testing_3,0.0017,Low,Product Testing 3
+Daily_Water&Product_Test,0.5815,Low,Daily Water & Product Test
+Water&Product_1,0.0118,Low,Water & Product 1
+Water&Product_2,0.025,Low,Water & Product 2
+Water&Product_3,0.0371,Low,Water & Product 3
 Daily_Water_Test,1,High,Daily Water Test
-Daily_Produce_Test,0.8,High,Daily Product Test
-Water_Testing_1,0.03,High,Water Testing 1
-Water_Testing_2,0.07,High,Water Testing 2
-Water_Testing_3,0.1,High,Water Testing 3
-Produce_Testing_1,0.03,High,Product Testing 1
-Produce_Testing_2,0.07,High,Product Testing 2
-Produce_Testing_3,0.1,High,Product Testing 3
+Daily_Produce_Test,0.3996,High,Daily Product Test
+Water_Testing_1,0.0221,High,Water Testing 1
+Water_Testing_2,0.0437,High,Water Testing 2
+Water_Testing_3,0.0693,High,Water Testing 3
+Produce_Testing_1,0.0002,High,Product Testing 1
+Produce_Testing_2,0.0252,High,Product Testing 2
+Produce_Testing_3,0.0346,High,Product Testing 3
 Daily_Water&Product_Test,1,High,Daily Water & Product Test
-Water&Product_1,0.978546667,High,Water & Product 1
-Water&Product_2,0.979264444,High,Water & Product 2
-Water&Product_3,0.979868889,High,Water & Product 3
+Water&Product_1,0.0224,High,Water & Product 1
+Water&Product_2,0.042,High,Water & Product 2
+Water&Product_3,0.0693,High,Water & Product 3
