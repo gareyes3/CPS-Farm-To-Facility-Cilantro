@@ -1,25 +1,25 @@
 Scenarios,Relative_Efficacy,Contamination,Scenarios2
 Daily_Water_Test,1,Low,Daily Water Test
-Daily_Produce_Test,0.5428,Low,Daily Product Test
+Daily_Produce_Test,0.5428,Low,Daily Produce Test
 Water_Testing_1,0.5744,Low,Water Testing 1
 Water_Testing_2,0.8263,Low,Water Testing 2
 Water_Testing_3,0.9291,Low,Water Testing 3
-Produce_Testing_1,0.0012,Low,Product Testing 1
-Produce_Testing_2,0.0374,Low,Product Testing 2
-Produce_Testing_3,0.0476,Low,Product Testing 3
-Daily_Water&Product_Test,1,Low,Daily Water & Product Test
-Water&Product_1,0.5843,Low,Water & Product 1
-Water&Product_2,0.8263,Low,Water & Product 2
-Water&Product_3,0.9269,Low,Water & Product 3
+Produce_Testing_1,0.0012,Low,Produce Testing 1
+Produce_Testing_2,0.0374,Low,Produce Testing 2
+Produce_Testing_3,0.0476,Low,Produce Testing 3
+Daily_Water&Product_Test,1,Low,Daily Water & Produce Test
+Water&Product_1,0.5843,Low,Water & Produce 1
+Water&Product_2,0.8263,Low,Water & Produce 2
+Water&Product_3,0.9269,Low,Water & Produce 3
 Daily_Water_Test,1,High,Daily Water Test
-Daily_Produce_Test,1,High,Daily Product Test
+Daily_Produce_Test,1,High,Daily Produce Test
 Water_Testing_1,1,High,Water Testing 1
 Water_Testing_2,1,High,Water Testing 2
 Water_Testing_3,1,High,Water Testing 3
-Produce_Testing_1,0.0255,High,Product Testing 1
-Produce_Testing_2,0.9961,High,Product Testing 2
-Produce_Testing_3,0.9996,High,Product Testing 3
-Daily_Water&Product_Test,1,High,Daily Water & Product Test
-Water&Product_1,1,High,Water & Product 1
-Water&Product_2,1,High,Water & Product 2
-Water&Product_3,1,High,Water & Product 3
+Produce_Testing_1,0.0255,High,Produce Testing 1
+Produce_Testing_2,0.9961,High,Produce Testing 2
+Produce_Testing_3,0.9996,High,Produce Testing 3
+Daily_Water&Product_Test,1,High,Daily Water & Produce Test
+Water&Product_1,1,High,Water & Produce 1
+Water&Product_2,1,High,Water & Produce 2
+Water&Product_3,1,High,Water & Produce 3
