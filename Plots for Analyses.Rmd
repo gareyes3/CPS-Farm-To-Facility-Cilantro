@@ -124,6 +124,7 @@ ggsave("Contamination vs Field Contam-R2.jpeg", width = 15, height = 10, units =
 ```
 
 ```{r}
+
 Conts_PD = Unc_Conts[1:45,2]
 as.data.frame(Conts_PD)
 
@@ -151,7 +152,6 @@ Conts_PD$`4`<-PD_4$median-PD_1$median
 Conts_PD$`8`<-PD_8$median-PD_1$median
 Conts_PD$`16`<-PD_16$median-PD_1$median
 Conts_PD$`32`<-PD_32$median-PD_1$median
-
 Conts_PD %>% 
   melt(id = "log_CFU_g_conts") %>% 
   #filter(log_CFU_g_conts<2) %>% 
@@ -163,6 +163,29 @@ Conts_PD %>%
   labs(x = "Contamination Levels in Field: log (Oocysts/g)", y = "Difference in median probability of detection\n n number of samples vs. 1 25g Sample", color = "No. 25g Samples", shape = "No. 25g Samples", fill = "No. 25g Samples")
 
 ggsave("Contamination vs Method Differences Contam-R2.jpeg", width = 15, height = 10, units = "cm", dpi = 600)
+```
+
+```{r}
+#AUC
+#Areas under the curve
+integrate(approxfun(Conts_PD$log_CFU_g_conts, y = Conts_PD$`2`),-3.9994785337, 0.4005214663)
+
+library(pracma)
+AUC2 = trapz(Conts_PD$log_CFU_g_conts, y = Conts_PD$`2`)
+AUC4 = trapz(Conts_PD$log_CFU_g_conts, y = Conts_PD$`4`)
+AUC8 = trapz(Conts_PD$log_CFU_g_conts, y = Conts_PD$`8`)
+AUC16 = trapz(Conts_PD$log_CFU_g_conts, y = Conts_PD$`16`)
+AUC32 = trapz(Conts_PD$log_CFU_g_conts, y = Conts_PD$`32`)
+
+AUC2/AUC4
+AUC4/AUC8 
+AUC8/AUC16
+AUC16/AUC32
+
+AUC32-AUC16
+AUC16-AUC8
+AUC8-AUC4
+AUC4-AUC2
 
 ```
 

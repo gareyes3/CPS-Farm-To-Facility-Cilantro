@@ -26,17 +26,21 @@ BS1
 
 Fig1 <- ggplot(BS1, aes(fill=Contamination, x=Scenarios2, y=Relative_Efficacy)) + 
   geom_bar(position = "dodge", stat = "identity") + 
-  labs(title="Baseline Scenario 1:Daily Irrigation with Contaminated Water", y="Relative Efficacy Enpoint Oocyst", x="Sampling Scenario")
+  labs(title="Contamination Frequency 1: Daily Irrigation with contaminated water", y="Relative Efficacy: Endpoint Oocyst", x="Sampling Scenario")
 
 Fig1 + 
-  scale_fill_discrete(name = "Contamination \nScenario")+#(values=c("#FF3366","#99CCFF")) +
+  scale_fill_discrete(name = "Contamination \nLevel")+#(values=c("#FF3366","#99CCFF")) +
   theme_bw()+
+  theme(plot.title = element_text(hjust = 0.5))+
   #theme(axis.text.x = element_text(angle=45, vjust=1, hjust=1))+
   coord_flip()
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1347f542efd39a1a97f4138822ff75e342fc1175
 
-ggsave("Baseline1.jpg", width =7, height = 7, units = "in", dpi = 600)
+ggsave("Baseline1.jpg", width =7, height = 6, units = "in", dpi = 600)
 
 
 BS2 <- read.csv(file = "Baseline2.csv", header = TRUE )
@@ -52,15 +56,19 @@ BS2
 
 Fig2 <- ggplot(BS2, aes(fill=Contamination, x=Scenarios2, y=Relative_Efficacy)) + 
   geom_bar(position = "dodge", stat = "identity") + 
-  labs(title="Baseline Scenario 2: Irrigation with contaminated water once \n per season (random)", y="Relative Efficacy Enpoint Oocyst", x="Sampling Scenario")
+  labs(title="Contamination Frequency 2: Irrigation with contaminated water\n  once per season (random)", y="Relative Efficacy: Endpoint Oocyst", x="Sampling Scenario")
 
 Fig2 + 
-  scale_fill_discrete(name = "Contamination \nScenario")+#(values=c("#FF3366","#99CCFF")) +
+  scale_fill_discrete(name = "Contamination \nLevel")+#(values=c("#FF3366","#99CCFF")) +
   theme_bw()+
+  theme(plot.title = element_text(hjust = 0.5))+
   #theme(axis.text.x = element_text(angle=45, vjust=1, hjust=1))+
   coord_flip()
 
-ggsave("Baseline2.jpg", width =7, height = 7, units = "in", dpi = 600)
+ggsave("Baseline2.jpg", width =7, height = 6, units = "in", dpi = 600)
+
+
+
 
 ```
 
