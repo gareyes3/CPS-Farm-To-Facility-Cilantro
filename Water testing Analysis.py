@@ -46,7 +46,7 @@ def Water_Sampling (total_oocyst_bw, bw_volume, sample_size_volume,total_samples
 #Loading the saved logistic regression model
 
 #filename = 'C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test.sav'
-filename_qPCR = 'C:\\Users\Gustavo Reyes\Documents\GitHubFiles\CPS-Farm-To-Facility-Cilantro\logistic_AW_Testing_qPCR.sav'
+filename_qPCR = 'C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-To-Facility-Cilantro\logistic_AW_Testing_qPCR.sav'
 qPCR_Model_AW = pickle.load(open(filename_qPCR, 'rb'))
 
 #%%
@@ -59,7 +59,7 @@ def Iterating_Water_Samples (total_oocyst_bw, bw_volume, sample_size_volume, tot
                                         sample_size_volume =sample_size_volume,
                                         total_samples=total_samples,
                                         loaded_model =loaded_model ))
-    return np.mean(P_detect)
+    return np.median(P_detect)
 
 
 #Water Characteristics, not necesarily used. 
@@ -103,7 +103,7 @@ def Analysis_NSamples (Cont_Levels, bw_volume, sample_size_volume,total_samples,
         print(i)
         Cont_BW = bw_volume*i
         P_Detect_L= Iterating_Water_Samples_Uncert  (total_oocyst_bw = Cont_BW , 
-                                                     bw_volume =Total_L_Season , 
+                                                     bw_volume =bw_volume , 
                                                      sample_size_volume=sample_size_volume , 
                                                      total_samples= total_samples,
                                                      loaded_model =loaded_model ,
@@ -117,62 +117,80 @@ def Analysis_NSamples (Cont_Levels, bw_volume, sample_size_volume,total_samples,
             })
         Df_Outs= pd.concat([Df_Outs,Df_Outs2])
     return Df_Outs
-    
-Cont_Levels = list(np.arange(0,20,0.1)) #Oocyst per L
+
+#%%
+
+#Cont_Levels = list(np.arange(0,3,0.02)) #Oocyst per L
+
+#%%
+
+Cont_Levels = list(np.arange(0,1,0.01)) #Oocyst per L
 
 Sample_BW_1 =Analysis_NSamples (Cont_Levels =Cont_Levels, 
                    bw_volume =Total_L_Season, 
                    sample_size_volume =10,
                    total_samples =1, 
                    loaded_model =qPCR_Model_AW,
-                   sampling_iters =50, 
-                   var_iters= 50)
+                   sampling_iters =1000, 
+                   var_iters=1)
+
+Sample_BW_1.to_csv("C:\\Users\\gareyes3\\Documents\\GitHub\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\Water_Testing_Meds.csv")
+
+
+#%%
+Sample_BW_1 =Analysis_NSamples (Cont_Levels =Cont_Levels, 
+                   bw_volume =Total_L_Season, 
+                   sample_size_volume =10,
+                   total_samples =1, 
+                   loaded_model =qPCR_Model_AW,
+                   sampling_iters =100, 
+                   var_iters=100)
 
 Sample_BW_2 =Analysis_NSamples (Cont_Levels =Cont_Levels, 
                    bw_volume =Total_L_Season, 
                    sample_size_volume =10,
                    total_samples =2, 
                    loaded_model =qPCR_Model_AW,
-                   sampling_iters =50, 
-                   var_iters= 50)
+                   sampling_iters =100, 
+                   var_iters=100)
 
 Sample_BW_4 =Analysis_NSamples (Cont_Levels =Cont_Levels, 
                    bw_volume =Total_L_Season, 
                    sample_size_volume =10,
                    total_samples =4, 
                    loaded_model =qPCR_Model_AW,
-                   sampling_iters =50, 
-                   var_iters= 50)
+                   sampling_iters =100, 
+                   var_iters=100)
 
 Sample_BW_8 =Analysis_NSamples (Cont_Levels =Cont_Levels, 
                    bw_volume =Total_L_Season, 
                    sample_size_volume =10,
                    total_samples =8, 
                    loaded_model =qPCR_Model_AW,
-                   sampling_iters =50, 
-                   var_iters= 50)
+                   sampling_iters =100, 
+                   var_iters=100)
 
 Sample_BW_16 =Analysis_NSamples (Cont_Levels =Cont_Levels, 
                    bw_volume =Total_L_Season, 
                    sample_size_volume =10,
                    total_samples =16, 
                    loaded_model =qPCR_Model_AW,
-                   sampling_iters =50, 
-                   var_iters= 50)
+                   sampling_iters =100, 
+                   var_iters=100)
 
 Sample_BW_32 =Analysis_NSamples (Cont_Levels =Cont_Levels, 
                    bw_volume =Total_L_Season, 
                    sample_size_volume =10,
                    total_samples =32, 
                    loaded_model =qPCR_Model_AW,
-                   sampling_iters =50, 
-                   var_iters= 50)
+                   sampling_iters =100, 
+                   var_iters=100)
 
 All_Samples_Combined =pd.concat([Sample_BW_1,Sample_BW_2,Sample_BW_4,Sample_BW_8,Sample_BW_16,Sample_BW_32])
 All_Samples_Combined["N10Lsamples"] = All_Samples_Combined["N10Lsamples"].astype(str)
 All_Samples_Combined.reset_index(drop= True, inplace= True)
 
-All_Samples_Combined.to_csv("C:\\Users\\Gustavo Reyes\\Documents\\GitHubFiles\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\Water_Testing_Analysis_R2.csv")
+All_Samples_Combined.to_csv("C:\\Users\\gareyes3\\Documents\\GitHub\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\Water_Testing_Analysis_R3.csv")
 
 sns.lineplot(data =All_Samples_Combined, x = "Conts", y = "PDetect", hue ="N10Lsamples" )
 plt.xlim(0,5)

@@ -147,7 +147,7 @@ def Samling_Var(Cilantro_df, Hazard_lvl, percent_cont, Sample_Weight,N_25g_Sampl
                 L_Acc_Reject.append(1)
             else:
                 L_Acc_Reject.append(0) 
-        P_Reject.append(np.mean(L_Acc_Reject)) 
+        P_Reject.append(np.median(L_Acc_Reject)) 
     return P_Reject
 
 
@@ -230,9 +230,29 @@ Cilantro_df=pd.DataFrame({"Plant_ID": Total_Plants_List,
 #%%
 #Grabs, each grab = 25g. 
 
-Cont_Levels = list(np.linspace(1,10_000_000, 100)) 
-Cont_Levels_log10= list(np.arange(3,7.5, 0.1)) 
-Cont_Levels_log10_Num =[10**x for x in Cont_Levels_log10 ]
+#Cont_Levels = list(np.linspace(1,10_000_000, 100)) 
+#Cont_Levels_log10= list(np.arange(3,7.5, 0.1)) 
+#Cont_Levels_log10_Num =[10**x for x in Cont_Levels_log10 ]
+
+
+
+#Cont_Levels_log10_Num=[22000*454*x for x in list(np.arange(0,1.52, 0.01))]
+Cont_Levels_log10_Num=[22000*454*x for x in list(np.arange(0,0.5, 0.01))]
+
+#%%
+Outs_32g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num , 
+           Cilantro_df = Cilantro_df, 
+           percent_cont =100, 
+           Sample_Weight =25,
+           N_25g_Samples=1,
+           N_Grabs_Sample =1,
+           Plant_Weight = 1,
+           loaded_model = nPCR_Model,
+           Field_Iters =1, 
+           Sampling_Iters =1000)
+
+Outs_32g.to_csv("C:\\Users\\gareyes3\\Documents\\GitHub\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\Product_Testing_Meds.csv")
+
 
 #%%
 #Running Analysys for 25g grabs
@@ -245,8 +265,8 @@ Outs_32g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num ,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
            loaded_model = nPCR_Model,
-           Field_Iters =50, 
-           Sampling_Iters =50)
+           Field_Iters =100, 
+           Sampling_Iters =100)
 
 Outs_16g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num , 
            Cilantro_df = Cilantro_df, 
@@ -256,8 +276,8 @@ Outs_16g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num ,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
            loaded_model = nPCR_Model,
-           Field_Iters =50, 
-           Sampling_Iters =50)
+           Field_Iters =100, 
+           Sampling_Iters =100)
 
 Outs_8g = Iter_Cont_Levels(Cont_Levels =Cont_Levels_log10_Num, 
            Cilantro_df = Cilantro_df, 
@@ -267,8 +287,8 @@ Outs_8g = Iter_Cont_Levels(Cont_Levels =Cont_Levels_log10_Num,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
            loaded_model = nPCR_Model,
-           Field_Iters =50, 
-           Sampling_Iters =50)
+           Field_Iters =100, 
+           Sampling_Iters =100)
 
 
 Outs_4g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num, 
@@ -279,8 +299,8 @@ Outs_4g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
            loaded_model = nPCR_Model,
-           Field_Iters =50, 
-           Sampling_Iters =50)
+           Field_Iters =100, 
+           Sampling_Iters =100)
 
 Outs_2g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num, 
            Cilantro_df = Cilantro_df, 
@@ -290,8 +310,8 @@ Outs_2g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
            loaded_model = nPCR_Model,
-           Field_Iters =50, 
-           Sampling_Iters =50)
+           Field_Iters =100, 
+           Sampling_Iters =100)
 
 Outs_1g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num, 
            Cilantro_df = Cilantro_df, 
@@ -301,8 +321,8 @@ Outs_1g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
            loaded_model = nPCR_Model,
-           Field_Iters =50, 
-           Sampling_Iters =50)
+           Field_Iters =100, 
+           Sampling_Iters =100)
 
 
 
@@ -310,7 +330,7 @@ Outs_1g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num,
 Grabs_Combined =pd.concat([Outs_1g,Outs_2g,Outs_4g,Outs_8g,Outs_16g,Outs_32g])
 Grabs_Combined.reset_index(drop= True, inplace= True)
 
-Grabs_Combined.to_csv("C:\\Users\\gareyes3\\Documents\\GitHub\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\Product_Testing_Analysis_R2.csv")
+Grabs_Combined.to_csv("C:\\Users\\gareyes3\\Documents\\GitHub\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\Product_Testing_Analysis_R3.csv")
 
 
 #%%
