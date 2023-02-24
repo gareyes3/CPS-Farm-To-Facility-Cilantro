@@ -147,7 +147,7 @@ def Samling_Var(Cilantro_df, Hazard_lvl, percent_cont, Sample_Weight,N_25g_Sampl
                 L_Acc_Reject.append(1)
             else:
                 L_Acc_Reject.append(0) 
-        P_Reject.append(np.median(L_Acc_Reject)) 
+        P_Reject.append(np.mean(L_Acc_Reject)) 
     return P_Reject
 
 
@@ -236,8 +236,8 @@ Cilantro_df=pd.DataFrame({"Plant_ID": Total_Plants_List,
 
 
 
-#Cont_Levels_log10_Num=[22000*454*x for x in list(np.arange(0,1.52, 0.01))]
-Cont_Levels_log10_Num=[22000*454*x for x in list(np.arange(0,0.5, 0.01))]
+Cont_Levels_log10_Num=[22000*454*x for x in list(np.arange(0,1.7, 0.01))]
+#Cont_Levels_log10_Num=[22000*454*x for x in list(np.arange(0,0.5, 0.01))]
 
 #%%
 Outs_32g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num , 
@@ -330,7 +330,7 @@ Outs_1g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num,
 Grabs_Combined =pd.concat([Outs_1g,Outs_2g,Outs_4g,Outs_8g,Outs_16g,Outs_32g])
 Grabs_Combined.reset_index(drop= True, inplace= True)
 
-Grabs_Combined.to_csv("C:\\Users\\gareyes3\\Documents\\GitHub\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\Product_Testing_Analysis_R3.csv")
+Grabs_Combined.to_csv("C:\\Users\\gareyes3\\Documents\\GitHub\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\Product_Testing_Analysis_R4.csv")
 
 
 #%%

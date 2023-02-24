@@ -218,7 +218,7 @@ Df_PD_AW=pd.DataFrame({
         "Results": np.concatenate([R1_AW,R2_AW,R3_AW,R4_AW,R5_AW,R6_AW]),
         })
 
-Df_PD_AW.to_csv("C:\\Users\\Gustavo Reyes\\Documents\\GitHubFiles\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\Water_Testing_Data.csv")
+Df_PD_AW.to_csv("C:\\Users\\gareyes3\\Documents\\GitHub\\CPS-Farm-To-Facility-Cilantro\\Data\\Water_Testing_Data.csv")
 
 
 from sklearn import linear_model
@@ -230,10 +230,15 @@ logr_AW.coef_
 logr_AW.score(np.array(Df_PD_AW["Cont"]).reshape(-1,1),np.array(Df_PD_AW["Results"]))
 
 
-(math.exp(-4.4879239+0.85580838*1))/(1+(math.exp(-4.4879239+0.85580838*1)))
+(math.exp(-4.4879239+0.85580838*0))/(1+(math.exp(-4.4879239+0.85580838*0)))
 
 0.02577*32
 1-(1-0.02577)**16
+
+
+import statsmodels.api as sm
+log_reg = sm.Logit(Df_PD_AW["Results"],Df_PD_AW["Cont"]).fit()
+print(log_reg.summary())
 
 
 probs_detect = []

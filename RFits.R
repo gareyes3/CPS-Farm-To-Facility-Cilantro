@@ -3,12 +3,13 @@ library(pscl)
 library(pROC)
 library(ResourceSelection)
 library(glmtoolbox)
-
+library(fmsb)
+library(glmnet)
 
 data_predict = data.frame("Cont" = 1:200,
                           "Prob" = "")
 
-TD<-read_csv("Product_Testing_Data.csv")
+TD<-read_csv("Data/Product_Testing_Data.csv")
 TD<-TD[,2:3]
 
 model<-glm(Results~Cont, data = TD,family = binomial(link = "logit"))
@@ -18,26 +19,27 @@ anova(modeln, model, test = 'Chisq')
 
 NagelkerkeR2(model)
 
-220.4 -99.35
+#(exp(-3.4393+0.4566*0))/(1-exp(-3.4393+0.4566*0))
 
-(exp(-3.4393+0.4566*0))/(1-exp(-3.4393+0.4566*0))
-
-predict(model,data_predict )
-
+#good fit of the model
 hoslem.test(model$y, fitted(model), g = 10)
 
 
 #water testing
-TD_W<-read_csv("Water_Testing_Data.csv")
-TD_W$Results<-as.factor(TD_W$Results)
+TD_W<-read_csv("Data/Water_Testing_Data.csv")
+#TD_W$Results<-as.factor(TD_W$Results)
 TD_W<-TD_W[,2:3]
 
 model_W<-glm(Results~Cont, data = TD_W,family = binomial(link = "logit"))
 model_Wn<-glm(Results~1, data = TD_W,family = binomial(link = "logit"))
 
+
+model_w2<-glmnet(TD_W$Cont,TD_W$Results, family= "binomial" )
+
 NagelkerkeR2(model_W)
 
 anova(model_Wn, model_W, test = 'Chisq')
+#also goof fit of the model
 hoslem.test(model_W$y, fitted(model_W), g = 10)
 
 (exp(-19.8+3.424*0))/(1-exp(-19.8+3.424  *0))

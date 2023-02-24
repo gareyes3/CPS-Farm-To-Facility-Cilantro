@@ -35,10 +35,9 @@ Fig1 +
   #theme(axis.text.x = element_text(angle=45, vjust=1, hjust=1))+
   coord_flip()
 
-<<<<<<< HEAD
+```
 
-=======
->>>>>>> 1347f542efd39a1a97f4138822ff75e342fc1175
+```{r}
 
 ggsave("Baseline1.jpg", width =7, height = 6, units = "in", dpi = 600)
 

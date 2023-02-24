@@ -59,7 +59,7 @@ def Iterating_Water_Samples (total_oocyst_bw, bw_volume, sample_size_volume, tot
                                         sample_size_volume =sample_size_volume,
                                         total_samples=total_samples,
                                         loaded_model =loaded_model ))
-    return np.median(P_detect)
+    return np.mean(P_detect)
 
 
 #Water Characteristics, not necesarily used. 
@@ -120,11 +120,11 @@ def Analysis_NSamples (Cont_Levels, bw_volume, sample_size_volume,total_samples,
 
 #%%
 
-#Cont_Levels = list(np.arange(0,3,0.02)) #Oocyst per L
+Cont_Levels = list(np.arange(0,2.01,0.01)) #Oocyst per L
 
 #%%
 
-Cont_Levels = list(np.arange(0,1,0.01)) #Oocyst per L
+Cont_Levels = list(np.arange(0,3,0.01)) #Oocyst per L
 
 Sample_BW_1 =Analysis_NSamples (Cont_Levels =Cont_Levels, 
                    bw_volume =Total_L_Season, 
@@ -190,7 +190,7 @@ All_Samples_Combined =pd.concat([Sample_BW_1,Sample_BW_2,Sample_BW_4,Sample_BW_8
 All_Samples_Combined["N10Lsamples"] = All_Samples_Combined["N10Lsamples"].astype(str)
 All_Samples_Combined.reset_index(drop= True, inplace= True)
 
-All_Samples_Combined.to_csv("C:\\Users\\gareyes3\\Documents\\GitHub\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\Water_Testing_Analysis_R3.csv")
+All_Samples_Combined.to_csv("C:\\Users\\gareyes3\\Documents\\GitHub\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\Water_Testing_Analysis_R4.csv")
 
 sns.lineplot(data =All_Samples_Combined, x = "Conts", y = "PDetect", hue ="N10Lsamples" )
 plt.xlim(0,5)
