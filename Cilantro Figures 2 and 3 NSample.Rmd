@@ -39,7 +39,8 @@ Unc_Conts %>%
   labs(x = "Contamination Levels Bulk Water: Oocyst/L", y = "Probability of Detection: 10L Sample(s)", fill = "No. 10L Samples", color= "No. 10L Samples", shape = "No. 10L Samples", linetype ="No. 10L Samples" )+
   scale_x_continuous(limits = c(0,1.6), breaks = c(0,0.5,1,1.5,1.6))+
   theme_bw()+
-  theme(legend.position="top")
+  theme(axis.text.x=element_text(size =12), axis.text.y=element_text(size =12),axis.title = element_text(size = 12))+
+  theme(legend.position=c(0.75, 0.3))
 
 
 ggsave("Contamination vs Method-R4.jpeg", width = 15, height = 10, units = "cm", dpi = 600)
@@ -83,7 +84,8 @@ Conts_WT %>%
   geom_line()+
   theme_bw()+
   labs(x = "Contamination Levels Bulk Water: Oocyst/L", y = "Difference in median probability of detection\n n number of samples vs. 1 10L Sample", color = "No. 10L Samples", shape = "No. 10L Samples", fill = "No. 10L Samples")+
-  theme(legend.position="top")
+  theme(axis.text.x=element_text(size =12), axis.text.y=element_text(size =12),axis.title = element_text(size = 12))+
+  theme(legend.position=c(0.75, 0.7))
 
 ggsave("Contamination vs Method Differences Water-R4.jpeg", width = 15, height = 10, units = "cm", dpi = 600)
 
@@ -125,7 +127,9 @@ Unc_Conts %>%
   theme_bw()+
   scale_x_continuous(limits = c(0,1.6), breaks = c(0,0.5,1,1.5,1.6))+
   theme(legend.position="top")+
-  labs(x = "Contamination Levels in Field:oocysts/g ", y = "Probability of Detection: 25g sample(s)", fill = "No. 25 g Samples", color= "No. 25 g Samples", linetype = "No. 25 g Samples", shape = "No. 25 g Samples")
+  labs(x = "Contamination Levels in Field:Oocysts/g ", y = "Probability of Detection: 25g sample(s)", fill = "No. 25 g Samples", color= "No. 25 g Samples", linetype = "No. 25 g Samples", shape = "No. 25 g Samples")+
+  theme(axis.text.x=element_text(size =12), axis.text.y=element_text(size =12),axis.title = element_text(size = 12))+
+  theme(legend.position=c(0.75, 0.3))
 
 
 # #log
@@ -186,7 +190,9 @@ Conts_PD %>%
   scale_x_continuous(limits = c(0,1.6), breaks = c(0,0.5,1,1.5,1.6))+
   theme_bw()+
   theme(legend.position="top")+
-  labs(x = "Contamination Levels in Field: oocysts/g", y = "Difference in median probability of detection\n n number of samples vs. 1 25g Sample", color = "No. 25g Samples", shape = "No. 25g Samples", fill = "No. 25g Samples")
+  labs(x = "Contamination Levels in Field: Oocysts/g", y = "Difference in median probability of detection\n n number of samples vs. 1 25g Sample", color = "No. 25g Samples", shape = "No. 25g Samples", fill = "No. 25g Samples")+
+  theme(axis.text.x=element_text(size =12), axis.text.y=element_text(size =12),axis.title = element_text(size = 12))+
+  theme(legend.position=c(0.75, 0.70))
 
 # #log version
 # Conts_PD %>% 
