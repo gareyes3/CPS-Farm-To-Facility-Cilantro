@@ -54,6 +54,29 @@ logr.intercept_
 logr.coef_
 
 
+def deviance(X, y, model):
+    return 2*metrics.log_loss(y, model.predict_proba(X), normalize=False)
+
+def loglike(X, y, model):
+    return metrics.log_loss(y, model.predict_proba(X), normalize=False)
+
+#chisqauered for the null model vs the full model
+deviance(np.array(Df_PD["Cont"]).reshape(-1,1),np.array(Df_PD["Results"]), logr)
+
+
+from sklearn.dummy import DummyClassifier
+from sklearn import metrics
+import scipy
+logr_D = DummyClassifier()
+logr_D.fit(np.array(Df_PD["Cont"]).reshape(-1,1),np.array(Df_PD["Results"]))
+
+deviance(np.array(Df_PD["Cont"]).reshape(-1,1),np.array(Df_PD["Results"]), logr_D)
+
+#chi sqaured.
+scipy.stats.chi2.sf((220.36419628552224-99.34764524320522), 1)
+#2.2328359100593915e-10
+
+
 # save the model to disk
 filename = 'C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test_nPCR_FDA.sav'
 pickle.dump(logr, open(filename, 'wb'))
@@ -219,15 +242,55 @@ Df_PD_AW=pd.DataFrame({
         })
 
 Df_PD_AW.to_csv("C:\\Users\\gareyes3\\Documents\\GitHub\\CPS-Farm-To-Facility-Cilantro\\Data\\Water_Testing_Data.csv")
-
+Df_PD_AW['intercept'] = 1.0
 
 from sklearn import linear_model
+from sklearn import metrics
+import scipy
 logr_AW = linear_model.LogisticRegression()
 logr_AW.fit(np.array(Df_PD_AW["Cont"]).reshape(-1,1),np.array(Df_PD_AW["Results"]))
 
+
+logr_AW.score(np.array(Df_PD_AW["Cont"]).reshape(-1,1),np.array(Df_PD_AW["Results"]))
+
 logr_AW.intercept_
 logr_AW.coef_
-logr_AW.score(np.array(Df_PD_AW["Cont"]).reshape(-1,1),np.array(Df_PD_AW["Results"]))
+
+def deviance(X, y, model):
+    return 2*metrics.log_loss(y, model.predict_proba(X), normalize=False)
+
+def loglike(X, y, model):
+    return metrics.log_loss(y, model.predict_proba(X), normalize=False)
+
+#chisqauered for the null model vs the full model
+deviance(np.array(Df_PD_AW["Cont"]).reshape(-1,1), np.array(Df_PD_AW["Results"]), logr_AW)
+
+
+from sklearn.dummy import DummyClassifier
+logr_AW_D = DummyClassifier()
+logr_AW_D.fit(np.array(Df_PD_AW["Cont"]).reshape(-1,1),np.array(Df_PD_AW["Results"]))
+
+deviance(np.array(Df_PD_AW["Cont"]).reshape(-1,1), np.array(Df_PD_AW["Results"]), logr_AW_D)
+
+#chi sqaured.
+scipy.stats.chi2.sf((55.82038884701287-15.568886670709356), 1)
+#2.2328359100593915e-10
+
+
+# importing libraries
+import statsmodels.api as sm
+import pandas as pd 
+  
+# defining the dependent and independent variables
+Xtrain = Df_PD_AW[['intercept',"Cont"]]
+ytrain = Df_PD_AW[['Results']]
+   
+# building the model and fitting the data
+log_reg = sm.Logit(ytrain, Xtrain).fit()
+
+log_reg.predict(6)
+
+print(log_reg.summary())
 
 
 (math.exp(-4.4879239+0.85580838*0))/(1+(math.exp(-4.4879239+0.85580838*0)))
