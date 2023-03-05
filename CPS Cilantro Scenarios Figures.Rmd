@@ -57,7 +57,7 @@ BS2
 
 Fig2 <- ggplot(BS2, aes(fill=Contamination, x=Scenarios2, y=Relative_Efficacy)) + 
   geom_bar(position = "dodge", stat = "identity") + 
-  labs(title="Contamination Frequency 2: Irrigation with contaminated water\n  once per season (random)", y="Relative Efficacy: Endpoint Oocyst", x="Sampling Scenario")
+  labs(title="Contamination Frequency 2: Sporadic, irrigation with contaminated water\n  once per season", y="Relative Efficacy: Endpoint Oocyst", x="Sampling Scenario")
 
 Fig2 + 
   scale_fill_discrete(name = "Contamination \nLevel")+#(values=c("#FF3366","#99CCFF")) +
