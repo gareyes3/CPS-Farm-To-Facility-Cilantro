@@ -21,7 +21,10 @@ import pickle
 import statsmodels.api as smf
 import math
 #%%
-#Product Testing Model Logistic nPCR FDA
+
+###############################################################################
+
+#Product Testing Model Logistic nPCR FDA, not used old method. 
 R1=np.concatenate([np.ones(0), np.zeros(39)])
 R2=np.concatenate([np.ones(12), np.zeros(28)])
 R3=np.concatenate([np.ones(29), np.zeros(11)])
@@ -93,9 +96,12 @@ plt.xlabel("OOcyst per 25g sample")
 plt.ylabel("Probability of Detection")
 plt.title("Product Testing nPCR Method")
 
-#Product Testing Model Logistic qPCR FDA
+
+##############################################################################
+
+#Product Testing Model Logistic qPCR FDA USED in Model**** From Murphy 2018, new method, Lab A and B Data combined. 
 R1_qPCR=np.concatenate([np.ones(0), np.zeros(80)])
-R2_qPCR=np.concatenate([np.ones(27), np.zeros(53)])
+R2_qPCR=np.concatenate([np.ones(25), np.zeros(55)])
 R3_qPCR=np.concatenate([np.ones(64), np.zeros(16)])
 R4_qPCR=np.concatenate([np.ones(80), np.zeros(0)])
 
@@ -110,15 +116,45 @@ Df_PD_qPCR=pd.DataFrame({
         "Results": np.concatenate([R1_qPCR,R2_qPCR,R3_qPCR,R4_qPCR]),
         })
 
-
+#Fitting the logistic regression model
 from sklearn import linear_model
 #Logistic Regression
 logr_qPCR = linear_model.LogisticRegression()
 logr_qPCR.fit(np.array(Df_PD_qPCR["Cont"]).reshape(-1,1),np.array(Df_PD_qPCR["Results"]))
 logr_qPCR.score(np.array(Df_PD_qPCR["Cont"]).reshape(-1,1),np.array(Df_PD_qPCR["Results"]))
-logr_qPCR.r2_score()
 
-#
+logr_qPCR.intercept_
+logr_qPCR.coef_
+
+from sklearn import metrics
+
+def deviance(X, y, model):
+    return 2*metrics.log_loss(y, model.predict_proba(X), normalize=False)
+
+def loglike(X, y, model):
+    return metrics.log_loss(y, model.predict_proba(X), normalize=False)
+
+#chisqauered for the null model vs the full model
+deviance(np.array(Df_PD_qPCR["Cont"]).reshape(-1,1),np.array(Df_PD_qPCR["Results"]), logr_qPCR)
+
+from sklearn.dummy import DummyClassifier
+import scipy
+logr_D_qPRC = DummyClassifier()
+logr_D_qPRC.fit(np.array(Df_PD_qPCR["Cont"]).reshape(-1,1),np.array(Df_PD_qPCR["Results"]))
+
+deviance(np.array(Df_PD_qPCR["Cont"]).reshape(-1,1),np.array(Df_PD_qPCR["Results"]), logr_D_qPRC)
+
+#chi sqaured.
+scipy.stats.chi2.sf(( 442.6011609459082-185.00983117735439), 1)
+#5.7485453799292104e-58 goodness of fit satisfied. 
+
+# save the model to disk
+filename = 'C:\\Users\Gustavo Reyes\Documents\GitHubFiles\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test_qPCR_FDA.sav'
+pickle.dump(logr_D_qPRC, open(filename, 'wb'))
+
+
+#Trying other classifiers, not relevant for manuscript
+'''
 from sklearn.naive_bayes import GaussianNB
 nbayes_qPCR = GaussianNB()
 nbayes_qPCR.fit(np.array(Df_PD_qPCR["Cont"]).reshape(-1,1),np.array(Df_PD_qPCR["Results"]))
@@ -143,7 +179,7 @@ svm_qPCR.score(np.array(Df_PD_qPCR["Cont"]).reshape(-1,1),np.array(Df_PD_qPCR["R
 svm_qPCR.predict_proba(np.array([7]).reshape(-1,1))[0][1]
 
 logr_qPCR.predict_proba(np.array([10]).reshape(-1,1))[0][1]
-
+'''
 probs_detect = []
 for i in (range(200)):
     prob_detect = logr_qPCR.predict_proba(np.array([i]).reshape(-1,1))[0][1]

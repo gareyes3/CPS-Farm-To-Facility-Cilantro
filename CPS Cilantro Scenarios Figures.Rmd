@@ -12,10 +12,11 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 
 library(ggplot2)
+library(scales)
 
 BS1 <- read.csv(file = "Baseline1.csv", header = TRUE )
+Order<-(BS1$Scenarios2[1:12])
 
-BS1
 
 BS1$Scenarios <- as.factor(BS1$Scenarios)
 BS1$Scenarios2 <- as.factor(BS1$Scenarios2)
@@ -24,20 +25,20 @@ BS1$Relative_Efficacy <-as.numeric(BS1$Relative_Efficacy)
 
 BS1
 
-Fig1 <- ggplot(BS1, aes(fill=Contamination, x=Scenarios2, y=Relative_Efficacy)) + 
+Fig1 <- ggplot(BS1, aes(fill=Contamination, x=factor(Scenarios2, levels = rev(Order)), y=Relative_Efficacy)) + 
   geom_bar(position = "dodge", stat = "identity") + 
-  labs(title="Contamination Frequency 1: Daily Irrigation with contaminated water", y="Relative Efficacy: Endpoint Oocyst", x="Sampling Scenario")
-
-Fig1 + 
+  labs(title="Daily Irrigation with contaminated water", y="Fraction of oocysts rejected by sampling scenario", x="Sampling Scenario")+
   scale_fill_discrete(name = "Contamination \nLevel")+#(values=c("#FF3366","#99CCFF")) +
+  scale_y_continuous(labels = scales::percent)+
   theme_bw()+
   theme(plot.title = element_text(hjust = 0.5))+
   #theme(axis.text.x = element_text(angle=45, vjust=1, hjust=1))+
   coord_flip()+
   theme(axis.text.x=element_text(size =12), axis.text.y=element_text(size =12),axis.title = element_text(size = 12))
 
+Fig1
 
-ggsave("Baseline1.jpg", width =7, height = 6, units = "in", dpi = 600)
+ggsave("Baseline1.jpg", width =9, height = 6, units = "in", dpi = 300)
 
 
 ```
@@ -46,7 +47,8 @@ ggsave("Baseline1.jpg", width =7, height = 6, units = "in", dpi = 600)
 
 BS2 <- read.csv(file = "Baseline2.csv", header = TRUE )
 
-BS2
+Order<-(BS2$Scenarios2[1:12])
+
 
 BS2$Scenarios <- as.factor(BS2$Scenarios)
 BS2$Scenarios2 <- as.factor(BS2$Scenarios2)
@@ -55,20 +57,20 @@ BS2$Relative_Efficacy <-as.numeric(BS2$Relative_Efficacy)
 
 BS2
 
-Fig2 <- ggplot(BS2, aes(fill=Contamination, x=Scenarios2, y=Relative_Efficacy)) + 
+Fig2 <- ggplot(BS2, aes(fill=Contamination, x=factor(Scenarios2, levels = rev(Order)), y=Relative_Efficacy)) + 
   geom_bar(position = "dodge", stat = "identity") + 
-  labs(title="Contamination Frequency 2: Random irrigation with contaminated water\n  once per season", y="Relative Efficacy: Endpoint Oocyst", x="Sampling Scenario")
-
-Fig2 + 
+  labs(title="Random irrigation with contaminated water once per growth cycle", y="Fraction of oocysts rejected by sampling scenario", x="Sampling Scenario")+
   scale_fill_discrete(name = "Contamination \nLevel")+#(values=c("#FF3366","#99CCFF")) +
+  scale_y_continuous(labels = scales::percent)+
   theme_bw()+
   theme(plot.title = element_text(hjust = 0.5))+
   #theme(axis.text.x = element_text(angle=45, vjust=1, hjust=1))+
   coord_flip()+
   theme(axis.text.x=element_text(size =12), axis.text.y=element_text(size =12),axis.title = element_text(size = 12))
   #theme(legend.position=c(0.75, 0.70))
+Fig2
 
-ggsave("Baseline2.jpg", width =7, height = 6, units = "in", dpi = 600)
+ggsave("Baseline2.jpg", width =9, height = 6, units = "in", dpi = 300)
 
 
 
