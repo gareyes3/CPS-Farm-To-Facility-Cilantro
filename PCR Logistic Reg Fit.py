@@ -100,6 +100,7 @@ plt.title("Product Testing nPCR Method")
 ##############################################################################
 
 #Product Testing Model Logistic qPCR FDA USED in Model**** From Murphy 2018, new method, Lab A and B Data combined. 
+
 R1_qPCR=np.concatenate([np.ones(0), np.zeros(80)])
 R2_qPCR=np.concatenate([np.ones(25), np.zeros(55)])
 R3_qPCR=np.concatenate([np.ones(64), np.zeros(16)])
@@ -191,15 +192,11 @@ plt.xlabel("Oocyst per 25g sample")
 plt.ylabel("Probability of Detection")
 plt.title("Product Testing qPCR Method")
 
-Df_PD_qPCR.to_csv("C:\\Users\\gareyes3\\Documents\\GitHub\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\qPCR_Fit_Product_Testing.csv")
+Df_PD_qPCR.to_csv("C:\\Users\\Gustavo Reyes\Documents\GitHubFiles\\CPS-Farm-To-Facility-Cilantro\\Data\\qPCR_Fit_Product_Testing.csv")
 Df_probs_qPCR = pd.DataFrame({"Prob Detect":probs_detect,
                              "Cont" : range(200)})
 
-Df_probs_qPCR.to_csv("C:\\Users\\gareyes3\\Documents\\GitHub\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\qPCR_Fit_Product_Testing_Probs.csv")
-
-# save the model to disk
-filename = 'C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test_qPCR_FDA.sav'
-pickle.dump(logr_qPCR, open(filename, 'wb'))
+Df_probs_qPCR.to_csv("C:\\Users\\Gustavo Reyes\Documents\GitHubFiles\\CPS-Farm-To-Facility-Cilantro\\Data\\qPCR_Fit_Product_Testing_Probs.csv")
 
 
 probs_detect = []

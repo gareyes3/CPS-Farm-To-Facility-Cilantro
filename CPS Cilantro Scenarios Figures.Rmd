@@ -27,7 +27,7 @@ BS1
 
 Fig1 <- ggplot(BS1, aes(fill=Contamination, x=factor(Scenarios2, levels = rev(Order)), y=Relative_Efficacy)) + 
   geom_bar(position = "dodge", stat = "identity") + 
-  labs(title="Daily Irrigation with contaminated water", y="Fraction of oocysts rejected by sampling scenario", x="Sampling Scenario")+
+  labs(title="Unintentional irrigation with contaminated water every day of a growing cycle", y="Fraction of oocysts rejected by sampling scenario", x="Sampling Scenario")+
   scale_fill_discrete(name = "Contamination \nLevel")+#(values=c("#FF3366","#99CCFF")) +
   scale_y_continuous(labels = scales::percent)+
   theme_bw()+
@@ -38,7 +38,7 @@ Fig1 <- ggplot(BS1, aes(fill=Contamination, x=factor(Scenarios2, levels = rev(Or
 
 Fig1
 
-ggsave("Baseline1.jpg", width =9, height = 6, units = "in", dpi = 300)
+ggsave("Baseline1.jpg", width =9, height = 4.5, units = "in", dpi = 300)
 
 
 ```
@@ -59,7 +59,7 @@ BS2
 
 Fig2 <- ggplot(BS2, aes(fill=Contamination, x=factor(Scenarios2, levels = rev(Order)), y=Relative_Efficacy)) + 
   geom_bar(position = "dodge", stat = "identity") + 
-  labs(title="Random irrigation with contaminated water once per growth cycle", y="Fraction of oocysts rejected by sampling scenario", x="Sampling Scenario")+
+  labs(title="Unintentional irrigation with contaminated water\n one random day during the growing cycle", y="Fraction of oocysts rejected by sampling scenario", x="Sampling Scenario")+
   scale_fill_discrete(name = "Contamination \nLevel")+#(values=c("#FF3366","#99CCFF")) +
   scale_y_continuous(labels = scales::percent)+
   theme_bw()+
@@ -70,7 +70,7 @@ Fig2 <- ggplot(BS2, aes(fill=Contamination, x=factor(Scenarios2, levels = rev(Or
   #theme(legend.position=c(0.75, 0.70))
 Fig2
 
-ggsave("Baseline2.jpg", width =9, height = 6, units = "in", dpi = 300)
+ggsave("Baseline2.jpg", width =9, height = 4.5, units = "in", dpi = 300)
 
 
 
