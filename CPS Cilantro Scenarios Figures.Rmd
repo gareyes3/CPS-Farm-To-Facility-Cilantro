@@ -38,7 +38,7 @@ Fig1 <- ggplot(BS1, aes(fill=Contamination, x=factor(Scenarios2, levels = rev(Or
 
 Fig1
 
-ggsave("Baseline1.jpg", width =9, height = 4.5, units = "in", dpi = 300)
+ggsave("Baseline1-Present.jpg", width =9, height = 7, units = "in", dpi = 300)
 
 
 ```
@@ -70,7 +70,7 @@ Fig2 <- ggplot(BS2, aes(fill=Contamination, x=factor(Scenarios2, levels = rev(Or
   #theme(legend.position=c(0.75, 0.70))
 Fig2
 
-ggsave("Baseline2.jpg", width =9, height = 4.5, units = "in", dpi = 300)
+ggsave("Baseline2-Presentation.jpg", width =9, height = 7, units = "in", dpi = 300)
 
 
 
