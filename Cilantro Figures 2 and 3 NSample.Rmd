@@ -304,37 +304,35 @@ Unc_Conts %>%
 
 ```{r}
 #product Testing
-PT_Qpcr_Results<-read_csv("Data_Cilantro_Outputs/qPCR_Fit_Product_Testing.csv")
-PT_Qpcr_Probs<-read_csv("Data_Cilantro_Outputs/qPCR_Fit_Product_Testing_Probs.csv")
+PT_Qpcr_Results<-read_csv("Data/qPCR_Fit_Product_Testing.csv")
+PT_Qpcr_Probs<-read_csv("Data/qPCR_Fit_Product_Testing_Probs.csv")
 
 ggplot()+
-  geom_hline(aes(yintercept = .29),color = "orange")+
-  geom_hline(aes(yintercept = .82),color = "red")+  
+  geom_hline(aes(yintercept = .313),color = "orange")+
+  geom_hline(aes(yintercept = .80),color = "red")+  
   geom_vline(aes(xintercept = 5),color = "orange")+
   geom_vline(aes(xintercept = 10),color = "red")+
   geom_line(aes(x = Cont, y = `Prob Detect`), data = PT_Qpcr_Probs)+
   geom_point(aes(x = Cont, y = Results), data = PT_Qpcr_Results,position = position_jitter(height = 0.01, width = 1),shape= 21, fill = "skyblue")+
-  labs(x= "Oocyst/ 25 g Sample", y = "Predicted Probability of Detection", title = "Logistic Fit: Product Testing")+
+  labs(x= "Oocyst/ 25 g Sample", y = "Predicted Detection Rate", title = "Logistic Fit: Product Testing")+
   theme_bw()
 
-  ggsave(filename="Product Testing Fit.png",width = 15, height = 10, units = "cm", dpi = 600)
+  ggsave(filename="Figures/Product Testing Fit.png",width = 10, height = 10, units = "cm", dpi = 600)
   
   
 #Water Testing
-WT_Qpcr_Results<-read_csv("Data_Cilantro_Outputs/qPCR_Fit_Water_Testing.csv")
-WT_Qpcr_Probs<-read_csv("Data_Cilantro_Outputs/qPCR_Fit_Water_Testing_Probs.csv")
+WT_Qpcr_Results<-read_csv("Data/qPCR_Fit_Water_Testing.csv")
+WT_Qpcr_Probs<-read_csv("Data/qPCR_Fit_Water_Testing_Probs.csv")
 
 ggplot()+
-  #geom_hline(aes(yintercept = .29),color = "orange")+
   geom_hline(aes(yintercept = .66),color = "red")+  
-  #geom_vline(aes(xintercept = 5),color = "orange")+
   geom_vline(aes(xintercept = 6),color = "red")+
-  geom_line(aes(x = Cont, y = `Prob Detect`), data = PT_Qpcr_Probs)+
-  geom_point(aes(x = Cont, y = Results), data = PT_Qpcr_Results,position = position_jitter(height = 0.01, width = 1),shape= 21, fill = "skyblue")+
-  labs(x= "Oocyst/ 10L Sample", y = "Predicted Probability of Detection", title = "Logistic Fit: Agricultural Water Testing")+
+  geom_line(aes(x = Cont, y = `Prob Detect`), data = WT_Qpcr_Probs)+
+  geom_point(aes(x = Cont, y = Results), data = WT_Qpcr_Results,position = position_jitter(height = 0.01, width = 1),shape= 21, fill = "skyblue")+
+  labs(x= "Oocyst/ 10L Sample", y = "Predicted Detection Rate", title = "Logistic Fit: Agricultural Water Testing")+
   theme_bw()
 
-  ggsave(filename="Water Testing Fit.png",width = 15, height = 10, units = "cm", dpi = 600)
+  ggsave(filename="Figures/Water Testing Fit.png",width = 10, height = 10, units = "cm", dpi = 600)
   
 
 ```

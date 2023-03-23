@@ -247,7 +247,7 @@ Outs_32g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num ,
            N_25g_Samples=1,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
-           loaded_model = nPCR_Model,
+           loaded_model =  qPCR_Model,
            Field_Iters =1, 
            Sampling_Iters =1000)
 
@@ -264,7 +264,7 @@ Outs_32g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num ,
            N_25g_Samples=32,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
-           loaded_model = nPCR_Model,
+           loaded_model = qPCR_Model,
            Field_Iters =100, 
            Sampling_Iters =100)
 
@@ -275,7 +275,7 @@ Outs_16g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num ,
            N_25g_Samples=16,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
-           loaded_model = nPCR_Model,
+           loaded_model = qPCR_Model,
            Field_Iters =100, 
            Sampling_Iters =100)
 
@@ -286,7 +286,7 @@ Outs_8g = Iter_Cont_Levels(Cont_Levels =Cont_Levels_log10_Num,
            N_25g_Samples=8,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
-           loaded_model = nPCR_Model,
+           loaded_model = qPCR_Model,
            Field_Iters =100, 
            Sampling_Iters =100)
 
@@ -298,7 +298,7 @@ Outs_4g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num,
            N_25g_Samples=4,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
-           loaded_model = nPCR_Model,
+           loaded_model = qPCR_Model,
            Field_Iters =100, 
            Sampling_Iters =100)
 
@@ -309,7 +309,7 @@ Outs_2g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num,
            N_25g_Samples=2,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
-           loaded_model = nPCR_Model,
+           loaded_model = qPCR_Model,
            Field_Iters =100, 
            Sampling_Iters =100)
 
@@ -320,7 +320,7 @@ Outs_1g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num,
            N_25g_Samples=1,
            N_Grabs_Sample =1,
            Plant_Weight = 1,
-           loaded_model = nPCR_Model,
+           loaded_model = qPCR_Model,
            Field_Iters =100, 
            Sampling_Iters =100)
 
