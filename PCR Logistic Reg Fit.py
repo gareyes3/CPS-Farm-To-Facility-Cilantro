@@ -150,8 +150,8 @@ scipy.stats.chi2.sf(( 442.6011609459082-185.00983117735439), 1)
 #5.7485453799292104e-58 goodness of fit satisfied. 
 
 # save the model to disk
-filename = 'C:\\Users\Gustavo Reyes\Documents\GitHubFiles\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test_qPCR_FDA.sav'
-pickle.dump(logr_D_qPRC, open(filename, 'wb'))
+filename = 'C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/logistic_Prod_Test_qPCR_FDA.sav'
+pickle.dump(logr_qPCR, open(filename, 'wb'))
 
 
 #Trying other classifiers, not relevant for manuscript
