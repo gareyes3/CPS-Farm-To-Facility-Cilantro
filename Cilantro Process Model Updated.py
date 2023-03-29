@@ -1643,6 +1643,511 @@ Scen_100_L_PTD = Process_Model(
                   Product_Testing_H = 0
                   )
 
+Scen_50_L_PTD = Process_Model(
+                  Days_per_season = 45,
+                  Niterations= 1000,
+                  Cont_Scenario = 2,#Random Cont Event
+                  Testing_Scenario=1,#Sampling at given day
+                  #Contamination Information
+                  OO_per_L =0.6,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as fault 
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [0],#testing water on day 1
+                  Per_Cont_Field = 50,
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1,
+                  Product_Testing_H = 0
+                  )
+
+Scen_25_L_PTD = Process_Model(
+                  Days_per_season = 45,
+                  Niterations= 1000,
+                  Cont_Scenario = 2,#Random Cont Event
+                  Testing_Scenario=1,#Sampling at given day
+                  #Contamination Information
+                  OO_per_L =0.6,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as fault 
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [0],#testing water on day 1
+                  Per_Cont_Field = 25,
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1,
+                  Product_Testing_H = 0
+                  )
+
+Scen_12_L_PTD = Process_Model(
+                  Days_per_season = 45,
+                  Niterations= 1000,
+                  Cont_Scenario = 2,#Random Cont Event
+                  Testing_Scenario=1,#Sampling at given day
+                  #Contamination Information
+                  OO_per_L =0.6,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as fault 
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [0],#testing water on day 1
+                  Per_Cont_Field = 12.5,
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1,
+                  Product_Testing_H = 0
+                  )
+
+Scen_6_L_PTD = Process_Model(
+                  Days_per_season = 45,
+                  Niterations= 1000,
+                  Cont_Scenario = 2,#Random Cont Event
+                  Testing_Scenario=1,#Sampling at given day
+                  #Contamination Information
+                  OO_per_L =0.6,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as fault 
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [0],#testing water on day 1
+                  Per_Cont_Field = 6.25,
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1,
+                  Product_Testing_H = 0
+                  )
+
+Scen_3_L_PTD = Process_Model(
+                  Days_per_season = 45,
+                  Niterations= 1000,
+                  Cont_Scenario = 2,#Random Cont Event
+                  Testing_Scenario=1,#Sampling at given day
+                  #Contamination Information
+                  OO_per_L =0.6,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as fault 
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [0],#testing water on day 1
+                  Per_Cont_Field = 3.125,
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1,
+                  Product_Testing_H = 0
+                  )
+
+Scen_1_L_PTD = Process_Model(
+                  Days_per_season = 45,
+                  Niterations= 1000,
+                  Cont_Scenario = 2,#Random Cont Event
+                  Testing_Scenario=1,#Sampling at given day
+                  #Contamination Information
+                  OO_per_L =0.6,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as fault 
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [0],#testing water on day 1
+                  Per_Cont_Field = 1.5,
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1,
+                  Product_Testing_H = 0
+                  )
+
+Scen_075_L_PTD = Process_Model(
+                  Days_per_season = 45,
+                  Niterations= 1000,
+                  Cont_Scenario = 2,#Random Cont Event
+                  Testing_Scenario=1,#Sampling at given day
+                  #Contamination Information
+                  OO_per_L =0.6,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as fault 
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [0],#testing water on day 1
+                  Per_Cont_Field = 0.75,
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1,
+                  Product_Testing_H = 0
+                  )
+
+Scen_04_L_PTD = Process_Model(
+                  Days_per_season = 45,
+                  Niterations= 1000,
+                  Cont_Scenario = 2,#Random Cont Event
+                  Testing_Scenario=1,#Sampling at given day
+                  #Contamination Information
+                  OO_per_L =0.6,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as fault 
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [0],#testing water on day 1
+                  Per_Cont_Field = 0.4,
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1,
+                  Product_Testing_H = 0
+                  )
+
+
+Scen_02_L_PTD = Process_Model(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Cont_Scenario = 2,#Random Cont Event
+                  Testing_Scenario=1,#Sampling at given day
+                  #Contamination Information
+                  OO_per_L =0.6,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as fault 
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [0],#testing water on day 1
+                  Per_Cont_Field = 0.2,
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1,
+                  Product_Testing_H = 0
+                  )
+
+col_name_prod=["100%",
+               "50%",
+               "25%",
+               "12.5%",
+               "6.2%",
+               "3.1%",
+               "1.5%",
+               "0.75%",
+               "0.4%",
+               "0.2%"
+               ]
+
+df_prod_Low = pd.DataFrame(columns=[col_name_prod])
+
+df_prod_Low["100%"] = get_dec_rate(df= Scen_100_L_PTD , Water_Produce_Both= "Produce")
+df_prod_Low["50%"] = get_dec_rate(df= Scen_50_L_PTD , Water_Produce_Both= "Produce")
+df_prod_Low["25%"] = get_dec_rate(df= Scen_25_L_PTD , Water_Produce_Both= "Produce")
+df_prod_Low["12.5%"] = get_dec_rate(df= Scen_12_L_PTD , Water_Produce_Both= "Produce")
+df_prod_Low["6.2%"] = get_dec_rate(df= Scen_6_L_PTD , Water_Produce_Both= "Produce")
+df_prod_Low["3.1%"] = get_dec_rate(df= Scen_3_L_PTD , Water_Produce_Both= "Produce")
+df_prod_Low["1.5%"] = get_dec_rate(df= Scen_1_L_PTD , Water_Produce_Both= "Produce")
+df_prod_Low["0.75%"] = get_dec_rate(df= Scen_075_L_PTD , Water_Produce_Both= "Produce")
+df_prod_Low["0.4%"] = get_dec_rate(df= Scen_04_L_PTD , Water_Produce_Both= "Produce")
+df_prod_Low["0.2%"] = get_dec_rate(df= Scen_02_L_PTD , Water_Produce_Both= "Produce")
+
+
+
+##High contamiantion
+
+
+Scen_100_H_PTD = Process_Model(
+                  Days_per_season = 45,
+                  Niterations= 1000,
+                  Cont_Scenario = 2,#Random Cont Event
+                  Testing_Scenario=1,#Sampling at given day
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as fault 
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [0],#testing water on day 1
+                  Per_Cont_Field = 100,
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1,
+                  Product_Testing_H = 0
+                  )
+
+Scen_50_H_PTD = Process_Model(
+                  Days_per_season = 45,
+                  Niterations= 1000,
+                  Cont_Scenario = 2,#Random Cont Event
+                  Testing_Scenario=1,#Sampling at given day
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as fault 
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [0],#testing water on day 1
+                  Per_Cont_Field = 50,
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1,
+                  Product_Testing_H = 0
+                  )
+
+Scen_25_H_PTD = Process_Model(
+                  Days_per_season = 45,
+                  Niterations= 1000,
+                  Cont_Scenario = 2,#Random Cont Event
+                  Testing_Scenario=1,#Sampling at given day
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as fault 
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [0],#testing water on day 1
+                  Per_Cont_Field = 25,
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1,
+                  Product_Testing_H = 0
+                  )
+
+Scen_12_H_PTD = Process_Model(
+                  Days_per_season = 45,
+                  Niterations= 1000,
+                  Cont_Scenario = 2,#Random Cont Event
+                  Testing_Scenario=1,#Sampling at given day
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as fault 
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [0],#testing water on day 1
+                  Per_Cont_Field = 12.5,
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1,
+                  Product_Testing_H = 0
+                  )
+
+Scen_6_H_PTD = Process_Model(
+                  Days_per_season = 45,
+                  Niterations= 1000,
+                  Cont_Scenario = 2,#Random Cont Event
+                  Testing_Scenario=1,#Sampling at given day
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as fault 
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [0],#testing water on day 1
+                  Per_Cont_Field = 6.25,
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1,
+                  Product_Testing_H = 0
+                  )
+
+Scen_3_H_PTD = Process_Model(
+                  Days_per_season = 45,
+                  Niterations= 1000,
+                  Cont_Scenario = 2,#Random Cont Event
+                  Testing_Scenario=1,#Sampling at given day
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as fault 
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [0],#testing water on day 1
+                  Per_Cont_Field = 3.125,
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1,
+                  Product_Testing_H = 0
+                  )
+
+Scen_1_H_PTD = Process_Model(
+                  Days_per_season = 45,
+                  Niterations= 1000,
+                  Cont_Scenario = 2,#Random Cont Event
+                  Testing_Scenario=1,#Sampling at given day
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as fault 
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [0],#testing water on day 1
+                  Per_Cont_Field = 1.5,
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1,
+                  Product_Testing_H = 0
+                  )
+
+Scen_075_H_PTD = Process_Model(
+                  Days_per_season = 45,
+                  Niterations= 1000,
+                  Cont_Scenario = 2,#Random Cont Event
+                  Testing_Scenario=1,#Sampling at given day
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as fault 
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [0],#testing water on day 1
+                  Per_Cont_Field = 0.75,
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1,
+                  Product_Testing_H = 0
+                  )
+
+Scen_04_H_PTD = Process_Model(
+                  Days_per_season = 45,
+                  Niterations= 1000,
+                  Cont_Scenario = 2,#Random Cont Event
+                  Testing_Scenario=1,#Sampling at given day
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as fault 
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [0],#testing water on day 1
+                  Per_Cont_Field = 0.4,
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1,
+                  Product_Testing_H = 0
+                  )
+
+
+Scen_02_H_PTD = Process_Model(
+                  Days_per_season = 45,
+                  Niterations= 1000,
+                  Cont_Scenario = 2,#Random Cont Event
+                  Testing_Scenario=1,#Sampling at given day
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as fault 
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [0],#testing water on day 1
+                  Per_Cont_Field = 0.2,
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1,
+                  Product_Testing_H = 0
+                  )
+
+Scen_01_H_PTD = Process_Model(
+                  Days_per_season = 45,
+                  Niterations= 1000,
+                  Cont_Scenario = 2,#Random Cont Event
+                  Testing_Scenario=1,#Sampling at given day
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as fault 
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [0],#testing water on day 1
+                  Per_Cont_Field = 0.1,
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1,
+                  Product_Testing_H = 0
+                  )
+
+col_name_prod=["100%",
+               "50%",
+               "25%",
+               "12.5%",
+               "6.2%",
+               "3.1%",
+               "1.5%",
+               "0.75%",
+               "0.4%",
+               "0.2%",
+               "0.1%"
+               ]
+
+df_prod_High = pd.DataFrame(columns=[col_name_prod])
+
+df_prod_High["100%"] = get_dec_rate(df= Scen_100_H_PTD , Water_Produce_Both= "Produce")
+df_prod_High["50%"] = get_dec_rate(df= Scen_50_H_PTD , Water_Produce_Both= "Produce")
+df_prod_High["25%"] = get_dec_rate(df= Scen_25_H_PTD , Water_Produce_Both= "Produce")
+df_prod_High["12.5%"] = get_dec_rate(df= Scen_12_H_PTD , Water_Produce_Both= "Produce")
+df_prod_High["6.2%"] = get_dec_rate(df= Scen_6_H_PTD , Water_Produce_Both= "Produce")
+df_prod_High["3.1%"] = get_dec_rate(df= Scen_3_H_PTD , Water_Produce_Both= "Produce")
+df_prod_High["1.5%"] = get_dec_rate(df= Scen_1_H_PTD , Water_Produce_Both= "Produce")
+df_prod_High["0.75%"] = get_dec_rate(df= Scen_075_H_PTD , Water_Produce_Both= "Produce")
+df_prod_High["0.4%"] = get_dec_rate(df= Scen_04_H_PTD , Water_Produce_Both= "Produce")
+df_prod_High["0.2%"] = get_dec_rate(df= Scen_02_H_PTD , Water_Produce_Both= "Produce")
+df_prod_High["0.1%"] = get_dec_rate(df= Scen_01_H_PTD , Water_Produce_Both= "Produce")
+
+
+df_prod_High.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/ProductTestingClustersHigh.csv")
+
+#%%
+
+det_rate = []
+for i in list(range(1,101,1)):
+    x = Process_Model(Days_per_season = 45,
+                      Niterations= 1000,
+                      Cont_Scenario = 2,#Random Cont Event
+                      Testing_Scenario=1,#Sampling at given day
+                      #Contamination Information
+                      OO_per_L =20,
+                      #Water Testing Options
+                      Sampling_every_Days_Water = 1, #1 for sampling every day
+                      Sampling_every_Days_Product = 1, #as fault 
+                      #Testing Options
+                      Testing_Day_Water = [0], 
+                      Testing_Day_Product = [0],#testing water on day 1
+                      Per_Cont_Field = i,
+                      Water_Sampling = 0,
+                      Product_Sampling_PH = 1,
+                      Product_Testing_H = 0
+                      )
+    det_rate.append(get_dec_rate(df= x , Water_Produce_Both= "Produce"))   
+
+Detection_Rates_High_DPT_List = [item for items in det_rate for item in items]
+Detection_Rates_High_DPT = pd.DataFrame({"Drates": Detection_Rates_High_DPT_List,
+                                          "Cluster": list(range(1,101,1))})
+
+Detection_Rates_High_DPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_High_DPT.csv")
+
+
+#Propduct end of day
+det_rate_FPT = []
+for i in list(range(1,101,1)):
+    x = Process_Model(Days_per_season = 45,
+                      Niterations= 1000,
+                      Cont_Scenario = 2,#Random Cont Event
+                      Testing_Scenario=2,#Sampling at given day
+                      #Contamination Information
+                      OO_per_L =20,
+                      #Water Testing Options
+                      Sampling_every_Days_Water = 1, #1 for sampling every day
+                      Sampling_every_Days_Product = 1, #as fault 
+                      #Testing Options
+                      Testing_Day_Water = [0], 
+                      Testing_Day_Product = [45],#testing water on day 1
+                      Per_Cont_Field = i,
+                      Water_Sampling = 0,
+                      Product_Sampling_PH = 1,
+                      Product_Testing_H = 0
+                      )
+    det_rate.append(get_dec_rate(df= x , Water_Produce_Both= "Produce"))   
+
+Detection_Rates_High_FPT_List = [item for items in det_rate_FPT for item in items]
+Detection_Rates_High_FPT = pd.DataFrame({"Drates": Detection_Rates_High_FPT_List,
+                                          "Cluster": list(range(1,101,1))})
+
+Detection_Rates_High_FPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_High_FPT.csv")
+
+
+
+
+
+
 
 #Product Testing end of season
 Scen_100_L_PT1 = Process_Model(

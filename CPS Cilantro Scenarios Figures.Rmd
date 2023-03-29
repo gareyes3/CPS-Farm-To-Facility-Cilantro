@@ -16,6 +16,9 @@ library(scales)
 library(reshape2)
 library(tidyverse)
 
+```
+
+```{r}
 BS1 <- read.csv(file = "Baseline1.csv", header = TRUE )
 Order<-(BS1$Scenarios2[1:12])
 
@@ -91,8 +94,25 @@ PS_High %>%
   group_by(variable) %>% 
   summarise(mean = mean(value), q25 = quantile(value, 0.05), q975 = quantile(value, 0.95)) %>% 
   ggplot(aes(x = variable, y = mean, ymin = q25, ymax = q975))+
-  geom_col()+
-  coord_flip()
+  geom_col(fill = "skyblue", color = "black")+
+  #coord_flip()+
+  labs(x = "Contamination Cluster", y = "Detection Rate")+
+  theme_bw()
+
+seq(from  = 0.1, to  = 100, length.out = 100)
+
+
+Detection_Rates_High_DPT<-read.csv(file = "Detection_Rates_High_DPT.csv")
+Detection_Rates_High_DPT<-Detection_Rates_High_DPT[,-1]
+
+Detection_Rates_High_DPT %>% 
+  ggplot(aes(x = Cluster, y = Drates))+
+  geom_point(fill = "skyblue", color = "black")+
+  geom_line()+
+  labs(x = "Contamination Cluster", y = "Detection Rate")+
+  theme_bw()
+
+#?seq()
 ```
 
 ```{r}
@@ -106,6 +126,7 @@ PS_High %>%
   summarise(mean = mean(value), q25 = quantile(value, 0.05), q975 = quantile(value, 0.95)) %>% 
   ggplot(aes(x = variable, y = mean, ymin = q25, ymax = q975))+
   geom_col()+
-  coord_flip()
+  #coord_flip()+
+  labs(x = "Contamination Cluster", y = "Detection Rate")
 ```
 
