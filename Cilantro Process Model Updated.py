@@ -11,20 +11,24 @@ import pickle
 def random_chunk(lst, chunk_size):
     nb_chunks = int(math.ceil(len(lst)/chunk_size))
     choice = random.randrange(nb_chunks) # 0 <= choice < nb_chunks
+    while choice == nb_chunks-1 and nb_chunks!= 1:
+       choice = random.randrange(nb_chunks) 
     return lst[choice*chunk_size:(choice+1)*chunk_size]
 
 def field_cont_percetage2(df, percent_cont, Hazard_lvl,No_Cont_Clusters):
     df2=df.copy()
     No_Cont_Clusters = 1
     #This function contaminated the tomato field randomly based on a cluter of X%. 
-    No_Cont_PartitionUnits= int(len(df)*(percent_cont/100))
-    Field_df_1 =df.loc[(df["Location"]==1) & (df["Rej_Acc"]=="Acc")].copy()
+    No_Cont_PartitionUnits= int(len(df2)*(percent_cont/100))
+    Field_df_1 =df2.loc[(df2["Location"]==1) & (df2["Rej_Acc"]=="Acc")].copy()
     if len(Field_df_1)>0:
-        Hazard_lvl_percluster= Hazard_lvl / No_Cont_Clusters #(No_Cont_PartitionUnits*No_Cont_Clusters)
+        Hazard_lvl_percluster= Hazard_lvl /No_Cont_Clusters #(No_Cont_PartitionUnits*No_Cont_Clusters)
         for i in range(0,No_Cont_Clusters):
-            random_Chunky = np.array(random_chunk(lst = df.index, chunk_size = No_Cont_PartitionUnits)) #creating random chunk
+            random_Chunky = np.array(random_chunk(lst = df2.index, chunk_size = No_Cont_PartitionUnits)) #creating random chunk
             Contamination_Pattern = np.random.multinomial(Hazard_lvl_percluster,[1/No_Cont_PartitionUnits]*No_Cont_PartitionUnits,1) #spliting cont into chunks length
+            #print(len(Contamination_Pattern[0]))
             random_Chunky_s= random_Chunky[np.isin(random_Chunky,np.array(Field_df_1.index))]
+            #print(len(Field_df_1.index))
             Contamination_Pattern_s = Contamination_Pattern[0][range(0,len(random_Chunky_s))]
             Field_df_1.loc[random_Chunky_s, "Oo"] = Field_df_1.loc[random_Chunky_s, "Oo"] + Contamination_Pattern_s
             
@@ -1456,6 +1460,8 @@ def get_exposure_WP(df_rejections_W,df_rejections_P,df_FinalConts,Iterations, Da
 
     return exps
 
+#%%
+
 Scenario_Names=["Daily_Water_Test",
 "Daily_Produce_Test",
 "Water_Testing_1",
@@ -2088,7 +2094,7 @@ df_prod_High.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Ci
 #%%
 
 det_rate = []
-for i in list(range(1,101,1)):
+for i in list(range(1,101,3)):
     x = Process_Model(Days_per_season = 45,
                       Niterations= 1000,
                       Cont_Scenario = 2,#Random Cont Event
@@ -2110,7 +2116,7 @@ for i in list(range(1,101,1)):
 
 Detection_Rates_High_DPT_List = [item for items in det_rate for item in items]
 Detection_Rates_High_DPT = pd.DataFrame({"Drates": Detection_Rates_High_DPT_List,
-                                          "Cluster": list(range(1,101,1))})
+                                          "Cluster": list(range(1,101,3))})
 
 Detection_Rates_High_DPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_High_DPT.csv")
 
