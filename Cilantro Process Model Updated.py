@@ -78,8 +78,10 @@ def Cilantro_Sampling_25g(df,Sample_Weight,N_25g_Samples,N_Grabs_Sample ,Plant_W
         Total_Oo_Composite = sum(Total_Oocyst_Grab)
         if Total_Oo_Composite>=1:
             Pr_Detect = loaded_model.predict_proba(np.array([Total_Oo_Composite]).reshape(-1,1))[0][1] #from logistic
+            Sampled_OO = 1
         else:
-            Pr_Detect = 0       
+            Pr_Detect = 0  
+            Sampled_OO = 0
         probs_detection.append(Pr_Detect)
         if np.random.uniform(0,1) < Pr_Detect:
             sample_resuls.append(1)
@@ -95,7 +97,7 @@ def Cilantro_Sampling_25g(df,Sample_Weight,N_25g_Samples,N_Grabs_Sample ,Plant_W
         pdetect = 1-np.prod([1-i for i in probs_detection])
     else: 
         pdetect = probs_detection[0]
-    return [df2, reject_YN,pdetect]
+    return [df2, reject_YN,pdetect, Sampled_OO]
 
 
 def F_Rejection_Rule_C (df):
@@ -141,14 +143,14 @@ def Func_Water_Sampling (total_oocyst_bw, bw_volume, sample_size_volume,total_sa
     return [reject_YN,pdetect]
 
 #%% Loading PCR Detection Models
-#filename_qPCR = 'C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/logistic_AW_Testing_qPCR.sav'
-filename_qPCR = 'C://Users/Gustavo Reyes/Documents/GitHubFiles/CPS-Farm-To-Facility-Cilantro/logistic_AW_Testing_qPCR.sav'
+filename_qPCR = 'C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/logistic_AW_Testing_qPCR.sav'
+#filename_qPCR = 'C://Users/Gustavo Reyes/Documents/GitHubFiles/CPS-Farm-To-Facility-Cilantro/logistic_AW_Testing_qPCR.sav'
 
 qPCR_Model_AW = pickle.load(open(filename_qPCR, 'rb'))
 qPCR_Model_AW.predict_proba(np.array([20]).reshape(-1,1))[0][1] #from logistic
 
-#filename_qPCR = 'C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/logistic_Prod_Test_qPCR_FDA.sav'
-filename_qPCR = 'C://Users/Gustavo Reyes/Documents/GitHubFiles/CPS-Farm-To-Facility-Cilantro/logistic_Prod_Test_qPCR_FDA.sav'
+filename_qPCR = 'C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/logistic_Prod_Test_qPCR_FDA.sav'
+#filename_qPCR = 'C://Users/Gustavo Reyes/Documents/GitHubFiles/CPS-Farm-To-Facility-Cilantro/logistic_Prod_Test_qPCR_FDA.sav'
 
 qPCR_Model = pickle.load(open(filename_qPCR, 'rb'))
 
@@ -242,6 +244,9 @@ def Process_Model(Days_per_season,
     Produce_Outcome_DF = Output_DF_Creation(Column_Names =np.arange(1,Days_per_season+1), Niterations= Niterations)
     #tell you probability of detection of product sampling
     Produce_PrRej_DF = Output_DF_Creation(Column_Names =np.arange(1,Days_per_season+1), Niterations= Niterations)
+    #tells if anything was sampled
+    Produce_sampledYN_DF = Output_DF_Creation(Column_Names =np.arange(1,Days_per_season+1), Niterations= Niterations)
+
     #tells you contamination at each sampling point per day
     Contam_Produce_DF = Output_DF_Creation(Column_Names =np.arange(1,Days_per_season+1), Niterations= Niterations)
     #not in use harest samplfin
@@ -342,6 +347,7 @@ def Process_Model(Days_per_season,
               
                   Produce_Outcome_DF = Output_Collection_any_output(outputDF = Produce_Outcome_DF, Step_Column = i,iteration=k, outcome = Produce_test_results[1])
                   Produce_PrRej_DF = Output_Collection_any_output(outputDF = Produce_PrRej_DF, Step_Column = i,iteration=k, outcome = Produce_test_results[2])
+                  Produce_sampledYN_DF = Output_Collection_any_output(outputDF = Produce_sampledYN_DF, Step_Column = i,iteration=k, outcome = Produce_test_results[3])
                   Contam_Produce_DF=Output_Collection_ProduceCont(df=Cilantro_df, outputDF=Contam_Produce_DF, Step_Column = i,iteration = k)
         
         
@@ -364,7 +370,7 @@ def Process_Model(Days_per_season,
             
             Final_CFUS_DF=Output_Collection_ProduceCont(df=Cilantro_df, outputDF=Final_CFUS_DF, Step_Column = i,iteration = k)
 
-    return [Water_Outcome_DF,Water_PrRej_DF,Produce_Outcome_DF,Produce_PrRej_DF, Contam_Produce_DF,Harvest_Sampling_Outcome_DF,Harvest_Sampling_PrRej_DF,Contam_HS_DF,Final_CFUS_DF]
+    return [Water_Outcome_DF,Water_PrRej_DF,Produce_Outcome_DF,Produce_PrRej_DF, Contam_Produce_DF,Harvest_Sampling_Outcome_DF,Harvest_Sampling_PrRej_DF,Contam_HS_DF,Final_CFUS_DF, Produce_sampledYN_DF]
 
 #a_Tring = Process_Model(
  #                 Days_per_season = 45,
@@ -1282,8 +1288,8 @@ Scen_B1_H_WPT1 = Process_Model(
                   Sampling_every_Days_Water = 1, #1 for sampling every day
                   Sampling_every_Days_Product = 1, #as default 
                   #Testing Options
-                  Testing_Day_Water = [1],
-                  Testing_Day_Product = [1],
+                  Testing_Day_Water = [45],
+                  Testing_Day_Product = [45],
                   Water_Sampling = 1,
                   Product_Sampling_PH = 1, #now product testing is on
                   Product_Testing_H = 0
@@ -1344,7 +1350,7 @@ Scen_B1_L_WPT4 = Process_Model(
                   Product_Sampling_PH = 1, 
                   Product_Testing_H = 0
                   )
-
+#----
 #B1_Water testing 1 time per season at the start of the season - High
 Scen_B1_H_WPT2 = Process_Model(
                   Days_per_season = 45,
@@ -1376,8 +1382,8 @@ Scen_B1_L_WPT2 = Process_Model(
                   Sampling_every_Days_Water = 1, #leave as 1 defaul
                   Sampling_every_Days_Product = 1, #as default 
                   #Testing Options
-                  Testing_Day_Water = [22,45], #testing water on day 1
-                  Testing_Day_Product = [22,45],
+                  Testing_Day_Water = [1,45], #testing water on day 1
+                  Testing_Day_Product = [1,45],
                   Water_Sampling = 1,#now water testing is on
                   Product_Sampling_PH = 1, 
                   Product_Testing_H = 0
@@ -2326,9 +2332,34 @@ df_prod_High["0.1%"] = get_dec_rate(df= Scen_01_H_PTD , Water_Produce_Both= "Pro
 df_prod_High.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/ProductTestingClustersHigh.csv")
 
 #%%
+def Extracting_outputs_sample_prob(df):
+    probability_of_sample = np.mean(df[9].sum(axis = 1)>0)
+    df_narrow= df[3][df[9].sum(axis = 1)>0]
+    
+    Pdetects = []
+    for i in list(df_narrow.index):
+        Probs = df_narrow.loc[[i]].values.tolist()[0]
+        Probs_g_zero = [i for i in Probs if i >0]
+        if len(Probs_g_zero)>0:
+            Probs_g_zero_rem = [1-i for i in Probs_g_zero]
+            Prod_Probs_g_zero_rem=np.prod(Probs_g_zero_rem)
+            Pdetect = 1-Prod_Probs_g_zero_rem
+        else:
+            Pdetect = 0 
+        Pdetects.append(Pdetect)
+    P_detect_pres = np.mean(Pdetects)
+    return [probability_of_sample,P_detect_pres]
+
+
+
+list_of_clusters = []
+for i in list(range(11)):
+    list_of_clusters.append(100/2**i)
 
 det_rate = []
-for i in list(range(1,101,1)):
+samp_rate = []
+assay_rate = []
+for i in list_of_clusters:
     x = Process_Model(Days_per_season = 45,
                       Niterations= 10000,
                       Cont_Scenario = 2,#Random Cont Event
@@ -2347,19 +2378,24 @@ for i in list(range(1,101,1)):
                       Product_Testing_H = 0
                       )
     det_rate.append(get_dec_rate(df= x , Water_Produce_Both= "Produce"))   
+    samp_rate.append(Extracting_outputs_sample_prob(x)[0])
+    assay_rate.append(Extracting_outputs_sample_prob(x)[1])
 
 Detection_Rates_High_DPT_List = [item for items in det_rate for item in items]
 Detection_Rates_High_DPT = pd.DataFrame({"Drates": Detection_Rates_High_DPT_List,
-                                          "Cluster": list(range(1,101,1))})
+                                          "Cluster": list_of_clusters})
 
-Detection_Rates_High_DPT.to_csv("C://Users/Gustavo Reyes/Documents/GitHubFiles/CPS-Farm-To-Facility-Cilantro/Detection_Rates_High_DPT.csv")
+Detection_Rates_High_DPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_High_DPT_LOC.csv")
 
+##############################################################################
 
 #Propduct end of day
 det_rate_FPT = []
-for i in list(range(1,101,1)):
+samp_rate_FTP = []
+assay_rate_FTP = []
+for i in list_of_clusters :
     x = Process_Model(Days_per_season = 45,
-                      Niterations= 1000,
+                      Niterations= 10000,
                       Cont_Scenario = 2,#Random Cont Event
                       Testing_Scenario=2,#Sampling at given day
                       #Contamination Information
@@ -2375,13 +2411,96 @@ for i in list(range(1,101,1)):
                       Product_Sampling_PH = 1,
                       Product_Testing_H = 0
                       )
-    det_rate.append(get_dec_rate(df= x , Water_Produce_Both= "Produce"))   
+    det_rate_FPT.append(get_dec_rate(df= x , Water_Produce_Both= "Produce")) 
+    samp_rate_FTP.append(Extracting_outputs_sample_prob(x)[0])
+    samp_rate_FTP.append(Extracting_outputs_sample_prob(x)[1])
 
 Detection_Rates_High_FPT_List = [item for items in det_rate_FPT for item in items]
 Detection_Rates_High_FPT = pd.DataFrame({"Drates": Detection_Rates_High_FPT_List,
-                                          "Cluster": list(range(1,101,1))})
+                                          "Cluster": list_of_clusters})
 
-Detection_Rates_High_FPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_High_FPT.csv")
+Detection_Rates_High_FPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_High_FPT_LOC.csv")
+
+
+
+#Propduct end of day
+det_rate_DPT_L = []
+samp_rate_DPT_L =[]
+assay_rate_DPT_L = []
+for i in list_of_clusters :
+    x = Process_Model(Days_per_season = 45,
+                      Niterations= 10000,
+                      Cont_Scenario = 2,#Random Cont Event
+                      Testing_Scenario=1,#Sampling at given day
+                      #Contamination Information
+                      OO_per_L =0.6,
+                      #Water Testing Options
+                      Sampling_every_Days_Water = 1, #1 for sampling every day
+                      Sampling_every_Days_Product = 1, #as fault 
+                      #Testing Options
+                      Testing_Day_Water = [0], 
+                      Testing_Day_Product = [0],#testing water on day 1
+                      Per_Cont_Field = i,
+                      Water_Sampling = 0,
+                      Product_Sampling_PH = 1,
+                      Product_Testing_H = 0
+                      )
+    det_rate_DPT_L.append(get_dec_rate(df= x , Water_Produce_Both= "Produce"))  
+    samp_rate_DPT_L.append(Extracting_outputs_sample_prob(x)[0])
+    assay_rate_DPT_L.append(Extracting_outputs_sample_prob(x)[1])
+
+Detection_Rates_Low_DPT = [item for items in det_rate_DPT_L for item in items]
+Detection_Rates_Low_DPT = pd.DataFrame({"Drates": Detection_Rates_Low_DPT,
+                                          "Cluster": list_of_clusters,
+                                          "samp_rate":samp_rate_DPT_L,
+                                          "assay_rate":det_rate_DPT_L})
+
+
+Detection_Rates_Low_DPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_Low_DPT_LOC.csv")
+
+
+
+
+#Propduct end of day
+det_rate_FPT_L = []
+samp_rate_FPT_L =[]
+assay_rate_FPT_L = []
+for i in list_of_clusters :
+    x = Process_Model(Days_per_season = 45,
+                      Niterations= 10000,
+                      Cont_Scenario = 2,#Random Cont Event
+                      Testing_Scenario=2,#Sampling at given day
+                      #Contamination Information
+                      OO_per_L =0.6,
+                      #Water Testing Options
+                      Sampling_every_Days_Water = 1, #1 for sampling every day
+                      Sampling_every_Days_Product = 1, #as fault 
+                      #Testing Options
+                      Testing_Day_Water = [0], 
+                      Testing_Day_Product = [45],#testing water on day 1
+                      Per_Cont_Field = i,
+                      Water_Sampling = 0,
+                      Product_Sampling_PH = 1,
+                      Product_Testing_H = 0
+                      )
+    det_rate_FPT_L.append(get_dec_rate(df= x , Water_Produce_Both= "Produce"))  
+    samp_rate_FPT_L.append(Extracting_outputs_sample_prob(x)[0])
+    assay_rate_FPT_L.append(Extracting_outputs_sample_prob(x)[1])
+
+Detection_Rates_Low_FPT = [item for items in det_rate_FPT_L for item in items]
+Detection_Rates_Low_FPT = pd.DataFrame({"Drates": Detection_Rates_Low_FPT,
+                                          "Cluster": list_of_clusters,
+                                          "samp_rate":samp_rate_FPT_L,
+                                          "assay_rate":det_rate_FPT_L})
+
+
+Detection_Rates_Low_DPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_Low_FPT_LOC.csv")
+
+
+
+
+
+
 
 
 
