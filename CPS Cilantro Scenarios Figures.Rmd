@@ -85,24 +85,50 @@ ggsave("Baseline2-Presentation.jpg", width =9, height = 7, units = "in", dpi = 3
 
 
 ```{r}
-PS_High <- read.csv(file = "ProductTestingClustersHigh.csv", header = TRUE )
-PS_High<-PS_High[,-1]
-PS_High<-melt(PS_High)
+#together:
+H_DPT<-read.csv(file = "Detection_Rates_High_DPT_LOC.csv")
+H_DPT$Level = "Contamination - High"
+H_DPT$Type = "Daily Produce Testing"
+
+H_FPT<-read.csv(file = "Detection_Rates_High_FPT_LOC.csv")
+H_FPT$Level = "Contamination - High"
+H_FPT$Type = "Produce Testing - End"
+
+L_DPT<-read.csv(file = "Detection_Rates_Low_DPT_LOC.csv")
+L_DPT$Level = "Contamination - Low"
+L_DPT$Type = "Daily Produce Testing"
+
+L_FPT<-read.csv(file = "Detection_Rates_Low_FPT_LOC.csv")
+L_FPT$Level = "Contamination - Low"
+L_FPT$Type = "Produce Testing - End"
 
 
-PS_High %>% 
-  group_by(variable) %>% 
-  summarise(mean = mean(value), q25 = quantile(value, 0.05), q975 = quantile(value, 0.95)) %>% 
-  ggplot(aes(x = variable, y = mean, ymin = q25, ymax = q975))+
+Detection_Rates_Binded = rbind(H_DPT,H_FPT,L_DPT,L_FPT)
+Detection_Rates_Binded<-Detection_Rates_Binded[,-1]
+Detection_Rates_Binded$Cluster<-round(Detection_Rates_Binded$Cluster,1)
+Detection_Rates_Binded$Cluster<-as.factor(Detection_Rates_Binded$Cluster)
+
+Detection_Rates_Binded %>% 
+  ggplot(aes(x = Cluster, y = Drates))+
   geom_col(fill = "skyblue", color = "black")+
-  #coord_flip()+
-  labs(x = "Contamination Cluster", y = "Detection Rate")+
-  theme_bw()
+  geom_point(aes( y = assay_rate, color = "black", fill = "Detection Rate Assay",shape = "Detection Rate Assay"), size =2,show_guide = T)+
+  geom_line(aes( y = assay_rate, group=1,color = "Detection Rate Assay"))+
+  geom_point(aes( y = samp_rate, fill = "Detection Rate Sample",color = "black",shape = "Detection Rate Sample"), size =2)+
+  geom_line(aes(y = samp_rate, group=1,color = "Detection Rate Sample"))+
+  labs(x = "Contamination Spread", y = "Overall Detection Rate")+
+  scale_color_manual(name = "", values = c("Detection Rate Sample" = "coral", "Detection Rate Assay" = "black"))+
+  scale_fill_manual(name = "", values = c("Detection Rate Sample" = "coral", "Detection Rate Assay" = "black"))+
+  scale_shape_manual(name = "", values = c("Detection Rate Sample" = 21, "Detection Rate Assay" = 22))+
+  scale_x_discrete(labels = function(x) paste0(x, "%"))+
+  theme_bw()+
+  theme(legend.position="bottom")+
+  facet_grid(Level~Type)
 
-seq(from  = 0.1, to  = 100, length.out = 100)
+ggsave("Detection_Rates.jpg", width =10, height = 7, units = "in", dpi = 300)
 
 
-Detection_Rates_High_DPT<-read.csv(file = "Detection_Rates_High_DPT_LOC2.csv")
+######
+Detection_Rates_High_DPT<-read.csv(file = "Detection_Rates_High_DPT_LOC.csv")
 Detection_Rates_High_DPT<-Detection_Rates_High_DPT[,-1]
 Detection_Rates_High_DPT$Cluster<-round(Detection_Rates_High_DPT$Cluster,1)
 Detection_Rates_High_DPT$Cluster<-as.factor(Detection_Rates_High_DPT$Cluster)
@@ -110,13 +136,38 @@ Detection_Rates_High_DPT$Cluster<-as.factor(Detection_Rates_High_DPT$Cluster)
 Detection_Rates_High_DPT %>% 
   ggplot(aes(x = Cluster, y = Drates))+
   geom_col(fill = "skyblue", color = "black")+
-  geom_line()+
-  labs(x = "Contamination Spread", y = "Detection Rate")+
+  geom_point(aes( y = assay_rate, color = "black", fill = "Detection Rate Assay"), shape = 21, size =2,show_guide = T)+
+  geom_line(aes( y = assay_rate, group=1,color = "Detection Rate Assay"))+
+  geom_point(aes( y = samp_rate, fill = "Detection Rate Sample",color = "black"),  shape = 21, size =2)+
+  geom_line(aes(y = samp_rate, group=1,color = "Detection Rate Sample"))+
+  labs(x = "Contamination Spread", y = "Overall Detection Rate")+
+  scale_color_manual(name = "", values = c("Detection Rate Sample" = "coral", "Detection Rate Assay" = "black"))+
+  scale_fill_manual(name = "", values = c("Detection Rate Sample" = "coral", "Detection Rate Assay" = "black"))+
+  scale_x_discrete(labels = function(x) paste0(x, "%"))
   theme_bw()
 
 ##############
 
-Detection_Rates_High_DPT<-read.csv(file = "Detection_Rates_High_FPT_LOC2.csv")
+Detection_Rates_High_DPT<-read.csv(file = "Detection_Rates_High_FPT_LOC.csv")
+Detection_Rates_High_DPT<-Detection_Rates_High_DPT[,-1]
+Detection_Rates_High_DPT$Cluster<-round(Detection_Rates_High_DPT$Cluster,1)
+Detection_Rates_High_DPT$Cluster<-as.factor(Detection_Rates_High_DPT$Cluster)
+
+Detection_Rates_High_DPT %>% 
+  ggplot()+
+  geom_col(aes(x = Cluster, y = Drates),fill = "skyblue", color = "black")+
+  geom_point(aes(x= Cluster, y = assay_rate), color = "black", fill = "black", shape = 21, size =2)+
+  geom_line(aes(x= Cluster, y = assay_rate), color = "black")+
+  geom_point(aes(x = Cluster, y = samp_rate), fill = "coral",color = "black", shape = 21, size =2)+
+  labs(x = "Contamination Spread", y = "OVerall Detection Rate")+
+  theme_bw()
+
+
+
+##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+Detection_Rates_High_DPT<-read.csv(file = "Detection_Rates_Low_DPT_LOC.csv")
 Detection_Rates_High_DPT<-Detection_Rates_High_DPT[,-1]
 Detection_Rates_High_DPT$Cluster<-round(Detection_Rates_High_DPT$Cluster,1)
 Detection_Rates_High_DPT$Cluster<-as.factor(Detection_Rates_High_DPT$Cluster)
@@ -129,6 +180,23 @@ Detection_Rates_High_DPT %>%
   labs(x = "Contamination Spread", y = "Detection Rate")+
   theme_bw()
 
+
+
+##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+Detection_Rates_High_DPT<-read.csv(file = "Detection_Rates_Low_FPT_LOC.csv")
+Detection_Rates_High_DPT<-Detection_Rates_High_DPT[,-1]
+Detection_Rates_High_DPT$Cluster<-round(Detection_Rates_High_DPT$Cluster,1)
+Detection_Rates_High_DPT$Cluster<-as.factor(Detection_Rates_High_DPT$Cluster)
+
+Detection_Rates_High_DPT %>% 
+  ggplot()+
+  geom_col(aes(x = Cluster, y = Drates),fill = "skyblue", color = "black")+
+  geom_point(aes(x= Cluster, y = assay_rate), color = "black", fill = "black", shape = 21, size =2)+
+  geom_point(aes(x = Cluster, y = samp_rate), fill = "coral",color = "black", shape = 21, size =2)+
+  labs(x = "Contamination Spread", y = "Detection Rate")+
+  theme_bw()
 
 ```
 
