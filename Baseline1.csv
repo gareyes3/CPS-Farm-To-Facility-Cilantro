@@ -1,25 +1,31 @@
-Scenarios,Relative_Efficacy,Contamination,Scenarios2
-Daily_Water_Test,1,Low,Water Testing - Daily
-Water_Testing_1,0.5744,Low,Water Testing - Start
-Water_Testing_2,0.8263,Low,Water Testing - Start & End
-Water_Testing_3,0.9291,Low,"Water Testing - Start, Mid & End"
-Daily_Produce_Test,0.5428,Low,Produce Testing - Daily
-Produce_Testing_1,0.0012,Low,Produce Testing - Start
-Produce_Testing_2,0.0374,Low,Produce Testing - Start & End
-Produce_Testing_3,0.0476,Low,"Produce Testing - Start, Mid & End"
-Daily_Water&Product_Test,1,Low,Water and Produce Testing - Daily
-Water&Product_1,0.5843,Low,Water and Produce Testing - Start
-Water&Product_2,0.8263,Low,Water and Produce Testing - Start & End
-Water&Product_3,0.9269,Low,"Water and Produce Testing - Start, Mid & End"
-Daily_Water_Test,1,High,Water Testing - Daily
-Water_Testing_1,1,High,Water Testing - Start
-Water_Testing_2,1,High,Water Testing - Start & End
-Water_Testing_3,1,High,"Water Testing - Start, Mid & End"
-Daily_Produce_Test,1,High,Produce Testing - Daily
-Produce_Testing_1,0.0255,High,Produce Testing - Start
-Produce_Testing_2,0.9961,High,Produce Testing - Start & End
-Produce_Testing_3,0.9996,High,"Produce Testing - Start, Mid & End"
-Daily_Water&Product_Test,1,High,Water and Produce Testing - Daily
-Water&Product_1,1,High,Water and Produce Testing - Start
-Water&Product_2,1,High,Water and Produce Testing - Start & End
-Water&Product_3,1,High,"Water and Produce Testing - Start, Mid & End"
+Scenarios,Detection_Rate,Contamination,Scenarios2,,,,
+Daily_Water_Test,1,High,Water Testing - Daily,,,,
+Water_Testing_1,1,High,Water Testing -  End,,,,
+Water_Testing_4,1,High,Water Testing -  Start,,,,
+Water_Testing_2,1,High,Water Testing - Start & End,,,,
+Water_Testing_3,1,High,"Water Testing - Start, Mid & End",,,,
+Daily_Produce_Test,1,High,Produce Testing - Daily,,,,
+Produce_Testing_1,1,High,Produce Testing - End,,,,
+Produce_Testing_4,0.0219,High,Produce Testing - Start,,,,
+Produce_Testing_2,0.99,High,Produce Testing - Start & End,,,,
+Produce_Testing_3,0.9997,High,"Produce Testing - Start, Mid & End",,,,
+Daily_Water&Product_Test,1,High,Water and Produce Testing - Daily,,,,
+Water&Product_1,1,High,Water and Produce Testing - End,,,,
+Water&Product_4,1,High,Water and Produce Testing - Start,,,,
+Water&Product_2,1,High,Water and Produce Testing - Start & End,,,,
+Water&Product_3,1,High,"Water and Produce Testing - Start, Mid & End",,,,
+Daily_Water_Test,1,Low,Water Testing - Daily,,,,
+Water_Testing_1,0.5798,Low,Water Testing -  End,,,,
+Water_Testing_4,0.5898,Low,Water Testing -  Start,,,,
+Water_Testing_2,0.8299,Low,Water Testing - Start & End,,,,
+Water_Testing_3,0.9209,Low,"Water Testing - Start, Mid & End",,,,
+Daily_Produce_Test,0.5008,Low,Produce Testing - Daily,,,,
+Produce_Testing_1,0.0284,Low,Produce Testing - End,,,,
+Produce_Testing_4,0.0007,Low,Produce Testing - Start,,,,
+Produce_Testing_2,0.0298,Low,Produce Testing - Start & End,,,,
+Produce_Testing_3,0.0429,Low,"Produce Testing - Start, Mid & End",,,,
+Daily_Water&Product_Test,1,Low,Water and Produce Testing - Daily,,,,
+Water&Product_1,0.5787,Low,Water and Produce Testing - End,,,,
+Water&Product_4,0.58,Low,Water and Produce Testing - Start,,,,
+Water&Product_2,0.8252,Low,Water and Produce Testing - Start & End,,,,
+Water&Product_3,0.9264,Low,"Water and Produce Testing - Start, Mid & End",,,,

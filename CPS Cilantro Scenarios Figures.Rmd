@@ -20,21 +20,21 @@ library(tidyverse)
 
 ```{r}
 BS1 <- read.csv(file = "Baseline1.csv", header = TRUE )
-Order<-(BS1$Scenarios2[1:12])
+Order<-(BS1$Scenarios2[1:15])
 
 
 BS1$Scenarios <- as.factor(BS1$Scenarios)
 BS1$Scenarios2 <- as.factor(BS1$Scenarios2)
 
-BS1$Relative_Efficacy <-as.numeric(BS1$Relative_Efficacy)
+BS1$Relative_Efficacy <-as.numeric(BS1$Detection_Rate)
 
 BS1
 
 Fig1 <- ggplot(BS1, aes(fill=Contamination, x=factor(Scenarios2, levels = rev(Order)), y=Relative_Efficacy)) + 
   geom_bar(position = "dodge", stat = "identity") + 
-  labs(title="Unintentional irrigation with contaminated water every day of a growing cycle", y="Fraction of oocysts rejected by sampling scenario", x="Sampling Scenario")+
+  labs(title="Unintentional irrigation with contaminated water \nevery day of a growing cycle", y="Overall Detection Rate", x="Sampling Scenario")+
   scale_fill_discrete(name = "Contamination \nLevel")+#(values=c("#FF3366","#99CCFF")) +
-  scale_y_continuous(labels = scales::percent)+
+  #scale_y_continuous(labels = scales::percent)+
   theme_bw()+
   theme(plot.title = element_text(hjust = 0.5))+
   #theme(axis.text.x = element_text(angle=45, vjust=1, hjust=1))+
@@ -58,15 +58,15 @@ Order<-(BS2$Scenarios2[1:12])
 BS2$Scenarios <- as.factor(BS2$Scenarios)
 BS2$Scenarios2 <- as.factor(BS2$Scenarios2)
 
-BS2$Relative_Efficacy <-as.numeric(BS2$Relative_Efficacy)
+BS2$Relative_Efficacy <-as.numeric(BS2$Detection_Rate)
 
 BS2
 
 Fig2 <- ggplot(BS2, aes(fill=Contamination, x=factor(Scenarios2, levels = rev(Order)), y=Relative_Efficacy)) + 
   geom_bar(position = "dodge", stat = "identity") + 
-  labs(title="Unintentional irrigation with contaminated water\n one random day during the growing cycle", y="Fraction of oocysts rejected by sampling scenario", x="Sampling Scenario")+
+  labs(title="Unintentional irrigation with contaminated water\n one random day of a growing cycle", y="Overall Detection Rate", x="Sampling Scenario")+
   scale_fill_discrete(name = "Contamination \nLevel")+#(values=c("#FF3366","#99CCFF")) +
-  scale_y_continuous(labels = scales::percent)+
+  #scale_y_continuous(labels = scales::percent)+
   theme_bw()+
   theme(plot.title = element_text(hjust = 0.5))+
   #theme(axis.text.x = element_text(angle=45, vjust=1, hjust=1))+
@@ -88,7 +88,7 @@ ggsave("Baseline2-Presentation.jpg", width =9, height = 7, units = "in", dpi = 3
 #together:
 H_DPT<-read.csv(file = "Detection_Rates_High_DPT_LOC.csv")
 H_DPT$Level = "Contamination - High"
-H_DPT$Type = "Daily Produce Testing"
+H_DPT$Type = "Produce Testing - Daily"
 
 H_FPT<-read.csv(file = "Detection_Rates_High_FPT_LOC.csv")
 H_FPT$Level = "Contamination - High"
@@ -96,7 +96,7 @@ H_FPT$Type = "Produce Testing - End"
 
 L_DPT<-read.csv(file = "Detection_Rates_Low_DPT_LOC.csv")
 L_DPT$Level = "Contamination - Low"
-L_DPT$Type = "Daily Produce Testing"
+L_DPT$Type = "Produce Testing - Daily"
 
 L_FPT<-read.csv(file = "Detection_Rates_Low_FPT_LOC.csv")
 L_FPT$Level = "Contamination - Low"
