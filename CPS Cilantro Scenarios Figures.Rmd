@@ -161,20 +161,38 @@ Detection_Rates_Binded %>%
 
 Detection_Rates_Binded %>% 
   ggplot(aes(x = Cluster, y = Drates))+
-  geom_col(fill = "skyblue",color = "black")+
-  #scale_fill_manual(name = "", values = c("Pdetect" = "skyblue"))+
+  geom_col(aes(linetype = "solid"),fill = "skyblue",color = "black")+
   geom_point(aes( y = assay_rate, color = "Detection Rate Assay", fill = "Detection Rate Assay",shape = "Detection Rate Assay"), size =2,show_guide = T)+
   geom_line(aes( y = assay_rate, group=1,color = "Detection Rate Assay"))+
   geom_point(aes( y = samp_rate, fill = "Detection Rate Sample",color = "Detection Rate Sample",shape = "Detection Rate Sample", ), size =2)+
   geom_line(aes(y = samp_rate, group=1,color = "Detection Rate Sample"))+
-  labs(x = "Contamination Spread", y = "Overall Detection Rate")+
-  scale_color_manual(name = "", values = c("Detection Rate Sample" = "coral", "Detection Rate Assay" = "black"))+
-  scale_fill_manual(name = "", values = c("Detection Rate Sample" = "coral", "Detection Rate Assay" = "black"))+
-  scale_shape_manual(name = "", values = c("Detection Rate Sample" = 21, "Detection Rate Assay" = 22))+
+  scale_color_manual(name = "", values = c("Detection Rate Sample" = "coral", "Detection Rate Assay" = "black"), labels = c("Probability detection of assay\nif >0 oocysts in sample", "Probability of collecting >0\n oocysts in sample"))+
+  scale_fill_manual(name = "", values = c("Detection Rate Sample" = "coral", "Detection Rate Assay" = "black"),labels = c("Probability detection of assay\nif >0 oocysts in sample", "Probability of collecting >0\n oocysts in sample"))+
+  scale_shape_manual(name = "", values = c("Detection Rate Sample" = 21, "Detection Rate Assay" = 22),labels = c("Probability detection of assay\nif >0 oocysts in sample", "Probability of collecting >0\n oocysts in sample"))+
+  scale_linetype_manual(name = " ",values = 1, labels = c("Probability of detection \nsampling scheme")) +
   scale_x_discrete(labels = function(x) paste0(x, "%"))+
   theme_bw()+
   theme(legend.position="bottom")+
+  labs(x = "Contamination Spread", y = "Probability")+
   facet_grid(Level~Type)
+
+Detection_Rates_Binded %>% 
+  ggplot(aes(x = Cluster, y = Drates))+
+  geom_col(aes(fill = "Pdetect"),color = "black")+
+  geom_point(aes( y = assay_rate, color = "Detection Rate Assay",shape = "Detection Rate Assay"), size =2)+
+  geom_line(aes( y = assay_rate, group=1,color = "Detection Rate Assay"))+
+  geom_point(aes( y = samp_rate,color = "Detection Rate Sample",shape = "Detection Rate Sample", ), size =2)+
+  geom_line(aes(y = samp_rate, group=1,color = "Detection Rate Sample"))+
+  scale_color_manual(name = "", values = c("Detection Rate Sample" = "coral", "Detection Rate Assay" = "black"), labels = c("Assay probability of detection\nif >0 oocysts in sample", "Probability of collecting >0\n oocysts in sample"))+
+  scale_fill_manual(name = "", values = c("Pdetect" = "skyblue"),labels = c("Probability of detection \nsampling scheme"))+
+  scale_shape_manual(name = "", values = c("Detection Rate Sample" = 15, "Detection Rate Assay" = 16),labels = c("Assay probability of detection\nif >0 oocysts in sample", "Probability of collecting >0\n oocysts in sample"))+
+  scale_linetype_manual(name = " ",values = 1, labels = c("Probability of detection \nsampling scheme")) +
+  scale_x_discrete(labels = function(x) paste0(x, "%"))+
+  theme_bw()+
+  theme(legend.position="bottom")+
+  labs(x = "Contamination Spread", y = "Probability")+
+  facet_grid(Level~Type)
+
 
 ggsave("Detection_Rates.jpg", width =11, height = 5.5, units = "in", dpi = 300)
 
