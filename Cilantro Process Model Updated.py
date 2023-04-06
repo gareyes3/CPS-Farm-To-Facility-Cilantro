@@ -100,6 +100,30 @@ def Cilantro_Sampling_25g(df,Sample_Weight,N_25g_Samples,N_Grabs_Sample ,Plant_W
     return [df2, reject_YN,pdetect, Sampled_OO]
 
 
+#Creating the Field
+Field_Yield = 22_000 #lb
+Plant_Weight = 1 #lb
+Total_Plants = int(Field_Yield/Plant_Weight)
+Total_Plants_List = range(1,Total_Plants+1)
+
+Cilantro_df=pd.DataFrame({"Plant_ID": Total_Plants_List,
+                       "Weight": Plant_Weight,
+                       "Case_PH": 0,
+                       "Oo": 0,
+                       "Oo_BRej":"",
+                       "Location": 1,
+                       'PositiveSamples':0,
+                       "Rej_Acc" :"Acc"
+                  })
+
+Cilantro_df = field_cont_percetage2(df = Cilantro_df, 
+                                    percent_cont = 100, 
+                                    Hazard_lvl =200000,
+                                    No_Cont_Clusters = 1)
+
+
+
+
 def F_Rejection_Rule_C (df):
     df_field_1 =df.copy()
     Postives = sum(df_field_1['PositiveSamples'] >0)
@@ -1873,8 +1897,8 @@ get_dec_rate(df  = Scen_B1_H_PT4, Water_Produce_Both = "Produce")
 
 get_dec_rate(df  = Scen_B1_H_DWPT, Water_Produce_Both = "Both")
 get_dec_rate(df  = Scen_B1_H_WPT1, Water_Produce_Both = "Both")
-get_dec_rate(df  = Scen_B1_H_WPT2, Water_Produce_Both = "Both") #
-get_dec_rate(df  = Scen_B1_H_WPT3, Water_Produce_Both = "Both") #
+get_dec_rate(df  = Scen_B1_H_WPT2, Water_Produce_Both = "Both") 
+get_dec_rate(df  = Scen_B1_H_WPT3, Water_Produce_Both = "Both") 
 get_dec_rate(df  = Scen_B1_H_WPT4, Water_Produce_Both = "Both")
 
     #Baseline 1 - Low
@@ -1894,8 +1918,8 @@ get_dec_rate(df  = Scen_B1_L_PT4, Water_Produce_Both = "Produce")
 
 get_dec_rate(df  = Scen_B1_L_DWPT, Water_Produce_Both = "Both")
 get_dec_rate(df  = Scen_B1_L_WPT1, Water_Produce_Both = "Both")
-get_dec_rate(df  = Scen_B1_L_WPT2, Water_Produce_Both = "Both") #
-get_dec_rate(df  = Scen_B1_L_WPT3, Water_Produce_Both = "Both") #
+get_dec_rate(df  = Scen_B1_L_WPT2, Water_Produce_Both = "Both") 
+get_dec_rate(df  = Scen_B1_L_WPT3, Water_Produce_Both = "Both") 
 get_dec_rate(df  = Scen_B1_L_WPT4, Water_Produce_Both = "Both")
 
     #Baseline 2 - High
@@ -1914,10 +1938,10 @@ get_dec_rate(df  = Scen_B2_H_PT4, Water_Produce_Both = "Produce")
 
 
 get_dec_rate(df  = Scen_B2_H_DWPT, Water_Produce_Both = "Both")
-get_dec_rate(df  = Scen_B2_H_WPT1, Water_Produce_Both = "Both") #
+get_dec_rate(df  = Scen_B2_H_WPT1, Water_Produce_Both = "Both") 
 get_dec_rate(df  = Scen_B2_H_WPT2, Water_Produce_Both = "Both") 
 get_dec_rate(df  = Scen_B2_H_WPT3, Water_Produce_Both = "Both") 
-get_dec_rate(df  = Scen_B2_H_WPT4, Water_Produce_Both = "Both") #
+get_dec_rate(df  = Scen_B2_H_WPT4, Water_Produce_Both = "Both") 
 
     #Baseline 2 - Low
 get_dec_rate(df  = Scen_B2_L_DTP, Water_Produce_Both = "Produce")
