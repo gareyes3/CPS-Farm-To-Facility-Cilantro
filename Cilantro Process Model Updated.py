@@ -66,6 +66,7 @@ def Cilantro_Sampling_25g(df,Sample_Weight,N_25g_Samples,N_Grabs_Sample ,Plant_W
     Oo_list=df2.loc[:,"Oo"]#list of oocyst in the field by location, vectorization
     probs_detection = []
     sample_resuls =[]
+    sampled_oo_l = []
     for i in range(N_25g_Samples):
         Total_Oocyst_Grab = []
         Sample_Indeces = []
@@ -87,19 +88,21 @@ def Cilantro_Sampling_25g(df,Sample_Weight,N_25g_Samples,N_Grabs_Sample ,Plant_W
             sample_resuls.append(1)
             df2.loc[Sample_Indeces, 'PositiveSamples'] = df2.loc[Sample_Indeces, 'PositiveSamples'] + 1
         else: 
-            sample_resuls.append(0)        
+            sample_resuls.append(0)
+        sampled_oo_l.append(Sampled_OO)
+        samp_more_1_o = sum(sampled_oo_l)/N_25g_Samples
     if sum(sample_resuls)> 0:
         reject_YN = 1
     else:
-       reject_YN = 0
+        reject_YN = 0
         
     if len(probs_detection)>1:
         pdetect = 1-np.prod([1-i for i in probs_detection])
     else: 
         pdetect = probs_detection[0]
-    return [df2, reject_YN,pdetect, Sampled_OO]
+    return [df2, reject_YN, pdetect, samp_more_1_o]
 
-
+'''
 #Creating the Field
 Field_Yield = 22_000 #lb
 Plant_Weight = 1 #lb
@@ -117,12 +120,18 @@ Cilantro_df=pd.DataFrame({"Plant_ID": Total_Plants_List,
                   })
 
 Cilantro_df = field_cont_percetage2(df = Cilantro_df, 
-                                    percent_cont = 100, 
+                                    percent_cont = 10, 
                                     Hazard_lvl =200000,
                                     No_Cont_Clusters = 1)
 
 
-
+Cilantro_Sampling_25g(df = Cilantro_df,
+                      Sample_Weight = 25,
+                      N_25g_Samples = 100,
+                      N_Grabs_Sample =10,
+                      Plant_Weight = 1, 
+                      loaded_model = qPCR_Model )
+'''
 
 def F_Rejection_Rule_C (df):
     df_field_1 =df.copy()
@@ -251,7 +260,10 @@ def Process_Model(Days_per_season,
                   #Testing Options
                   Water_Sampling = 0,#1 is on 0 is off
                   Product_Sampling_PH = 0, #1 is on 0 is off
-                  Product_Testing_H = 0 ##1 is on 0 is off
+                  Product_Testing_H = 0, ##1 is on 0 is off
+                  #sampling
+                  N_Samples_Prod = 1,
+                  N_Grabs_Prod = 1
                   ):
     
     #Initial levels based on Input
@@ -364,8 +376,8 @@ def Process_Model(Days_per_season,
             if i in Product_Sampling_Days and Product_Sampling_PH == 1 :
                   Produce_test_results =Cilantro_Sampling_25g(df=Cilantro_df,
                                           Sample_Weight = Sample_Weight,
-                                          N_25g_Samples = N_25g_Samples,
-                                          N_Grabs_Sample = N_Grabs ,
+                                          N_25g_Samples = N_Samples_Prod,
+                                          N_Grabs_Sample = N_Grabs_Prod ,
                                           Plant_Weight = Plant_Weight, 
                                           loaded_model =  qPCR_Model)
               
@@ -381,8 +393,8 @@ def Process_Model(Days_per_season,
                 if Product_Testing_H  == 1:
                     Harvest_Test_Results =Cilantro_Sampling_25g(df=Cilantro_df,
                                           Sample_Weight = Sample_Weight,
-                                          N_25g_Samples = N_25g_Samples,
-                                          N_Grabs_Sample = N_Grabs ,
+                                          N_25g_Samples =N_Samples_Prod,
+                                          N_Grabs_Sample = N_Grabs_Prod ,
                                           Plant_Weight = Plant_Weight, 
                                           loaded_model =  qPCR_Model)
                     
@@ -2139,4 +2151,83 @@ Detection_Rates_Low_FPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-
 
 
 
+#Now Doing 10 samples of 25g
 
+#Propduct end of day
+det_rate_FPT_10s_L = []
+samp_rate_FPT_10s_L =[]
+assay_rate_FPT_10s_L = []
+for i in list_of_clusters :
+    x = Process_Model(Days_per_season = 45,
+                      Niterations= 10000,
+                      Cont_Scenario = 2,#Random Cont Event
+                      Testing_Scenario=2,#Sampling at given day
+                      #Contamination Information
+                      OO_per_L =0.6,
+                      #Water Testing Options
+                      Sampling_every_Days_Water = 1, #1 for sampling every day
+                      Sampling_every_Days_Product = 1, #as fault 
+                      #Testing Options
+                      Testing_Day_Water = [0], 
+                      Testing_Day_Product = [45],#testing water on day 1
+                      Per_Cont_Field = i,
+                      Water_Sampling = 0,
+                      Product_Sampling_PH = 1,
+                      Product_Testing_H = 0,
+                      #sampling
+                      N_Samples_Prod = 10,
+                      N_Grabs_Prod = 1,
+                      )
+    det_rate_FPT_10s_L.append(get_dec_rate(df= x , Water_Produce_Both= "Produce"))  
+    samp_rate_FPT_10s_L.append(Extracting_outputs_sample_prob(x)[0])
+    assay_rate_FPT_10s_L.append(Extracting_outputs_sample_prob(x)[1])
+
+Detection_Rates_Low_10s_FPT = [item for items in det_rate_FPT_10s_L for item in items]
+Detection_Rates_Low_10s_FPT = pd.DataFrame({"Drates": Detection_Rates_Low_10s_FPT,
+                                          "Cluster": list_of_clusters,
+                                          "samp_rate":samp_rate_FPT_10s_L,
+                                          "assay_rate":assay_rate_FPT_10s_L})
+
+
+Detection_Rates_Low_10s_FPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_Low_10s_FPT_LOC.csv")
+
+
+#Now Doing 10 samples of 25g
+
+#Propduct end of day
+det_rate_FPT_10s_H = []
+samp_rate_FPT_10s_H =[]
+assay_rate_FPT_10s_H = []
+for i in list_of_clusters :
+    x = Process_Model(Days_per_season = 45,
+                      Niterations= 10000,
+                      Cont_Scenario = 2,#Random Cont Event
+                      Testing_Scenario=2,#Sampling at given day
+                      #Contamination Information
+                      OO_per_L =20,
+                      #Water Testing Options
+                      Sampling_every_Days_Water = 1, #1 for sampling every day
+                      Sampling_every_Days_Product = 1, #as fault 
+                      #Testing Options
+                      Testing_Day_Water = [0], 
+                      Testing_Day_Product = [45],#testing water on day 1
+                      Per_Cont_Field = i,
+                      Water_Sampling = 0,
+                      Product_Sampling_PH = 1,
+                      Product_Testing_H = 0,
+                      #sampling
+                      N_Samples_Prod = 10,
+                      N_Grabs_Prod = 1
+                      )
+    det_rate_FPT_10s_H.append(get_dec_rate(df= x , Water_Produce_Both= "Produce"))  
+    samp_rate_FPT_10s_H.append(Extracting_outputs_sample_prob(x)[0])
+    assay_rate_FPT_10s_H.append(Extracting_outputs_sample_prob(x)[1])
+
+Detection_Rates_High_10s_FPT = [item for items in det_rate_FPT_10s_H for item in items]
+Detection_Rates_High_10s_FPT = pd.DataFrame({"Drates": Detection_Rates_High_10s_FPT,
+                                          "Cluster": list_of_clusters,
+                                          "samp_rate":samp_rate_FPT_10s_H,
+                                          "assay_rate":assay_rate_FPT_10s_H})
+
+
+Detection_Rates_High_10s_FPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_High_10s_FPT_LOC.csv")
