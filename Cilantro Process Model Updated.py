@@ -2231,3 +2231,88 @@ Detection_Rates_High_10s_FPT = pd.DataFrame({"Drates": Detection_Rates_High_10s_
 
 
 Detection_Rates_High_10s_FPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_High_10s_FPT_LOC.csv")
+
+
+
+#Now Doing 10 samples of 25g
+
+#Propduct end of day
+det_rate_FPT_45s_H = []
+samp_rate_FPT_45s_H =[]
+assay_rate_FPT_45s_H = []
+for i in list_of_clusters :
+    x = Process_Model(Days_per_season = 45,
+                      Niterations= 10000,
+                      Cont_Scenario = 2,#Random Cont Event
+                      Testing_Scenario=2,#Sampling at given day
+                      #Contamination Information
+                      OO_per_L =20,
+                      #Water Testing Options
+                      Sampling_every_Days_Water = 1, #1 for sampling every day
+                      Sampling_every_Days_Product = 1, #as fault 
+                      #Testing Options
+                      Testing_Day_Water = [0], 
+                      Testing_Day_Product = [45],#testing water on day 1
+                      Per_Cont_Field = i,
+                      Water_Sampling = 0,
+                      Product_Sampling_PH = 1,
+                      Product_Testing_H = 0,
+                      #sampling
+                      N_Samples_Prod = 10,
+                      N_Grabs_Prod = 1
+                      )
+    det_rate_FPT_45s_H.append(get_dec_rate(df= x , Water_Produce_Both= "Produce"))  
+    samp_rate_FPT_45s_H.append(Extracting_outputs_sample_prob(x)[0])
+    assay_rate_FPT_45s_H.append(Extracting_outputs_sample_prob(x)[1])
+
+Detection_Rates_High_45s_FPT = [item for items in det_rate_FPT_45s_H for item in items]
+Detection_Rates_High_45s_FPT = pd.DataFrame({"Drates": Detection_Rates_High_45s_FPT,
+                                          "Cluster": list_of_clusters,
+                                          "samp_rate":samp_rate_FPT_45s_H,
+                                          "assay_rate":assay_rate_FPT_45s_H})
+
+
+Detection_Rates_High_45s_FPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_High_45s_FPT_LOC.csv")
+
+
+
+#Now Doing 10 samples of 25g
+
+#Propduct end of day
+det_rate_FPT_45s_L = []
+samp_rate_FPT_45s_L =[]
+assay_rate_FPT_45s_L = []
+for i in list_of_clusters :
+    x = Process_Model(Days_per_season = 45,
+                      Niterations= 10000,
+                      Cont_Scenario = 2,#Random Cont Event
+                      Testing_Scenario=2,#Sampling at given day
+                      #Contamination Information
+                      OO_per_L =0.6,
+                      #Water Testing Options
+                      Sampling_every_Days_Water = 1, #1 for sampling every day
+                      Sampling_every_Days_Product = 1, #as fault 
+                      #Testing Options
+                      Testing_Day_Water = [0], 
+                      Testing_Day_Product = [45],#testing water on day 1
+                      Per_Cont_Field = i,
+                      Water_Sampling = 0,
+                      Product_Sampling_PH = 1,
+                      Product_Testing_L = 0,
+                      #sampling
+                      N_Samples_Prod = 10,
+                      N_Grabs_Prod = 1
+                      )
+    det_rate_FPT_45s_L.append(get_dec_rate(df= x , Water_Produce_Both= "Produce"))  
+    samp_rate_FPT_45s_L.append(Extracting_outputs_sample_prob(x)[0])
+    assay_rate_FPT_45s_L.append(Extracting_outputs_sample_prob(x)[1])
+
+Detection_Rates_Low_45s_FPT = [item for items in det_rate_FPT_45s_L for item in items]
+Detection_Rates_Low_45s_FPT = pd.DataFrame({"Drates": Detection_Rates_Low_45s_FPT,
+                                          "Cluster": list_of_clusters,
+                                          "samp_rate":samp_rate_FPT_45s_L,
+                                          "assay_rate":assay_rate_FPT_45s_L})
+
+
+Detection_Rates_Low_45s_FPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_Low_45s_FPT_LOC.csv")
+
