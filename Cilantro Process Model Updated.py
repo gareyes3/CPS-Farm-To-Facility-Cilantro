@@ -2258,7 +2258,7 @@ for i in list_of_clusters :
                       Product_Sampling_PH = 1,
                       Product_Testing_H = 0,
                       #sampling
-                      N_Samples_Prod = 10,
+                      N_Samples_Prod = 45,
                       N_Grabs_Prod = 1
                       )
     det_rate_FPT_45s_H.append(get_dec_rate(df= x , Water_Produce_Both= "Produce"))  
@@ -2272,7 +2272,7 @@ Detection_Rates_High_45s_FPT = pd.DataFrame({"Drates": Detection_Rates_High_45s_
                                           "assay_rate":assay_rate_FPT_45s_H})
 
 
-Detection_Rates_High_45s_FPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_High_45s_FPT_LOC.csv")
+Detection_Rates_High_45s_FPT.to_csv("C://Users/Gustavo Reyes/Documents/GitHubFiles/CPS-Farm-To-Facility-Cilantro/Detection_Rates_High_45s_FPT_LOC.csv")
 
 
 
@@ -2298,9 +2298,9 @@ for i in list_of_clusters :
                       Per_Cont_Field = i,
                       Water_Sampling = 0,
                       Product_Sampling_PH = 1,
-                      Product_Testing_L = 0,
+                      Product_Testing_H = 0,
                       #sampling
-                      N_Samples_Prod = 10,
+                      N_Samples_Prod = 45,
                       N_Grabs_Prod = 1
                       )
     det_rate_FPT_45s_L.append(get_dec_rate(df= x , Water_Produce_Both= "Produce"))  
@@ -2314,5 +2314,5 @@ Detection_Rates_Low_45s_FPT = pd.DataFrame({"Drates": Detection_Rates_Low_45s_FP
                                           "assay_rate":assay_rate_FPT_45s_L})
 
 
-Detection_Rates_Low_45s_FPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_Low_45s_FPT_LOC.csv")
+Detection_Rates_Low_45s_FPT.to_csv("C://Users//Gustavo Reyes/Documents/GitHubFiles/CPS-Farm-To-Facility-Cilantro/Detection_Rates_Low_45s_FPT_LOC.csv")
 
