@@ -123,6 +123,10 @@ H_FPT_10s<-read.csv(file = "Detection_Rates_High_10s_FPT_LOC.csv")
 H_FPT_10s$Level = "Contamination - High"
 H_FPT_10s$Type = "Produce Testing 10 samples - End"
 
+H_FPT_45s<-read.csv(file = "Detection_Rates_High_45s_FPT_LOC.csv")
+H_FPT_45s$Level = "Contamination - High"
+H_FPT_45s$Type = "Produce Testing 45 samples - End"
+
 L_DPT<-read.csv(file = "Detection_Rates_Low_DPT_LOC.csv")
 L_DPT$Level = "Contamination - Low"
 L_DPT$Type = "Produce Testing - Daily"
@@ -135,8 +139,12 @@ L_FPT_10s<-read.csv(file = "Detection_Rates_Low_10s_FPT_LOC.csv")
 L_FPT_10s$Level = "Contamination - Low"
 L_FPT_10s$Type = "Produce Testing 10 samples - End"
 
+L_FPT_45s<-read.csv(file = "Detection_Rates_Low_45s_FPT_LOC.csv")
+L_FPT_45s$Level = "Contamination - Low"
+L_FPT_45s$Type = "Produce Testing 45 samples - End"
 
-Detection_Rates_Binded = rbind(H_DPT,H_FPT,L_DPT,L_FPT,L_FPT_10s,H_FPT_10s)
+
+Detection_Rates_Binded = rbind(H_DPT,H_FPT,L_DPT,L_FPT,L_FPT_10s,H_FPT_10s,L_FPT_45s,H_FPT_45s)
 Detection_Rates_Binded<-Detection_Rates_Binded[,-1]
 Detection_Rates_Binded$Cluster<-round(Detection_Rates_Binded$Cluster,1)
 Detection_Rates_Binded$Cluster<-as.factor(Detection_Rates_Binded$Cluster)
@@ -165,9 +173,9 @@ Detection_Rates_Binded %>%
   geom_line(aes( y = assay_rate, group=1,color = "Detection Rate Assay"))+
   geom_point(aes( y = samp_rate,color = "Detection Rate Sample",shape = "Detection Rate Sample", ), size =2)+
   geom_line(aes(y = samp_rate, group=1,color = "Detection Rate Sample"))+
-  scale_color_manual(name = "", values = c("Detection Rate Sample" = "coral", "Detection Rate Assay" = "black"), labels = c("Assay probability of detection\nif >0 oocysts in sample", "Probability of collecting >0\n oocysts in sample"))+
+  scale_color_manual(name = "", values = c("Detection Rate Sample" = "coral", "Detection Rate Assay" = "black"), labels = c("Assay probability of detection\nif >0 oocysts in sample(s)", "Probability of collecting >0\n oocysts in sample"))+
   scale_fill_manual(name = "", values = c("Pdetect" = "skyblue"),labels = c("Probability of detection \nsampling scheme"))+
-  scale_shape_manual(name = "", values = c("Detection Rate Sample" = 15, "Detection Rate Assay" = 16),labels = c("Assay probability of detection\nif >0 oocysts in sample", "Probability of collecting >0\n oocysts in sample"))+
+  scale_shape_manual(name = "", values = c("Detection Rate Sample" = 15, "Detection Rate Assay" = 16),labels = c("Assay probability of detection\nif >0 oocysts in sample(s)", "Probability of collecting >0\n oocysts in sample"))+
   scale_linetype_manual(name = " ",values = 1, labels = c("Probability of detection \nsampling scheme")) +
   scale_x_discrete(labels = function(x) paste0(x, "%"))+
   theme_bw()+
@@ -177,7 +185,7 @@ Detection_Rates_Binded %>%
   facet_grid(Level~Type)
 
 
-ggsave("Detection_Rates.jpg", width =8, height = 6, units = "in", dpi = 300)
+ggsave("Detection_Rates-2.0.jpg", width =9, height = 6, units = "in", dpi = 300)
 
 ```
 
