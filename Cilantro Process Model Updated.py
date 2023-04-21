@@ -208,6 +208,8 @@ Total_L_Season = 40.46*40.46*(0.0254*Water_Irrigation_In)*1000 # one acre 40.46m
 Days_per_season = 45 #days
 L_water_day = Total_L_Season/Days_per_season
 
+11088*20
+
 #Contamination
 #percentage of field contaminated
 #Per_Cont_Field = 100
