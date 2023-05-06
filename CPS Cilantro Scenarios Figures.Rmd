@@ -109,19 +109,19 @@ ggsave("Combined-Updated.jpg", width =7, height = 6, units = "in", dpi = 300)
 
 
 ```{r}
-BS2 <- read.csv(file = "Baseline3-Supplemental.csv", header = TRUE )
+BS3 <- read.csv(file = "Baseline3-Supplemental.csv", header = TRUE )
 
-Order<-(BS2$Scenarios2[1:15])
+Order<-(BS3$Scenarios2[1:15])
 
 
-BS2$Scenarios <- as.factor(BS2$Scenarios)
-BS2$Scenarios2 <- as.factor(BS2$Scenarios2)
+BS3$Scenarios <- as.factor(BS3$Scenarios)
+BS3$Scenarios2 <- as.factor(BS3$Scenarios2)
 
-BS2$Relative_Efficacy <-as.numeric(BS2$Detection_Rate)
+BS3$Relative_Efficacy <-as.numeric(BS3$Detection_Rate)
 
-BS2
+BS3
 
-Fig2 <- ggplot(BS2, aes(x=factor(Scenarios2, levels = rev(Order)), y=Relative_Efficacy,fill = Test_Type)) + 
+Fig2 <- ggplot(BS3, aes(x=factor(Scenarios2, levels = rev(Order)), y=Relative_Efficacy,fill = Test_Type)) + 
   geom_bar(position = "dodge", stat = "identity") + 
   labs(title="Water is always contaminated, irrigation 4 times per season\n total 6 inches irrigated in 5,000 lb acre", y="Overall Detection Rate", x="Sampling Scenario")+
   scale_fill_discrete(name = "Contamination \nLevel")+#(values=c("#FF3366","#99CCFF")) +
@@ -137,6 +137,63 @@ Fig2 <- ggplot(BS2, aes(x=factor(Scenarios2, levels = rev(Order)), y=Relative_Ef
 Fig2
 
 ```
+
+
+
+```{r}
+BS4 <- read.csv(file = "Baseline4-Supplemental.csv", header = TRUE )
+
+Order<-(BS4$Scenarios2[1:15])
+
+
+BS4$Scenarios <- as.factor(BS4$Scenarios)
+BS4$Scenarios2 <- as.factor(BS4$Scenarios2)
+
+BS4$Relative_Efficacy <-as.numeric(BS4$Detection_Rate)
+
+BS4
+
+Fig2 <- ggplot(BS4, aes(x=factor(Scenarios2, levels = rev(Order)), y=Relative_Efficacy,fill = Test_Type)) + 
+  geom_bar(position = "dodge", stat = "identity") + 
+  labs(title="Water is always contaminated, irrigation 4 times per season\n total 6 inches irrigated in 5,000 lb acre", y="Overall Detection Rate", x="Sampling Scenario")+
+  scale_fill_discrete(name = "Contamination \nLevel")+#(values=c("#FF3366","#99CCFF")) +
+  #scale_y_continuous(labels = scales::percent)+
+  theme_bw()+
+  theme(plot.title = element_text(hjust = 0.5))+
+  #theme(axis.text.x = element_text(angle=45, vjust=1, hjust=1))+
+  coord_flip()+
+  theme(axis.text.x=element_text(size =12), axis.text.y=element_text(size =12),axis.title = element_text(size = 12))+
+  scale_fill_manual(name = "Test Type:", values = c("Produce" = "darkgreen", "Water" = "darkblue", "Both" = "steelblue"))+
+  #theme(legend.position=c(0.75, 0.70))+
+  facet_grid(~Contamination)
+Fig2
+
+```
+
+```{r}
+Baseline_Binded<-rbind(BS3, BS4)
+
+Baseline_Binded %>% 
+  ggplot(aes(y= factor(Scenarios2, levels = rev(Order)), x = Detection_Rate, fill = Test_Type, alpha = Contamination))+
+  geom_col(color= "black")+
+  facet_grid(Type~Contamination, labeller = as_labeller(c("Daily Contamination " = "Daily Contamination" , 
+                                                 "Random Contamination - Once" = "Random Contamintion\n Once per growing cycle",
+                                                 "High" = "Contamination-High",
+                                                 "Low" = "Contamination - Low")))+
+  theme_bw()+
+  theme(legend.position="bottom")+ 
+  scale_fill_discrete(name = "Test Type")+
+  scale_alpha_discrete(range = c(1, 0.8), )+
+  scale_fill_hue()+
+  scale_fill_manual(name = "Test Type:", values = c("Produce" = "darkgreen", "Water" = "darkblue", "Both" = "steelblue"))+
+  labs(title="Unintentional irrigation with contaminated water\n 5k lb yield, irrigation 4 times per season\n for total of 6 inches", x="Overall Detection Rate", y="Sampling Scenario")+
+  guides(alpha = FALSE)
+
+ggsave("Suplemental Combined-Updated.jpg", width =7, height = 6, units = "in", dpi = 300)
+```
+
+
+
 
 
 ```{r}
