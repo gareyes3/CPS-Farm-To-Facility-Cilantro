@@ -176,14 +176,14 @@ def Func_Water_Sampling (total_oocyst_bw, bw_volume, sample_size_volume,total_sa
     return [reject_YN,pdetect]
 
 #%% Loading PCR Detection Models
-filename_qPCR = 'C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/logistic_AW_Testing_qPCR.sav'
-#filename_qPCR = 'C://Users/Gustavo Reyes/Documents/GitHubFiles/CPS-Farm-To-Facility-Cilantro/logistic_AW_Testing_qPCR.sav'
+#filename_qPCR = 'C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/logistic_AW_Testing_qPCR.sav'
+filename_qPCR = 'C://Users/Gustavo Reyes/Documents/GitHubFiles/CPS-Farm-To-Facility-Cilantro/logistic_AW_Testing_qPCR.sav'
 
 qPCR_Model_AW = pickle.load(open(filename_qPCR, 'rb'))
 qPCR_Model_AW.predict_proba(np.array([20]).reshape(-1,1))[0][1] #from logistic
 
-filename_qPCR = 'C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/logistic_Prod_Test_qPCR_FDA.sav'
-#filename_qPCR = 'C://Users/Gustavo Reyes/Documents/GitHubFiles/CPS-Farm-To-Facility-Cilantro/logistic_Prod_Test_qPCR_FDA.sav'
+#filename_qPCR = 'C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/logistic_Prod_Test_qPCR_FDA.sav'
+filename_qPCR = 'C://Users/Gustavo Reyes/Documents/GitHubFiles/CPS-Farm-To-Facility-Cilantro/logistic_Prod_Test_qPCR_FDA.sav'
 
 qPCR_Model = pickle.load(open(filename_qPCR, 'rb'))
 
@@ -2573,9 +2573,9 @@ N_Grabs = 1
 #%%
 
 #B1_Daily testing water (DTW) - Low
-Scen_B1_L_DTW = Process_Model_Extra(
+Scen_B31_L_DTW = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=1,#every day sampling
@@ -2593,9 +2593,9 @@ Scen_B1_L_DTW = Process_Model_Extra(
                   )
 
 #B1_Daily testing water (DTW) - High
-Scen_B1_H_DTW = Process_Model_Extra(
+Scen_B31_H_DTW = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=1,#every day sampling
@@ -2614,9 +2614,9 @@ Scen_B1_H_DTW = Process_Model_Extra(
 
 
 #B1_Daily testing product (DTP) - Low
-Scen_B1_L_DTP = Process_Model_Extra(
+Scen_B31_L_DTP = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=1,#every day sampling
@@ -2633,9 +2633,9 @@ Scen_B1_L_DTP = Process_Model_Extra(
                   Product_Testing_H = 0
                   )
 #B1_Daily testing product (DTP) - High
-Scen_B1_H_DTP = Process_Model_Extra(
+Scen_B31_H_DTP = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=1,#every day sampling
@@ -2653,9 +2653,9 @@ Scen_B1_H_DTP = Process_Model_Extra(
                   )
 
 #B1_Water testing 1 time per season at the end of the season - Low
-Scen_B1_L_WT1 = Process_Model_Extra(
+Scen_B31_L_WT1 = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=2,#Testing only in given day
@@ -2673,9 +2673,9 @@ Scen_B1_L_WT1 = Process_Model_Extra(
                   )
 
 #B1_Water testing 1 time per season at the end of the season - High
-Scen_B1_H_WT1 = Process_Model_Extra(
+Scen_B31_H_WT1 = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=2,#Testing only in given day
@@ -2693,9 +2693,9 @@ Scen_B1_H_WT1 = Process_Model_Extra(
                   )
 
 #B1_Water testing 1 time per season at the end of the season - Low
-Scen_B1_L_WT4 = Process_Model_Extra(
+Scen_B31_L_WT4 = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=2,#Testing only in given day
@@ -2713,9 +2713,9 @@ Scen_B1_L_WT4 = Process_Model_Extra(
                   )
 
 #B1_Water testing 1 time per season at the end of the season - High
-Scen_B1_H_WT4 = Process_Model_Extra(
+Scen_B31_H_WT4 = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=2,#Testing only in given day
@@ -2733,9 +2733,9 @@ Scen_B1_H_WT4 = Process_Model_Extra(
                   )
 
 #B1_Water testing 2 times per season (end and mid) - Low
-Scen_B1_L_WT2 = Process_Model_Extra(
+Scen_B31_L_WT2 = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=2,#Testing only in given day
@@ -2752,9 +2752,9 @@ Scen_B1_L_WT2 = Process_Model_Extra(
                   Product_Testing_H = 0
                   )
 #B1_Water testing 2 times per season (end and mid) - High
-Scen_B1_H_WT2 = Process_Model_Extra(
+Scen_B31_H_WT2 = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=2,#Testing only in given day
@@ -2772,9 +2772,9 @@ Scen_B1_H_WT2 = Process_Model_Extra(
                   )
 
 #B1_Water testing 3 times per season (end,mid,start) - Low
-Scen_B1_L_WT3 = Process_Model_Extra(
+Scen_B31_L_WT3 = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=2,#Testing only in given day
@@ -2792,9 +2792,9 @@ Scen_B1_L_WT3 = Process_Model_Extra(
                   )
 
 #B1_Water testing 3 times per season (end,mid,start) - High
-Scen_B1_H_WT3 = Process_Model_Extra(
+Scen_B31_H_WT3 = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=2,#Testing only in given day
@@ -2812,9 +2812,9 @@ Scen_B1_H_WT3 = Process_Model_Extra(
                   )
 
 #B1_product testing 1 time per season at the end of the season - Low
-Scen_B1_L_PT1 = Process_Model_Extra(
+Scen_B31_L_PT1 = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=2,#Testing only in given day
@@ -2832,9 +2832,9 @@ Scen_B1_L_PT1 = Process_Model_Extra(
                   )
 
 #B1_product testing 1 time per season at the end of the season - High
-Scen_B1_H_PT1 = Process_Model_Extra(
+Scen_B31_H_PT1 = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=2,#Testing only in given day
@@ -2852,9 +2852,9 @@ Scen_B1_H_PT1 = Process_Model_Extra(
                   )
 
 #B1_product testing 1 time per season at the end of the season - Low
-Scen_B1_L_PT4 = Process_Model_Extra(
+Scen_B31_L_PT4 = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=2,#Testing only in given day
@@ -2872,9 +2872,9 @@ Scen_B1_L_PT4 = Process_Model_Extra(
                   )
 
 #B1_product testing 1 time per season at the end of the season - High
-Scen_B1_H_PT4 = Process_Model_Extra(
+Scen_B31_H_PT4 = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=2,#Testing only in given day
@@ -2892,9 +2892,9 @@ Scen_B1_H_PT4 = Process_Model_Extra(
                   )
 
 #B1_product testing 2 times per season end and mid season - Low
-Scen_B1_L_PT2 = Process_Model_Extra(
+Scen_B31_L_PT2 = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=2,#Testing only in given day
@@ -2911,9 +2911,9 @@ Scen_B1_L_PT2 = Process_Model_Extra(
                   Product_Testing_H = 0
                   )
 #B1_product testing 2 times per season end and mid season - High
-Scen_B1_H_PT2 = Process_Model_Extra(
+Scen_B31_H_PT2 = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=2,#Testing only in given day
@@ -2931,9 +2931,9 @@ Scen_B1_H_PT2 = Process_Model_Extra(
                   )
 
 #B1_product testing 3 times per season (1 start, 1 end of the season) - Low
-Scen_B1_L_PT3 = Process_Model_Extra(
+Scen_B31_L_PT3 = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=2,#Testing only in given day
@@ -2951,9 +2951,9 @@ Scen_B1_L_PT3 = Process_Model_Extra(
                   )
 
 #B1_product testing 3 times per season (1 start, 1 end of the season) - High
-Scen_B1_H_PT3 = Process_Model_Extra(
+Scen_B31_H_PT3 = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=2,#Testing only in given day
@@ -2971,9 +2971,9 @@ Scen_B1_H_PT3 = Process_Model_Extra(
                   )
 
 ###############################
-Scen_B1_H_DWPT = Process_Model_Extra(
+Scen_B31_H_DWPT = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=1,#Testing only in given day
@@ -2990,9 +2990,9 @@ Scen_B1_H_DWPT = Process_Model_Extra(
                   Product_Testing_H = 0
                   )
 
-Scen_B1_L_DWPT =Process_Model_Extra(
+Scen_B31_L_DWPT =Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=1,#Testing only in given day
@@ -3011,9 +3011,9 @@ Scen_B1_L_DWPT =Process_Model_Extra(
 
 
 #B1_Daily testing product (DTP) - High
-Scen_B1_H_WPT1 = Process_Model_Extra(
+Scen_B31_H_WPT1 = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=2,#every day sampling
@@ -3031,9 +3031,9 @@ Scen_B1_H_WPT1 = Process_Model_Extra(
                   )
 
 #B1_Water testing 1 time per season at the start of the season - Low
-Scen_B1_L_WPT1 = Process_Model_Extra(
+Scen_B31_L_WPT1 = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=2,#Testing only in given day
@@ -3051,9 +3051,9 @@ Scen_B1_L_WPT1 = Process_Model_Extra(
                   )
 
 
-Scen_B1_H_WPT4 = Process_Model_Extra(
+Scen_B31_H_WPT4 = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=2,#Testing only in given day
@@ -3070,9 +3070,9 @@ Scen_B1_H_WPT4 = Process_Model_Extra(
                   Product_Testing_H = 0
                   )
 
-Scen_B1_L_WPT4 = Process_Model_Extra(
+Scen_B31_L_WPT4 = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=2,#Testing only in given day
@@ -3090,9 +3090,9 @@ Scen_B1_L_WPT4 = Process_Model_Extra(
                   )
 #----
 #B1_Water testing 1 time per season at the start of the season - High
-Scen_B1_H_WPT2 = Process_Model_Extra(
+Scen_B31_H_WPT2 = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=2,#Testing only in given day
@@ -3110,9 +3110,9 @@ Scen_B1_H_WPT2 = Process_Model_Extra(
                   )
 
 #B1_Water testing 2 times per season (1 start, 1 end of the season) - Low
-Scen_B1_L_WPT2 = Process_Model_Extra(
+Scen_B31_L_WPT2 = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=2,#Testing only in given day
@@ -3129,9 +3129,9 @@ Scen_B1_L_WPT2 = Process_Model_Extra(
                   Product_Testing_H = 0
                   )
 #B1_Water testing 2 times per season (1 start, 1 end of the season) - High
-Scen_B1_H_WPT3 = Process_Model_Extra(
+Scen_B31_H_WPT3 = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
                   Testing_Scenario=2,#Testing only in given day
@@ -3149,11 +3149,610 @@ Scen_B1_H_WPT3 = Process_Model_Extra(
                   )
 
 #B1_Water testing 3 times per season (1 start, 1 end of the season) - Low
-Scen_B1_L_WPT3 = Process_Model_Extra(
+Scen_B31_L_WPT3 = Process_Model_Extra(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Custom_Irrigation_Days = 4,
                   Cont_Scenario = 31,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=2,#Testing only in given day
+                  #Contamination Information
+                  OO_per_L =0.6,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #leave as 1 defaul
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = [1,22,45], #testing water on day 1
+                  Testing_Day_Product = [1,22,45],
+                  Water_Sampling = 1,#now water testing is on
+                  Product_Sampling_PH = 1, 
+                  Product_Testing_H = 0
+                  )
+
+##SEcond SCen
+
+
+#B1_Daily testing water (DTW) - Low
+Scen_B32_L_DTW = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=1,#every day sampling
+                  #Contamination Information
+                  OO_per_L =0.6,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as fault 
+                  #Testing Options
+                  Testing_Day_Water = [0],
+                  Testing_Day_Product = [0],
+                  Water_Sampling = 1,
+                  Product_Sampling_PH = 0,
+                  Product_Testing_H = 0
+                  )
+
+#B1_Daily testing water (DTW) - High
+Scen_B32_H_DTW = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=1,#every day sampling
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as fault 
+                  #Testing Options
+                  Testing_Day_Water = [0],
+                  Testing_Day_Product = [0],
+                  Water_Sampling = 1,
+                  Product_Sampling_PH = 0,
+                  Product_Testing_H = 0
+                  )
+
+
+#B1_Daily testing product (DTP) - Low
+Scen_B32_L_DTP = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=1,#every day sampling
+                  #Contamination Information
+                  OO_per_L =0.6,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = [0],
+                  Testing_Day_Product = [0],
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1, #now product testing is on
+                  Product_Testing_H = 0
+                  )
+#B1_Daily testing product (DTP) - High
+Scen_B32_H_DTP = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=1,#every day sampling
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = [0],
+                  Testing_Day_Product = [0],
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1, #now product testing is on
+                  Product_Testing_H = 0
+                  )
+
+#B1_Water testing 1 time per season at the end of the season - Low
+Scen_B32_L_WT1 = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=2,#Testing only in given day
+                  #Contamination Information
+                  OO_per_L =0.6,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #leave as 1 defaul
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = [45], #testing water on day 1
+                  Testing_Day_Product = [0],
+                  Water_Sampling = 1,#now water testing is on
+                  Product_Sampling_PH = 0, 
+                  Product_Testing_H = 0
+                  )
+
+#B1_Water testing 1 time per season at the end of the season - High
+Scen_B32_H_WT1 = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=2,#Testing only in given day
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #leave as 1 defaul
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = [45], #testing water on day 1
+                  Testing_Day_Product = [0],
+                  Water_Sampling = 1,#now water testing is on
+                  Product_Sampling_PH = 0, 
+                  Product_Testing_H = 0
+                  )
+
+#B1_Water testing 1 time per season at the end of the season - Low
+Scen_B32_L_WT4 = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=2,#Testing only in given day
+                  #Contamination Information
+                  OO_per_L =0.6,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #leave as 1 defaul
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = [1], #testing water on day 1
+                  Testing_Day_Product = [0],
+                  Water_Sampling = 1,#now water testing is on
+                  Product_Sampling_PH = 0, 
+                  Product_Testing_H = 0
+                  )
+
+#B1_Water testing 1 time per season at the end of the season - High
+Scen_B32_H_WT4 = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=2,#Testing only in given day
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #leave as 1 defaul
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = [1], #testing water on day 1
+                  Testing_Day_Product = [0],
+                  Water_Sampling = 1,#now water testing is on
+                  Product_Sampling_PH = 0, 
+                  Product_Testing_H = 0
+                  )
+
+#B1_Water testing 2 times per season (end and mid) - Low
+Scen_B32_L_WT2 = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=2,#Testing only in given day
+                  #Contamination Information
+                  OO_per_L =0.6,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #leave as 1 defaul
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = [1,45], #testing water on day 1
+                  Testing_Day_Product = [0],
+                  Water_Sampling = 1,#now water testing is on
+                  Product_Sampling_PH = 0, 
+                  Product_Testing_H = 0
+                  )
+#B1_Water testing 2 times per season (end and mid) - High
+Scen_B32_H_WT2 = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=2,#Testing only in given day
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #leave as 1 defaul
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = [1,45], #testing water on day 1
+                  Testing_Day_Product = [0],
+                  Water_Sampling = 1,#now water testing is on
+                  Product_Sampling_PH = 0, 
+                  Product_Testing_H = 0
+                  )
+
+#B1_Water testing 3 times per season (end,mid,start) - Low
+Scen_B32_L_WT3 = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=2,#Testing only in given day
+                  #Contamination Information
+                  OO_per_L =0.6,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #leave as 1 defaul
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = [1,22,45], #testing water on day 1
+                  Testing_Day_Product = [0],
+                  Water_Sampling = 1,#now water testing is on
+                  Product_Sampling_PH = 0, 
+                  Product_Testing_H = 0
+                  )
+
+#B1_Water testing 3 times per season (end,mid,start) - High
+Scen_B32_H_WT3 = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=2,#Testing only in given day
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #leave as 1 defaul
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = [1,22,45], #testing water on day 1
+                  Testing_Day_Product = [0],
+                  Water_Sampling = 1,#now water testing is on
+                  Product_Sampling_PH = 0, 
+                  Product_Testing_H = 0
+                  )
+
+#B1_product testing 1 time per season at the end of the season - Low
+Scen_B32_L_PT1 = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=2,#Testing only in given day
+                  #Contamination Information
+                  OO_per_L =0.6,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #leave as 1 defaul
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = [0], #testing water on day 1
+                  Testing_Day_Product = [45],
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1, 
+                  Product_Testing_H = 0
+                  )
+
+#B1_product testing 1 time per season at the end of the season - High
+Scen_B32_H_PT1 = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=2,#Testing only in given day
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #leave as 1 defaul
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [45],
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1, 
+                  Product_Testing_H = 0
+                  )
+
+#B1_product testing 1 time per season at the end of the season - Low
+Scen_B32_L_PT4 = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=2,#Testing only in given day
+                  #Contamination Information
+                  OO_per_L =0.6,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #leave as 1 defaul
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = [0], #testing water on day 1
+                  Testing_Day_Product = [1],
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1, 
+                  Product_Testing_H = 0
+                  )
+
+#B1_product testing 1 time per season at the end of the season - High
+Scen_B32_H_PT4 = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=2,#Testing only in given day
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #leave as 1 defaul
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [1],
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1, 
+                  Product_Testing_H = 0
+                  )
+
+#B1_product testing 2 times per season end and mid season - Low
+Scen_B32_L_PT2 = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=2,#Testing only in given day
+                  #Contamination Information
+                  OO_per_L =0.6,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #leave as 1 defaul
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [1,45],
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1, 
+                  Product_Testing_H = 0
+                  )
+#B1_product testing 2 times per season end and mid season - High
+Scen_B32_H_PT2 = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=2,#Testing only in given day
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #leave as 1 defaul
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [1,45],
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1, 
+                  Product_Testing_H = 0
+                  )
+
+#B1_product testing 3 times per season (1 start, 1 end of the season) - Low
+Scen_B32_L_PT3 = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=2,#Testing only in given day
+                  #Contamination Information
+                  OO_per_L =0.6,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #leave as 1 defaul
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = [0], #testing water on day 1
+                  Testing_Day_Product = [1,22,45],
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1, 
+                  Product_Testing_H = 0
+                  )
+
+#B1_product testing 3 times per season (1 start, 1 end of the season) - High
+Scen_B32_H_PT3 = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=2,#Testing only in given day
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #leave as 1 defaul
+                  Sampling_every_Days_Product = 1,  
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [1,22,45],#testing water on day 1
+                  Water_Sampling = 0,
+                  Product_Sampling_PH = 1, #now product testing is on
+                  Product_Testing_H = 0
+                  )
+
+###############################
+Scen_B32_H_DWPT = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=1,#Testing only in given day
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #leave as 1 defaul
+                  Sampling_every_Days_Product = 1,  
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [0],#testing water on day 1
+                  Water_Sampling = 1,
+                  Product_Sampling_PH = 1, #now product testing is on
+                  Product_Testing_H = 0
+                  )
+
+Scen_B32_L_DWPT =Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=1,#Testing only in given day
+                  #Contamination Information
+                  OO_per_L =0.6,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #leave as 1 defaul
+                  Sampling_every_Days_Product = 1,  
+                  #Testing Options
+                  Testing_Day_Water = [0], 
+                  Testing_Day_Product = [0],#testing water on day 1
+                  Water_Sampling = 1,
+                  Product_Sampling_PH = 1, #now product testing is on
+                  Product_Testing_H = 0
+                  )
+
+
+#B1_Daily testing product (DTP) - High
+Scen_B32_H_WPT1 = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=2,#every day sampling
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #1 for sampling every day
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = [45],
+                  Testing_Day_Product = [45],
+                  Water_Sampling = 1,
+                  Product_Sampling_PH = 1, #now product testing is on
+                  Product_Testing_H = 0
+                  )
+
+#B1_Water testing 1 time per season at the start of the season - Low
+Scen_B32_L_WPT1 = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=2,#Testing only in given day
+                  #Contamination Information
+                  OO_per_L =0.6,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #leave as 1 defaul
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = [45], #testing water on day 1
+                  Testing_Day_Product = [45],
+                  Water_Sampling = 1,#now water testing is on
+                  Product_Sampling_PH = 1, 
+                  Product_Testing_H = 0
+                  )
+
+
+Scen_B32_H_WPT4 = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=2,#Testing only in given day
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #leave as 1 defaul
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = [1], #testing water on day 1
+                  Testing_Day_Product = [1],
+                  Water_Sampling = 1,#now water testing is on
+                  Product_Sampling_PH = 1, 
+                  Product_Testing_H = 0
+                  )
+
+Scen_B32_L_WPT4 = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=2,#Testing only in given day
+                  #Contamination Information
+                  OO_per_L =0.6,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #leave as 1 defaul
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = [1], #testing water on day 1
+                  Testing_Day_Product = [1],
+                  Water_Sampling = 1,#now water testing is on
+                  Product_Sampling_PH = 1, 
+                  Product_Testing_H = 0
+                  )
+#----
+#B1_Water testing 1 time per season at the start of the season - High
+Scen_B32_H_WPT2 = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=2,#Testing only in given day
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #leave as 1 defaul
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = [1,45], #testing water on day 1
+                  Testing_Day_Product = [1,45],
+                  Water_Sampling = 1,#now water testing is on
+                  Product_Sampling_PH = 1, 
+                  Product_Testing_H = 0
+                  )
+
+#B1_Water testing 2 times per season (1 start, 1 end of the season) - Low
+Scen_B32_L_WPT2 = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=2,#Testing only in given day
+                  #Contamination Information
+                  OO_per_L =0.6,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #leave as 1 defaul
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = [1,45], #testing water on day 1
+                  Testing_Day_Product = [1,45],
+                  Water_Sampling = 1,#now water testing is on
+                  Product_Sampling_PH = 1, 
+                  Product_Testing_H = 0
+                  )
+#B1_Water testing 2 times per season (1 start, 1 end of the season) - High
+Scen_B32_H_WPT3 = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
+                  Testing_Scenario=2,#Testing only in given day
+                  #Contamination Information
+                  OO_per_L =20,
+                  #Water Testing Options
+                  Sampling_every_Days_Water = 1, #leave as 1 defaul
+                  Sampling_every_Days_Product = 1, #as default 
+                  #Testing Options
+                  Testing_Day_Water = [1,22,45], #testing water on day 1
+                  Testing_Day_Product = [1,22,45],
+                  Water_Sampling = 1,#now water testing is on
+                  Product_Sampling_PH = 1, 
+                  Product_Testing_H = 0
+                  )
+
+#B1_Water testing 3 times per season (1 start, 1 end of the season) - Low
+Scen_B32_L_WPT3 = Process_Model_Extra(
+                  Days_per_season = 45,
+                  Niterations= 10000,
+                  Custom_Irrigation_Days = 4,
+                  Cont_Scenario = 32,#Contamination 4 days per season at higher levels
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
                   OO_per_L =0.6,
@@ -3172,47 +3771,93 @@ Scen_B1_L_WPT3 = Process_Model_Extra(
  
     #Baseline 1 - High
 
-get_dec_rate(df  = Scen_B1_H_DTW, Water_Produce_Both = "Water")
-get_dec_rate(df  = Scen_B1_H_WT1, Water_Produce_Both = "Water")
-get_dec_rate(df  = Scen_B1_H_WT4, Water_Produce_Both = "Water")
-get_dec_rate(df  = Scen_B1_H_WT2, Water_Produce_Both = "Water")
-get_dec_rate(df  = Scen_B1_H_WT3, Water_Produce_Both = "Water")
+get_dec_rate(df  = Scen_B31_H_DTW, Water_Produce_Both = "Water")
+get_dec_rate(df  = Scen_B31_H_WT1, Water_Produce_Both = "Water")
+get_dec_rate(df  = Scen_B31_H_WT4, Water_Produce_Both = "Water")
+get_dec_rate(df  = Scen_B31_H_WT2, Water_Produce_Both = "Water")
+get_dec_rate(df  = Scen_B31_H_WT3, Water_Produce_Both = "Water")
 
 
-get_dec_rate(df  = Scen_B1_H_DTP, Water_Produce_Both = "Produce")
-get_dec_rate(df  = Scen_B1_H_PT1, Water_Produce_Both = "Produce")
-get_dec_rate(df  = Scen_B1_H_PT4, Water_Produce_Both = "Produce")
-get_dec_rate(df  = Scen_B1_H_PT2, Water_Produce_Both = "Produce")
-get_dec_rate(df  = Scen_B1_H_PT3, Water_Produce_Both = "Produce")
+get_dec_rate(df  = Scen_B31_H_DTP, Water_Produce_Both = "Produce")
+get_dec_rate(df  = Scen_B31_H_PT1, Water_Produce_Both = "Produce")
+get_dec_rate(df  = Scen_B31_H_PT4, Water_Produce_Both = "Produce")
+get_dec_rate(df  = Scen_B31_H_PT2, Water_Produce_Both = "Produce")
+get_dec_rate(df  = Scen_B31_H_PT3, Water_Produce_Both = "Produce")
 
 
-get_dec_rate(df  = Scen_B1_H_DWPT, Water_Produce_Both = "Both")
-get_dec_rate(df  = Scen_B1_H_WPT1, Water_Produce_Both = "Both")
-get_dec_rate(df  = Scen_B1_H_WPT4, Water_Produce_Both = "Both")
-get_dec_rate(df  = Scen_B1_H_WPT2, Water_Produce_Both = "Both") 
-get_dec_rate(df  = Scen_B1_H_WPT3, Water_Produce_Both = "Both") 
+get_dec_rate(df  = Scen_B31_H_DWPT, Water_Produce_Both = "Both")
+get_dec_rate(df  = Scen_B31_H_WPT1, Water_Produce_Both = "Both")
+get_dec_rate(df  = Scen_B31_H_WPT4, Water_Produce_Both = "Both")
+get_dec_rate(df  = Scen_B31_H_WPT2, Water_Produce_Both = "Both") 
+get_dec_rate(df  = Scen_B31_H_WPT3, Water_Produce_Both = "Both") 
 
 
     #Baseline 1 - Low
 
-get_dec_rate(df  = Scen_B1_L_DTW, Water_Produce_Both = "Water")
-get_dec_rate(df  = Scen_B1_L_WT1, Water_Produce_Both = "Water")
-get_dec_rate(df  = Scen_B1_L_WT4, Water_Produce_Both = "Water")
-get_dec_rate(df  = Scen_B1_L_WT2, Water_Produce_Both = "Water")
-get_dec_rate(df  = Scen_B1_L_WT3, Water_Produce_Both = "Water")
+get_dec_rate(df  = Scen_B31_L_DTW, Water_Produce_Both = "Water")
+get_dec_rate(df  = Scen_B31_L_WT1, Water_Produce_Both = "Water")
+get_dec_rate(df  = Scen_B31_L_WT4, Water_Produce_Both = "Water")
+get_dec_rate(df  = Scen_B31_L_WT2, Water_Produce_Both = "Water")
+get_dec_rate(df  = Scen_B31_L_WT3, Water_Produce_Both = "Water")
 
 
-get_dec_rate(df  = Scen_B1_L_DTP, Water_Produce_Both = "Produce")
-get_dec_rate(df  = Scen_B1_L_PT1, Water_Produce_Both = "Produce")
-get_dec_rate(df  = Scen_B1_L_PT4, Water_Produce_Both = "Produce")
-get_dec_rate(df  = Scen_B1_L_PT2, Water_Produce_Both = "Produce")
-get_dec_rate(df  = Scen_B1_L_PT3, Water_Produce_Both = "Produce")
+get_dec_rate(df  = Scen_B31_L_DTP, Water_Produce_Both = "Produce")
+get_dec_rate(df  = Scen_B31_L_PT1, Water_Produce_Both = "Produce")
+get_dec_rate(df  = Scen_B31_L_PT4, Water_Produce_Both = "Produce")
+get_dec_rate(df  = Scen_B31_L_PT2, Water_Produce_Both = "Produce")
+get_dec_rate(df  = Scen_B31_L_PT3, Water_Produce_Both = "Produce")
 
-get_dec_rate(df  = Scen_B1_L_DWPT, Water_Produce_Both = "Both")
-get_dec_rate(df  = Scen_B1_L_WPT1, Water_Produce_Both = "Both")
-get_dec_rate(df  = Scen_B1_L_WPT4, Water_Produce_Both = "Both")
-get_dec_rate(df  = Scen_B1_L_WPT2, Water_Produce_Both = "Both") 
-get_dec_rate(df  = Scen_B1_L_WPT3, Water_Produce_Both = "Both") 
+get_dec_rate(df  = Scen_B31_L_DWPT, Water_Produce_Both = "Both")
+get_dec_rate(df  = Scen_B31_L_WPT1, Water_Produce_Both = "Both")
+get_dec_rate(df  = Scen_B31_L_WPT4, Water_Produce_Both = "Both")
+get_dec_rate(df  = Scen_B31_L_WPT2, Water_Produce_Both = "Both") 
+get_dec_rate(df  = Scen_B31_L_WPT3, Water_Produce_Both = "Both") 
+
+
+
+###B2
+
+get_dec_rate(df  = Scen_B32_H_DTW, Water_Produce_Both = "Water")
+get_dec_rate(df  = Scen_B32_H_WT1, Water_Produce_Both = "Water")
+get_dec_rate(df  = Scen_B32_H_WT4, Water_Produce_Both = "Water")
+get_dec_rate(df  = Scen_B32_H_WT2, Water_Produce_Both = "Water")
+get_dec_rate(df  = Scen_B32_H_WT3, Water_Produce_Both = "Water")
+
+
+get_dec_rate(df  = Scen_B32_H_DTP, Water_Produce_Both = "Produce")
+get_dec_rate(df  = Scen_B32_H_PT1, Water_Produce_Both = "Produce")
+get_dec_rate(df  = Scen_B32_H_PT4, Water_Produce_Both = "Produce")
+get_dec_rate(df  = Scen_B32_H_PT2, Water_Produce_Both = "Produce")
+get_dec_rate(df  = Scen_B32_H_PT3, Water_Produce_Both = "Produce")
+
+
+get_dec_rate(df  = Scen_B32_H_DWPT, Water_Produce_Both = "Both")
+get_dec_rate(df  = Scen_B32_H_WPT1, Water_Produce_Both = "Both")
+get_dec_rate(df  = Scen_B32_H_WPT4, Water_Produce_Both = "Both")
+get_dec_rate(df  = Scen_B32_H_WPT2, Water_Produce_Both = "Both") 
+get_dec_rate(df  = Scen_B32_H_WPT3, Water_Produce_Both = "Both") 
+
+
+    #Baseline 1 - Low
+
+get_dec_rate(df  = Scen_B32_L_DTW, Water_Produce_Both = "Water")
+get_dec_rate(df  = Scen_B32_L_WT1, Water_Produce_Both = "Water")
+get_dec_rate(df  = Scen_B32_L_WT4, Water_Produce_Both = "Water")
+get_dec_rate(df  = Scen_B32_L_WT2, Water_Produce_Both = "Water")
+get_dec_rate(df  = Scen_B32_L_WT3, Water_Produce_Both = "Water")
+
+
+get_dec_rate(df  = Scen_B32_L_DTP, Water_Produce_Both = "Produce")
+get_dec_rate(df  = Scen_B32_L_PT1, Water_Produce_Both = "Produce")
+get_dec_rate(df  = Scen_B32_L_PT4, Water_Produce_Both = "Produce")
+get_dec_rate(df  = Scen_B32_L_PT2, Water_Produce_Both = "Produce")
+get_dec_rate(df  = Scen_B32_L_PT3, Water_Produce_Both = "Produce")
+
+get_dec_rate(df  = Scen_B32_L_DWPT, Water_Produce_Both = "Both")
+get_dec_rate(df  = Scen_B32_L_WPT1, Water_Produce_Both = "Both")
+get_dec_rate(df  = Scen_B32_L_WPT4, Water_Produce_Both = "Both")
+get_dec_rate(df  = Scen_B32_L_WPT2, Water_Produce_Both = "Both") 
+get_dec_rate(df  = Scen_B32_L_WPT3, Water_Produce_Both = "Both") 
 
 
 #%%
@@ -3226,7 +3871,7 @@ samp_rate = []
 assay_rate = []
 for i in list_of_clusters:
     x = Process_Model(Days_per_season = 45,
-                      Niterations= 100,
+                      Niterations= 10000,
                       Cont_Scenario = 2,#Random Cont Event
                       Testing_Scenario=1,#Sampling at given day
                       #Contamination Information
@@ -3252,4 +3897,111 @@ Detection_Rates_High_DPT = pd.DataFrame({"Drates": Detection_Rates_High_DPT_List
                                           "samp_rate":samp_rate,
                                           "assay_rate":assay_rate})
 
-Detection_Rates_High_DPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_High_DPT_LOC.csv")
+#Detection_Rates_High_DPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_High_DPT_LOC.csv")
+
+#Propduct end of day
+det_rate_FPT = []
+samp_rate_FTP = []
+assay_rate_FTP = []
+for i in list_of_clusters :
+    x = Process_Model(Days_per_season = 45,
+                      Niterations= 10000,
+                      Cont_Scenario = 2,#Random Cont Event
+                      Testing_Scenario=2,#Sampling at given day
+                      #Contamination Information
+                      OO_per_L =20,
+                      #Water Testing Options
+                      Sampling_every_Days_Water = 1, #1 for sampling every day
+                      Sampling_every_Days_Product = 1, #as fault 
+                      #Testing Options
+                      Testing_Day_Water = [0], 
+                      Testing_Day_Product = [45],#testing water on day 1
+                      Per_Cont_Field = i,
+                      Water_Sampling = 0,
+                      Product_Sampling_PH = 1,
+                      Product_Testing_H = 0
+                      )
+    det_rate_FPT.append(get_dec_rate(df= x , Water_Produce_Both= "Produce")) 
+    samp_rate_FTP.append(Extracting_outputs_sample_prob(x)[0])
+    assay_rate_FTP.append(Extracting_outputs_sample_prob(x)[1])
+
+Detection_Rates_High_FPT_List = [item for items in det_rate_FPT for item in items]
+Detection_Rates_High_FPT = pd.DataFrame({"Drates": Detection_Rates_High_FPT_List,
+                                          "Cluster": list_of_clusters,
+                                          "samp_rate":samp_rate_FTP,
+                                          "assay_rate":assay_rate_FTP})
+
+#Detection_Rates_High_FPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_High_FPT_LOC.csv")
+
+#Propduct end of day
+det_rate_DPT_L = []
+samp_rate_DPT_L =[]
+assay_rate_DPT_L = []
+for i in list_of_clusters :
+    x = Process_Model(Days_per_season = 45,
+                      Niterations= 10000,
+                      Cont_Scenario = 2,#Random Cont Event
+                      Testing_Scenario=1,#Sampling at given day
+                      #Contamination Information
+                      OO_per_L =0.6,
+                      #Water Testing Options
+                      Sampling_every_Days_Water = 1, #1 for sampling every day
+                      Sampling_every_Days_Product = 1, #as fault 
+                      #Testing Options
+                      Testing_Day_Water = [0], 
+                      Testing_Day_Product = [0],#testing water on day 1
+                      Per_Cont_Field = i,
+                      Water_Sampling = 0,
+                      Product_Sampling_PH = 1,
+                      Product_Testing_H = 0
+                      )
+    det_rate_DPT_L.append(get_dec_rate(df= x , Water_Produce_Both= "Produce"))  
+    samp_rate_DPT_L.append(Extracting_outputs_sample_prob(x)[0])
+    assay_rate_DPT_L.append(Extracting_outputs_sample_prob(x)[1])
+
+Detection_Rates_Low_DPT = [item for items in det_rate_DPT_L for item in items]
+Detection_Rates_Low_DPT = pd.DataFrame({"Drates": Detection_Rates_Low_DPT,
+                                          "Cluster": list_of_clusters,
+                                          "samp_rate":samp_rate_DPT_L,
+                                          "assay_rate":assay_rate_DPT_L})
+
+
+#Detection_Rates_Low_DPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_Low_DPT_LOC.csv")
+
+
+
+
+#Propduct end of day
+det_rate_FPT_L = []
+samp_rate_FPT_L =[]
+assay_rate_FPT_L = []
+for i in list_of_clusters :
+    x = Process_Model(Days_per_season = 45,
+                      Niterations= 10000,
+                      Cont_Scenario = 2,#Random Cont Event
+                      Testing_Scenario=2,#Sampling at given day
+                      #Contamination Information
+                      OO_per_L =0.6,
+                      #Water Testing Options
+                      Sampling_every_Days_Water = 1, #1 for sampling every day
+                      Sampling_every_Days_Product = 1, #as fault 
+                      #Testing Options
+                      Testing_Day_Water = [0], 
+                      Testing_Day_Product = [45],#testing water on day 1
+                      Per_Cont_Field = i,
+                      Water_Sampling = 0,
+                      Product_Sampling_PH = 1,
+                      Product_Testing_H = 0
+                      )
+    det_rate_FPT_L.append(get_dec_rate(df= x , Water_Produce_Both= "Produce"))  
+    samp_rate_FPT_L.append(Extracting_outputs_sample_prob(x)[0])
+    assay_rate_FPT_L.append(Extracting_outputs_sample_prob(x)[1])
+
+Detection_Rates_Low_FPT = [item for items in det_rate_FPT_L for item in items]
+Detection_Rates_Low_FPT = pd.DataFrame({"Drates": Detection_Rates_Low_FPT,
+                                          "Cluster": list_of_clusters,
+                                          "samp_rate":samp_rate_FPT_L,
+                                          "assay_rate":assay_rate_FPT_L})
+
+
+#Detection_Rates_Low_FPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_Low_FPT_LOC.csv")
