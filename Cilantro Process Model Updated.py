@@ -1945,6 +1945,8 @@ get_dec_rate(df  = Scen_B1_L_WPT2, Water_Produce_Both = "Both")
 get_dec_rate(df  = Scen_B1_L_WPT3, Water_Produce_Both = "Both") 
 get_dec_rate(df  = Scen_B1_L_WPT4, Water_Produce_Both = "Both")
 
+
+
     #Baseline 2 - High
 get_dec_rate(df  = Scen_B2_H_DTP, Water_Produce_Both = "Produce")
 get_dec_rate(df  = Scen_B2_H_DTW, Water_Produce_Both = "Water")
@@ -3902,7 +3904,7 @@ Detection_Rates_High_DPT = pd.DataFrame({"Drates": Detection_Rates_High_DPT_List
                                           "samp_rate":samp_rate,
                                           "assay_rate":assay_rate})
 
-#Detection_Rates_High_DPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_High_DPT_LOC.csv")
+Detection_Rates_High_DPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_High_DPT_LOC_5k.csv")
 
 #Propduct end of day
 det_rate_FPT = []
@@ -3936,7 +3938,7 @@ Detection_Rates_High_FPT = pd.DataFrame({"Drates": Detection_Rates_High_FPT_List
                                           "samp_rate":samp_rate_FTP,
                                           "assay_rate":assay_rate_FTP})
 
-#Detection_Rates_High_FPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_High_FPT_LOC.csv")
+Detection_Rates_High_FPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_High_FPT_LOC_5k.csv")
 
 #Propduct end of day
 det_rate_DPT_L = []
@@ -3971,7 +3973,7 @@ Detection_Rates_Low_DPT = pd.DataFrame({"Drates": Detection_Rates_Low_DPT,
                                           "assay_rate":assay_rate_DPT_L})
 
 
-#Detection_Rates_Low_DPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_Low_DPT_LOC.csv")
+Detection_Rates_Low_DPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_Low_DPT_LOC_5k.csv")
 
 
 
@@ -4009,7 +4011,7 @@ Detection_Rates_Low_FPT = pd.DataFrame({"Drates": Detection_Rates_Low_FPT,
                                           "assay_rate":assay_rate_FPT_L})
 
 
-#Detection_Rates_Low_FPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_Low_FPT_LOC.csv")
+Detection_Rates_Low_FPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_Low_FPT_LOC_5k.csv")
 
 
 #Now Doing 10 samples of 25g
@@ -4050,7 +4052,7 @@ Detection_Rates_Low_10s_FPT = pd.DataFrame({"Drates": Detection_Rates_Low_10s_FP
                                           "assay_rate":assay_rate_FPT_10s_L})
 
 
-#Detection_Rates_Low_10s_FPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_Low_10s_FPT_LOC.csv")
+Detection_Rates_Low_10s_FPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_Low_10s_FPT_LOC_5k.csv")
 
 
 #Now Doing 10 samples of 25g
@@ -4091,7 +4093,7 @@ Detection_Rates_High_10s_FPT = pd.DataFrame({"Drates": Detection_Rates_High_10s_
                                           "assay_rate":assay_rate_FPT_10s_H})
 
 
-#Detection_Rates_High_10s_FPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_High_10s_FPT_LOC.csv")
+Detection_Rates_High_10s_FPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_High_10s_FPT_LOC_5k.csv")
 
 
 
@@ -4133,7 +4135,7 @@ Detection_Rates_High_45s_FPT = pd.DataFrame({"Drates": Detection_Rates_High_45s_
                                           "assay_rate":assay_rate_FPT_45s_H})
 
 
-#Detection_Rates_High_45s_FPT.to_csv("C://Users/Gustavo Reyes/Documents/GitHubFiles/CPS-Farm-To-Facility-Cilantro/Detection_Rates_High_45s_FPT_LOC.csv")
+Detection_Rates_High_45s_FPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_High_45s_FPT_LOC_5k.csv")
 
 
 
@@ -4173,3 +4175,5 @@ Detection_Rates_Low_45s_FPT = pd.DataFrame({"Drates": Detection_Rates_Low_45s_FP
                                           "Cluster": list_of_clusters,
                                           "samp_rate":samp_rate_FPT_45s_L,
                                           "assay_rate":assay_rate_FPT_45s_L})
+
+Detection_Rates_Low_45s_FPT.to_csv("C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/Detection_Rates_Low_45s_FPT_LOC_5k.csv")

@@ -25,7 +25,7 @@ Produce_Testing_4,0.0007,Low,Produce Testing - Start,Daily Contamination ,Produc
 Produce_Testing_2,0.0298,Low,Produce Testing - Start & End,Daily Contamination ,Produce,Start & End of Seas
 Produce_Testing_3,0.0429,Low,"Produce Testing - Start, Mid & End",Daily Contamination ,Produce,"Start, Mid & End of Season"
 Daily_Water&Product_Test,1,Low,Water and Produce Testing - Daily,Daily Contamination ,Both,Daily
-Water&Product_1,0.5787,Low,Water and Produce Testing - End,Daily Contamination ,Both,End of Season
+Water&Product_1,0.5925,Low,Water and Produce Testing - End,Daily Contamination ,Both,End of Season
 Water&Product_4,0.58,Low,Water and Produce Testing - Start,Daily Contamination ,Both,Start of Season
-Water&Product_2,0.8252,Low,Water and Produce Testing - Start & End,Daily Contamination ,Both,Start & End of Seas
-Water&Product_3,0.9264,Low,"Water and Produce Testing - Start, Mid & End",Daily Contamination ,Both,"Start, Mid & End of Season"
+Water&Product_2,0.831,Low,Water and Produce Testing - Start & End,Daily Contamination ,Both,Start & End of Seas
+Water&Product_3,0.9298,Low,"Water and Produce Testing - Start, Mid & End",Daily Contamination ,Both,"Start, Mid & End of Season"
