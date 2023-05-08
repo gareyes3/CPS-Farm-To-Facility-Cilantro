@@ -109,7 +109,7 @@ ggsave("Combined-Updated.jpg", width =7, height = 6, units = "in", dpi = 300)
 
 
 ```{r}
-BS3 <- read.csv(file = "Baseline3-Supplemental.csv", header = TRUE )
+BS3 <- read.csv(file = "Data/Baseline3-Supplemental.csv", header = TRUE )
 
 Order<-(BS3$Scenarios2[1:15])
 
@@ -141,7 +141,7 @@ Fig2
 
 
 ```{r}
-BS4 <- read.csv(file = "Baseline4-Supplemental.csv", header = TRUE )
+BS4 <- read.csv(file = "Data/Baseline4-Supplemental.csv", header = TRUE )
 
 Order<-(BS4$Scenarios2[1:15])
 
