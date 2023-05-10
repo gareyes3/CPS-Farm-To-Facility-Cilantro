@@ -99,7 +99,7 @@ Baseline_Binded %>%
   scale_alpha_discrete(range = c(1, 0.8), )+
   scale_fill_hue()+
   scale_fill_manual(name = "Test Type:", values = c("Produce" = "darkgreen", "Water" = "darkblue", "Both" = "steelblue"))+
-  labs(title="Unintentional irrigation with contaminated water", x="Overall Detection Rate", y="Sampling Scenario")+
+  labs(title="Unintentional irrigation with contaminated water", x="Probability of Detection", y="Sampling Scenario")+
   guides(alpha = FALSE)
 
 ggsave("Combined-Updated.jpg", width =7, height = 6, units = "in", dpi = 300)
@@ -155,7 +155,7 @@ BS4
 
 Fig2 <- ggplot(BS4, aes(x=factor(Scenarios2, levels = rev(Order)), y=Relative_Efficacy,fill = Test_Type)) + 
   geom_bar(position = "dodge", stat = "identity") + 
-  labs(title="Water is always contaminated, irrigation 4 times per season\n total 6 inches irrigated in 5,000 lb acre", y="Overall Detection Rate", x="Sampling Scenario")+
+  labs(title="Water is always contaminated, irrigation 4 times per season\n total 6 inches irrigated in 5,000 lb acre", y="Probability of Detection", x="Sampling Scenario")+
   scale_fill_discrete(name = "Contamination \nLevel")+#(values=c("#FF3366","#99CCFF")) +
   #scale_y_continuous(labels = scales::percent)+
   theme_bw()+
@@ -186,7 +186,7 @@ Baseline_Binded %>%
   scale_alpha_discrete(range = c(1, 0.8), )+
   scale_fill_hue()+
   scale_fill_manual(name = "Test Type:", values = c("Produce" = "darkgreen", "Water" = "darkblue", "Both" = "steelblue"))+
-  labs(title="Unintentional irrigation with contaminated water\n 5k lb yield, irrigation 4 times per season\n for total of 6 inches", x="Overall Detection Rate", y="Sampling Scenario")+
+  labs(title="Unintentional irrigation with contaminated water\n 5k lb yield, irrigation 4 times per season\n for total of 6 inches", x="Probability of Detection", y="Sampling Scenario")+
   guides(alpha = FALSE)
 
 ggsave("Suplemental Combined-Updated.jpg", width =7, height = 6, units = "in", dpi = 300)
