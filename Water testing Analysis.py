@@ -64,9 +64,11 @@ def Iterating_Water_Samples (total_oocyst_bw, bw_volume, sample_size_volume, tot
 
 #Water Characteristics, not necesarily used. 
 Water_Irrigation_In = 12 #Inches of water per harvest season
-Total_L_Season = 40.46*40.46*(0.0254*Water_Irrigation_In)*1000 # one acre 40.46m2 * 0.348 m of water * 10000 to convert tot m3
+Total_L_Season = 40.46*40.46*(0.0254*Water_Irrigation_In)*1000 # one acre 40.46m2 * 0.348 m of water * 1000 to convert tot L
 Days_per_season = 45 #days
 L_water_day = Total_L_Season/Days_per_season
+
+
 
 #Water contamintion to calculate min and max. 
 OO_per_L = 0.6
