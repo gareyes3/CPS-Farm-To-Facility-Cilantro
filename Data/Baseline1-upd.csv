@@ -1,0 +1,31 @@
+Scenarios,Detection_Rate,Contamination,Scenarios2,Type ,Test_Type,Freq
+Daily_Water_Test,1,High,Water Testing - Daily,Daily Contamination ,Water,Daily
+Water_Testing_1,1,High,Water Testing -  End,Daily Contamination ,Water,End of Season
+Water_Testing_4,1,High,Water Testing -  Start,Daily Contamination ,Water,Start of Season
+Water_Testing_2,1,High,Water Testing - Start & End,Daily Contamination ,Water,Start & End of Seas
+Water_Testing_3,1,High,"Water Testing - Start, Mid & End",Daily Contamination ,Water,"Start, Mid & End of Season"
+Daily_Produce_Test,1,High,Produce Testing - Daily,Daily Contamination ,Produce,Daily
+Produce_Testing_1,1,High,Produce Testing - End,Daily Contamination ,Produce,End of Season
+Produce_Testing_4,0.059,High,Produce Testing - Start,Daily Contamination ,Produce,Start of Season
+Produce_Testing_2,1,High,Produce Testing - Start & End,Daily Contamination ,Produce,Start & End of Seas
+Produce_Testing_3,1,High,"Produce Testing - Start, Mid & End",Daily Contamination ,Produce,"Start, Mid & End of Season"
+Daily_Water&Product_Test,1,High,Water and Produce Testing - Daily,Daily Contamination ,Both,Daily
+Water&Product_1,1,High,Water and Produce Testing - End,Daily Contamination ,Both,End of Season
+Water&Product_4,1,High,Water and Produce Testing - Start,Daily Contamination ,Both,Start of Season
+Water&Product_2,1,High,Water and Produce Testing - Start & End,Daily Contamination ,Both,Start & End of Seas
+Water&Product_3,1,High,"Water and Produce Testing - Start, Mid & End",Daily Contamination ,Both,"Start, Mid & End of Season"
+Daily_Water_Test,1,Low,Water Testing - Daily,Daily Contamination ,Water,Daily
+Water_Testing_1,0.5798,Low,Water Testing -  End,Daily Contamination ,Water,End of Season
+Water_Testing_4,0.5898,Low,Water Testing -  Start,Daily Contamination ,Water,Start of Season
+Water_Testing_2,0.8299,Low,Water Testing - Start & End,Daily Contamination ,Water,Start & End of Seas
+Water_Testing_3,0.9209,Low,"Water Testing - Start, Mid & End",Daily Contamination ,Water,"Start, Mid & End of Season"
+Daily_Produce_Test,0.796,Low,Produce Testing - Daily,Daily Contamination ,Produce,Daily
+Produce_Testing_1,0.087,Low,Produce Testing - End,Daily Contamination ,Produce,End of Season
+Produce_Testing_4,0.0007,Low,Produce Testing - Start,Daily Contamination ,Produce,Start of Season
+Produce_Testing_2,0.076,Low,Produce Testing - Start & End,Daily Contamination ,Produce,Start & End of Seas
+Produce_Testing_3,0.118,Low,"Produce Testing - Start, Mid & End",Daily Contamination ,Produce,"Start, Mid & End of Season"
+Daily_Water&Product_Test,1,Low,Water and Produce Testing - Daily,Daily Contamination ,Both,Daily
+Water&Product_1,0.629,Low,Water and Produce Testing - End,Daily Contamination ,Both,End of Season
+Water&Product_4,0.6,Low,Water and Produce Testing - Start,Daily Contamination ,Both,Start of Season
+Water&Product_2,0.827,Low,Water and Produce Testing - Start & End,Daily Contamination ,Both,Start & End of Seas
+Water&Product_3,0.948,Low,"Water and Produce Testing - Start, Mid & End",Daily Contamination ,Both,"Start, Mid & End of Season"

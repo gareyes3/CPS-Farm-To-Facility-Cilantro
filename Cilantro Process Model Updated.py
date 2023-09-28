@@ -176,13 +176,13 @@ def Func_Water_Sampling (total_oocyst_bw, bw_volume, sample_size_volume,total_sa
     return [reject_YN,pdetect]
 
 #%% Loading PCR Detection Models
-filename_qPCR = 'C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/logistic_AW_Testing_qPCR.sav'
+filename_qPCR = 'C://Users/Gustavo Reyes/Documents/GitHubFiles/CPS-Farm-To-Facility-Cilantro/logistic_AW_Testing_qPCR.sav'
 #filename_qPCR = 'C://Users/Gustavo Reyes/Documents/GitHubFiles/CPS-Farm-To-Facility-Cilantro/logistic_AW_Testing_qPCR.sav'
 
 qPCR_Model_AW = pickle.load(open(filename_qPCR, 'rb'))
 qPCR_Model_AW.predict_proba(np.array([20]).reshape(-1,1))[0][1] #from logistic
 
-filename_qPCR = 'C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/logistic_Prod_Test_qPCR_FDA.sav'
+filename_qPCR = 'C://Users/Gustavo Reyes/Documents/GitHubFiles/CPS-Farm-To-Facility-Cilantro/logistic_Prod_Test_qPCR_FDA.sav'
 #filename_qPCR = 'C://Users/Gustavo Reyes/Documents/GitHubFiles/CPS-Farm-To-Facility-Cilantro/logistic_Prod_Test_qPCR_FDA.sav'
 
 qPCR_Model = pickle.load(open(filename_qPCR, 'rb'))
@@ -204,7 +204,7 @@ Bunches_Weight = Case_Weight/Plant_Weight
 
 #Water and Season Characteristics
 Water_Irrigation_In = 12 #Inches of water per harvest season
-Total_L_Season = 40.46*40.46*(0.0254*Water_Irrigation_In)*1000 # one acre 40.46m2 * 0.348 m of water * 10000 to convert tot m3
+Total_L_Season = 63.6*63.6*(0.0254*Water_Irrigation_In)*1000 # field yield 40.46m2 * 0.348 m of water * 10000 to convert tot m3
 Days_per_season = 45 #days
 Irrigation_Days_per_season = 45
 L_water_day = Total_L_Season/Irrigation_Days_per_season
@@ -556,7 +556,7 @@ Scen_B1_H_DTW = Process_Model(
 #B1_Daily testing product (DTP) - Low
 Scen_B1_L_DTP = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 10000,
+                  Niterations= 1000,
                   Cont_Scenario = 1,#every day contamiantion
                   Testing_Scenario=1,#every day sampling
                   #Contamination Information
@@ -571,6 +571,8 @@ Scen_B1_L_DTP = Process_Model(
                   Product_Sampling_PH = 1, #now product testing is on
                   Product_Testing_H = 0
                   )
+
+
 #B1_Daily testing product (DTP) - High
 Scen_B1_H_DTP = Process_Model(
                   Days_per_season = 45,

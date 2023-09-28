@@ -1,0 +1,31 @@
+Scenarios,Detection_Rate,Contamination,Scenarios2,Type,Test_Type,Freq
+Daily_Water_Test,1,High,Water Testing - Daily,Random Contamination - Once,Water,Daily
+Water_Testing_1,0.0225,High,Water Testing -  End,Random Contamination - Once,Water,End of Season
+Water_Testing_4,0.0223,High,Water Testing -  Start,Random Contamination - Once,Water,Start of Season
+Water_Testing_2,0.0405,High,Water Testing - Start & End,Random Contamination - Once,Water,Start & End of Seas
+Water_Testing_3,0.0676,High,"Water Testing - Start, Mid & End",Random Contamination - Once,Water,"Start, Mid & End of Season"
+Daily_Produce_Test,0.63,High,Produce Testing - Daily,Random Contamination - Once,Produce,Daily
+Produce_Testing_1,0.06,High,Produce Testing - End,Random Contamination - Once,Produce,End of Season
+Produce_Testing_4,0.001,High,Produce Testing - Start,Random Contamination - Once,Produce,Start of Season
+Produce_Testing_2,0.068,High,Produce Testing - Start & End,Random Contamination - Once,Produce,Start & End of Seas
+Produce_Testing_3,0.076,High,"Produce Testing - Start, Mid & End",Random Contamination - Once,Produce,"Start, Mid & End of Season"
+Daily_Water&Product_Test,1,High,Water and Produce Testing - Daily,Random Contamination - Once,Both,Daily
+Water&Product_1,0.074,High,Water and Produce Testing - End,Random Contamination - Once,Both,End of Season
+Water&Product_4,0.025,High,Water and Produce Testing - Start,Random Contamination - Once,Both,Start of Season
+Water&Product_2,0.116,High,Water and Produce Testing - Start & End,Random Contamination - Once,Both,Start & End of Seas
+Water&Product_3,0.118,High,"Water and Produce Testing - Start, Mid & End",Random Contamination - Once,Both,"Start, Mid & End of Season"
+Daily_Water_Test,0.5846,Low,Water Testing - Daily,Random Contamination - Once,Water,Daily
+Water_Testing_1,0.0133,Low,Water Testing -  End,Random Contamination - Once,Water,End of Season
+Water_Testing_4,0.0109,Low,Water Testing -  Start,Random Contamination - Once,Water,Start of Season
+Water_Testing_2,0.0265,Low,Water Testing - Start & End,Random Contamination - Once,Water,Start & End of Seas
+Water_Testing_3,0.0413,Low,"Water Testing - Start, Mid & End",Random Contamination - Once,Water,"Start, Mid & End of Season"
+Daily_Produce_Test,0.03,Low,Produce Testing - Daily,Random Contamination - Once,Produce,Daily
+Produce_Testing_1,0.002,Low,Produce Testing - End,Random Contamination - Once,Produce,End of Season
+Produce_Testing_4,0,Low,Produce Testing - Start,Random Contamination - Once,Produce,Start of Season
+Produce_Testing_2,0.002,Low,Produce Testing - Start & End,Random Contamination - Once,Produce,Start & End of Seas
+Produce_Testing_3,0.002,Low,"Produce Testing - Start, Mid & End",Random Contamination - Once,Produce,"Start, Mid & End of Season"
+Daily_Water&Product_Test,0.597,Low,Water and Produce Testing - Daily,Random Contamination - Once,Both,Daily
+Water&Product_1,0.017,Low,Water and Produce Testing - End,Random Contamination - Once,Both,End of Season
+Water&Product_4,0.017,Low,Water and Produce Testing - Start,Random Contamination - Once,Both,Start of Season
+Water&Product_2,0.036,Low,Water and Produce Testing - Start & End,Random Contamination - Once,Both,Start & End of Seas
+Water&Product_3,0.041,Low,"Water and Produce Testing - Start, Mid & End",Random Contamination - Once,Both,"Start, Mid & End of Season"

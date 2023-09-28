@@ -102,10 +102,10 @@ def F_Rejection_Rule_C (df):
 #Loading the saved logistic regression model
 
 #filename = 'C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test.sav'
-filename_nPCR = 'C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test_nPCR_FDA.sav'
+filename_nPCR = 'C:\\Users\Gustavo Reyes\Documents\GitHubFiles\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test_nPCR_FDA.sav'
 nPCR_Model = pickle.load(open(filename_nPCR, 'rb'))
 
-filename_qPCR = 'C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test_qPCR_FDA.sav'
+filename_qPCR = 'C:\\Users\Gustavo Reyes\Documents\GitHubFiles\CPS-Farm-To-Facility-Cilantro\logistic_Prod_Test_qPCR_FDA.sav'
 qPCR_Model = pickle.load(open(filename_qPCR, 'rb'))
 
 
@@ -165,7 +165,7 @@ Bunches_Weight = Case_Weight/Plant_Weight
 
 #Water Characteristics, not necesarily used. 
 Water_Irrigation_In = 12 #Inches of water per harvest season
-Total_L_Season = 40.46*40.46*(0.0254*Water_Irrigation_In)*1000 # one acre 40.46m2 * 0.348 m of water * 10000 to convert tot m3
+Total_L_Season = 63.6*63.6*(0.0254*Water_Irrigation_In)*1000 # one acre 40.46m2 * 0.348 m of water * 10000 to convert tot m3
 Days_per_season = 45 #days
 L_water_day = Total_L_Season/Days_per_season
 
@@ -330,7 +330,7 @@ Outs_1g = Iter_Cont_Levels(Cont_Levels = Cont_Levels_log10_Num,
 Grabs_Combined =pd.concat([Outs_1g,Outs_2g,Outs_4g,Outs_8g,Outs_16g,Outs_32g])
 Grabs_Combined.reset_index(drop= True, inplace= True)
 
-Grabs_Combined.to_csv("C:\\Users\\gareyes3\\Documents\\GitHub\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\Product_Testing_Analysis_R4.csv")
+Grabs_Combined.to_csv("C:\\Users\\Gustavo Reyes\\Documents\\GitHubFiles\\CPS-Farm-To-Facility-Cilantro\\Data_Cilantro_Outputs\\Product_Testing_Analysis_R6.csv")
 
 
 #%%

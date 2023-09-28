@@ -19,7 +19,7 @@ library(ggnewscale)
 ```
 
 ```{r}
-BS1 <- read.csv(file = "Data/Baseline1.csv", header = TRUE )
+BS1 <- read.csv(file = "Data/Baseline1-upd.csv", header = TRUE )
 Order<-(BS1$Scenarios2[1:15])
 
 
@@ -50,7 +50,7 @@ ggsave("Baseline1-Updated.jpg", width =9, height = 7, units = "in", dpi = 300)
 
 ```{r}
 
-BS2 <- read.csv(file = "Data/Baseline2.csv", header = TRUE )
+BS2 <- read.csv(file = "Data/Baseline2-upd.csv", header = TRUE )
 
 Order<-(BS2$Scenarios2[1:15])
 
@@ -102,7 +102,7 @@ Baseline_Binded %>%
   labs(title="Unintentional irrigation with contaminated water", x="Probability of Detection", y="Sampling Scenario")+
   guides(alpha = FALSE)
 
-ggsave("Combined-Updated.jpg", width =7, height = 6, units = "in", dpi = 300)
+ggsave("Combined-UpdatedR2.jpg", width =7, height = 6, units = "in", dpi = 300)
 
 
 ```
@@ -198,35 +198,35 @@ ggsave("Suplemental Combined-Updated.jpg", width =7, height = 6, units = "in", d
 
 ```{r}
 #together:
-H_DPT<-read.csv(file = "Data/Detection_Rates_High_DPT_LOC.csv")
+H_DPT<-read.csv(file = "Data/Detection_Rates_High_DPT_LOC-r2.csv")
 H_DPT$Level = "Contamination - High"
 H_DPT$Type = "Produce Testing - Daily"
 
-H_FPT<-read.csv(file = "Data/Detection_Rates_High_FPT_LOC.csv")
+H_FPT<-read.csv(file = "Data/Detection_Rates_High_FPT_LOC-r2.csv")
 H_FPT$Level = "Contamination - High"
 H_FPT$Type = "Produce Testing 1 sample - End"
 
-H_FPT_10s<-read.csv(file = "Data/Detection_Rates_High_10s_FPT_LOC.csv")
+H_FPT_10s<-read.csv(file = "Data/Detection_Rates_High_10s_FPT_LOC-r2.csv")
 H_FPT_10s$Level = "Contamination - High"
 H_FPT_10s$Type = "Produce Testing 10 samples - End"
 
-H_FPT_45s<-read.csv(file = "Data/Detection_Rates_High_45s_FPT_LOC.csv")
+H_FPT_45s<-read.csv(file = "Data/Detection_Rates_High_45s_FPT_LOC-r2.csv")
 H_FPT_45s$Level = "Contamination - High"
 H_FPT_45s$Type = "Produce Testing 45 samples - End"
 
-L_DPT<-read.csv(file = "Data/Detection_Rates_Low_DPT_LOC.csv")
+L_DPT<-read.csv(file = "Data/Detection_Rates_Low_DPT_LOC-r2.csv")
 L_DPT$Level = "Contamination - Low"
 L_DPT$Type = "Produce Testing - Daily"
 
-L_FPT<-read.csv(file = "Data/Detection_Rates_Low_FPT_LOC.csv")
+L_FPT<-read.csv(file = "Data/Detection_Rates_Low_FPT_LOC-r2.csv")
 L_FPT$Level = "Contamination - Low"
 L_FPT$Type = "Produce Testing 1 sample - End"
 
-L_FPT_10s<-read.csv(file = "Data/Detection_Rates_Low_10s_FPT_LOC.csv")
+L_FPT_10s<-read.csv(file = "Data/Detection_Rates_Low_10s_FPT_LOC-r2.csv")
 L_FPT_10s$Level = "Contamination - Low"
 L_FPT_10s$Type = "Produce Testing 10 samples - End"
 
-L_FPT_45s<-read.csv(file = "Data/Detection_Rates_Low_45s_FPT_LOC.csv")
+L_FPT_45s<-read.csv(file = "Data/Detection_Rates_Low_45s_FPT_LOC-r2.csv")
 L_FPT_45s$Level = "Contamination - Low"
 L_FPT_45s$Type = "Produce Testing 45 samples - End"
 
@@ -236,7 +236,7 @@ Detection_Rates_Binded<-Detection_Rates_Binded[,-1]
 Detection_Rates_Binded$Cluster<-round(Detection_Rates_Binded$Cluster,1)
 Detection_Rates_Binded$Cluster<-as.factor(Detection_Rates_Binded$Cluster)
 
-write.csv(Detection_Rates_Binded,file = "Data/DetectionRatesBinded.csv")
+write.csv(Detection_Rates_Binded,file = "Data/DetectionRatesBinded-r2.csv")
 
 Detection_Rates_Binded %>% 
   ggplot(aes(x = Cluster, y = Drates))+
@@ -274,7 +274,7 @@ Detection_Rates_Binded %>%
   facet_grid(Level~Type)
 
 
-ggsave("Detection_Rates-2.0.jpg", width =9, height = 6, units = "in", dpi = 300)
+ggsave("Detection_Rates-r2.jpg", width =9, height = 6, units = "in", dpi = 300)
 
 ```
 
