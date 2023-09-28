@@ -176,13 +176,13 @@ def Func_Water_Sampling (total_oocyst_bw, bw_volume, sample_size_volume,total_sa
     return [reject_YN,pdetect]
 
 #%% Loading PCR Detection Models
-filename_qPCR = 'C://Users/Gustavo Reyes/Documents/GitHubFiles/CPS-Farm-To-Facility-Cilantro/logistic_AW_Testing_qPCR.sav'
+filename_qPCR = 'C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/logistic_AW_Testing_qPCR.sav'
 #filename_qPCR = 'C://Users/Gustavo Reyes/Documents/GitHubFiles/CPS-Farm-To-Facility-Cilantro/logistic_AW_Testing_qPCR.sav'
 
 qPCR_Model_AW = pickle.load(open(filename_qPCR, 'rb'))
 qPCR_Model_AW.predict_proba(np.array([20]).reshape(-1,1))[0][1] #from logistic
 
-filename_qPCR = 'C://Users/Gustavo Reyes/Documents/GitHubFiles/CPS-Farm-To-Facility-Cilantro/logistic_Prod_Test_qPCR_FDA.sav'
+filename_qPCR = 'C://Users/gareyes3/Documents/GitHub/CPS-Farm-To-Facility-Cilantro/logistic_Prod_Test_qPCR_FDA.sav'
 #filename_qPCR = 'C://Users/Gustavo Reyes/Documents/GitHubFiles/CPS-Farm-To-Facility-Cilantro/logistic_Prod_Test_qPCR_FDA.sav'
 
 qPCR_Model = pickle.load(open(filename_qPCR, 'rb'))
@@ -516,7 +516,7 @@ Out_B2_H = Process_Model(
 #B1_Daily testing water (DTW) - Low
 Scen_B1_L_DTW = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 100,
+                  Niterations= 10000,
                   Cont_Scenario = 1,#every day contamiantion
                   Testing_Scenario=1,#every day sampling
                   #Contamination Information
@@ -556,7 +556,7 @@ Scen_B1_H_DTW = Process_Model(
 #B1_Daily testing product (DTP) - Low
 Scen_B1_L_DTP = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 1,#every day contamiantion
                   Testing_Scenario=1,#every day sampling
                   #Contamination Information
@@ -576,7 +576,7 @@ Scen_B1_L_DTP = Process_Model(
 #B1_Daily testing product (DTP) - High
 Scen_B1_H_DTP = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 1,#every day contamiantion
                   Testing_Scenario=1,#every day sampling
                   #Contamination Information
@@ -747,7 +747,7 @@ Scen_B1_H_WT3 = Process_Model(
 #B1_product testing 1 time per season at the end of the season - Low
 Scen_B1_L_PT1 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 1,#every day contamiantion
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -766,7 +766,7 @@ Scen_B1_L_PT1 = Process_Model(
 #B1_product testing 1 time per season at the end of the season - High
 Scen_B1_H_PT1 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 1,#every day contamiantion
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -785,7 +785,7 @@ Scen_B1_H_PT1 = Process_Model(
 #B1_product testing 1 time per season at the end of the season - Low
 Scen_B1_L_PT4 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 1,#every day contamiantion
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -804,7 +804,7 @@ Scen_B1_L_PT4 = Process_Model(
 #B1_product testing 1 time per season at the end of the season - High
 Scen_B1_H_PT4 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 1,#every day contamiantion
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -823,7 +823,7 @@ Scen_B1_H_PT4 = Process_Model(
 #B1_product testing 2 times per season end and mid season - Low
 Scen_B1_L_PT2 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 1,#every day contamiantion
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -841,7 +841,7 @@ Scen_B1_L_PT2 = Process_Model(
 #B1_product testing 2 times per season end and mid season - High
 Scen_B1_H_PT2 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 1,#every day contamiantion
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -860,7 +860,7 @@ Scen_B1_H_PT2 = Process_Model(
 #B1_product testing 3 times per season (1 start, 1 end of the season) - Low
 Scen_B1_L_PT3 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 1,#every day contamiantion
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -879,7 +879,7 @@ Scen_B1_L_PT3 = Process_Model(
 #B1_product testing 3 times per season (1 start, 1 end of the season) - High
 Scen_B1_H_PT3 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 1,#every day contamiantion
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -941,7 +941,7 @@ Scen_B2_H_DTW = Process_Model(
 #B2_Daily testing product (DTP) - Low
 Scen_B2_L_DTP = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 2,
                   Testing_Scenario=1,#every day sampling
                   #Contamination Information
@@ -961,7 +961,7 @@ Scen_B2_L_DTP = Process_Model(
 #B2_Daily testing product (DTP) - High
 Scen_B2_H_DTP = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 2,
                   Testing_Scenario=1,#every day sampling
                   #Contamination Information
@@ -1131,7 +1131,7 @@ Scen_B2_H_WT3 = Process_Model(
 #B2_product testing 1 time per season at the start of the season - Low
 Scen_B2_L_PT1 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 2,
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -1150,7 +1150,7 @@ Scen_B2_L_PT1 = Process_Model(
 #B2_product testing 1 time per season at the start of the season - High
 Scen_B2_H_PT1 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 2,
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -1169,7 +1169,7 @@ Scen_B2_H_PT1 = Process_Model(
 #B2_product testing 1 time per season at the start of the season - Low
 Scen_B2_L_PT4 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 2,
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -1188,7 +1188,7 @@ Scen_B2_L_PT4 = Process_Model(
 #B2_product testing 1 time per season at the start of the season - High
 Scen_B2_H_PT4 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 2,
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -1207,7 +1207,7 @@ Scen_B2_H_PT4 = Process_Model(
 #B2_product testing 2 times per season (1 start, 1 end of the season) - Low
 Scen_B2_L_PT2 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 2,
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -1225,7 +1225,7 @@ Scen_B2_L_PT2 = Process_Model(
 #B2_product testing 2 times per season (1 start, 1 end of the season) - High
 Scen_B2_H_PT2 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 2,
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -1244,7 +1244,7 @@ Scen_B2_H_PT2 = Process_Model(
 #B2_product testing 3 times per season (1 start, 1 end of the season) - Low
 Scen_B2_L_PT3 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 2,
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -1263,7 +1263,7 @@ Scen_B2_L_PT3 = Process_Model(
 #B2_product testing 3 times per season (1 start, 1 end of the season) - High
 Scen_B2_H_PT3 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 2,
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -1282,7 +1282,7 @@ Scen_B2_H_PT3 = Process_Model(
 
 Scen_B1_H_DWPT = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 1,
                   Testing_Scenario=1,#Testing only in given day
                   #Contamination Information
@@ -1300,7 +1300,7 @@ Scen_B1_H_DWPT = Process_Model(
 
 Scen_B1_L_DWPT = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 1,
                   Testing_Scenario=1,#Testing only in given day
                   #Contamination Information
@@ -1320,7 +1320,7 @@ Scen_B1_L_DWPT = Process_Model(
 #B1_Water testing 1 time per season at the start of the season - High
 Scen_B1_H_WPT1 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 1,#every day contamiantion
                   Testing_Scenario=2,#every day sampling
                   #Contamination Information
@@ -1339,7 +1339,7 @@ Scen_B1_H_WPT1 = Process_Model(
 #B1_Water testing 1 time per season at the start of the season - Low
 Scen_B1_L_WPT1 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 1,#every day contamiantion
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -1358,7 +1358,7 @@ Scen_B1_L_WPT1 = Process_Model(
 
 Scen_B1_H_WPT4 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 1,#every day contamiantion
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -1376,7 +1376,7 @@ Scen_B1_H_WPT4 = Process_Model(
 
 Scen_B1_L_WPT4 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 1,#every day contamiantion
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -1395,7 +1395,7 @@ Scen_B1_L_WPT4 = Process_Model(
 #B1_Water testing 1 time per season at the start of the season - High
 Scen_B1_H_WPT2 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 1,#every day contamiantion
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -1414,7 +1414,7 @@ Scen_B1_H_WPT2 = Process_Model(
 #B1_Water testing 2 times per season (1 start, 1 end of the season) - Low
 Scen_B1_L_WPT2 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 1,#every day contamiantion
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -1432,7 +1432,7 @@ Scen_B1_L_WPT2 = Process_Model(
 #B1_Water testing 2 times per season (1 start, 1 end of the season) - High
 Scen_B1_H_WPT3 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 1,#every day contamiantion
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -1451,7 +1451,7 @@ Scen_B1_H_WPT3 = Process_Model(
 #B1_Water testing 3 times per season (1 start, 1 end of the season) - Low
 Scen_B1_L_WPT3 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 1,#every day contamiantion
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -1471,7 +1471,7 @@ Scen_B1_L_WPT3 = Process_Model(
 
 Scen_B2_H_DWPT = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 2,
                   Testing_Scenario=1,#Testing only in given day
                   #Contamination Information
@@ -1489,7 +1489,7 @@ Scen_B2_H_DWPT = Process_Model(
 
 Scen_B2_L_DWPT = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 2,
                   Testing_Scenario=1,#Testing only in given day
                   #Contamination Information
@@ -1509,7 +1509,7 @@ Scen_B2_L_DWPT = Process_Model(
 #B1_Daily testing product (DTP) - High
 Scen_B2_H_WPT1 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 2,#every day contamiantion
                   Testing_Scenario=2,#every day sampling
                   #Contamination Information
@@ -1528,7 +1528,7 @@ Scen_B2_H_WPT1 = Process_Model(
 #B1_Water testing 1 time per season at the start of the season - Low
 Scen_B2_L_WPT1 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 2,#every day contamiantion
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -1548,7 +1548,7 @@ Scen_B2_L_WPT1 = Process_Model(
 
 Scen_B2_H_WPT4 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 2,#every day contamiantion
                   Testing_Scenario=2,#every day sampling
                   #Contamination Information
@@ -1567,7 +1567,7 @@ Scen_B2_H_WPT4 = Process_Model(
 #B1_Water testing 1 time per season at the start of the season - Low
 Scen_B2_L_WPT4 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 2,#every day contamiantion
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -1587,7 +1587,7 @@ Scen_B2_L_WPT4 = Process_Model(
 #B1_Water testing 1 time per season at the start of the season - High
 Scen_B2_H_WPT2 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 2,#every day contamiantion
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -1606,7 +1606,7 @@ Scen_B2_H_WPT2 = Process_Model(
 #B1_Water testing 2 times per season (1 start, 1 end of the season) - Low
 Scen_B2_L_WPT2 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 2,#every day contamiantion
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -1624,7 +1624,7 @@ Scen_B2_L_WPT2 = Process_Model(
 #B1_Water testing 2 times per season (1 start, 1 end of the season) - High
 Scen_B2_H_WPT3 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 2,#every day contamiantion
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
@@ -1643,7 +1643,7 @@ Scen_B2_H_WPT3 = Process_Model(
 #B1_Water testing 3 times per season (1 start, 1 end of the season) - Low
 Scen_B2_L_WPT3 = Process_Model(
                   Days_per_season = 45,
-                  Niterations= 1000,
+                  Niterations= 10000,
                   Cont_Scenario = 2,#every day contamiantion
                   Testing_Scenario=2,#Testing only in given day
                   #Contamination Information
